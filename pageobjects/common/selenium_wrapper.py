@@ -10,6 +10,8 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
 from selenium import webdriver
+from selenium.webdriver.remote import webdriver as remotewebdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import ConfigParser
 import os
 
@@ -30,16 +32,45 @@ class SeleniumWrapper(object):
         """
         Set up the browser driver
         """
+        if config.get('Server', 'enabled') == 'true':
+            self._setup_remotedriver()
+        else:
+            self._setup_localdriver()
+            
+        return self.driver
+
+    def _setup_remotedriver(self):
+        """
+        Setup webdriver in a remote server
+        """
+        server_host = config.get('Server', 'host')
+        server_port = config.get('Server', 'port')
+        server_url = 'http://{0}:{1}/wd/hub'.format(server_host, server_port)
+
+        capabilities_list = {
+                        'firefox': DesiredCapabilities.FIREFOX,
+                        'chrome': DesiredCapabilities.CHROME,
+                        'iexplore': DesiredCapabilities.INTERNETEXPLORER,
+                        'phantomjs': DesiredCapabilities.PHANTOMJS,
+                       }
+        capabilities = capabilities_list.get(config.get('Browser', 'browser'))
+        self.driver = webdriver.Remote(command_executor=server_url, desired_capabilities=capabilities)
+
+    def _setup_localdriver(self):
+        """
+        Setup webdriver in local machine
+        """
         def unknown_driver():
             assert False, 'Unknown driver {0}'.format(config.get('Browser', 'browser'))
 
-        browser_config = {'firefox': self._setup_firefox,
+        browser_config = {
+                          'firefox': self._setup_firefox,
                           'chrome': self._setup_chrome,
                           'iexplore': self._setup_explorer,
-                          'phantomjs': self._setup_phantomjs}
+                          'phantomjs': self._setup_phantomjs,
+                         }
 
         browser_config.get(config.get('Browser', 'browser'), unknown_driver)()
-        return self.driver
 
     def _setup_firefox(self):
         """

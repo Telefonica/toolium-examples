@@ -18,4 +18,4 @@ class SeleniumTestCase(unittest.TestCase):
         self.driver.maximize_window()
 
     def tearDown(self):
-        self.driver.close()
+        self.driver.quit()
