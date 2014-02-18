@@ -41,3 +41,10 @@ Run a singular test with:
 ```
 nosetests tests.test_register_user
 ```
+
+Browser configuration
+---------------------
+
+Chrome: download driver from http://code.google.com/p/chromedriver/downloads/list
+Explorer: download driver from http://code.google.com/p/selenium/downloads/list
+PhantomJS: download driver from http://phantomjs.org/download.html
