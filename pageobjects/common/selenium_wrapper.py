@@ -1,4 +1,9 @@
 from selenium import webdriver
+import ConfigParser
+import os
+
+config = ConfigParser.ConfigParser()
+config.read('properties.cfg')
 
 class SeleniumWrapper(object):
     # singleton
@@ -10,6 +15,7 @@ class SeleniumWrapper(object):
         return cls._instance
 
     def connect(self):
+        print config.get('Selenium', 'browser')
         self.driver = webdriver.Firefox()
         return self.driver
     
