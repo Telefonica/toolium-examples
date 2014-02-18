@@ -1,4 +1,3 @@
-from selenium import selenium
 from selenium import webdriver
 
 class SeleniumWrapper(object):
