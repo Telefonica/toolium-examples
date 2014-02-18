@@ -30,5 +30,5 @@ Launch tests
 ------------
 
 ```
-python tests/register_user.py
+python -m tests.register_user
 ```
