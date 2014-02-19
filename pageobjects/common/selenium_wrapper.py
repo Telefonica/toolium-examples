@@ -11,18 +11,25 @@ been supplied.
 '''
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+import logging.config
 import ConfigParser
-
-config = ConfigParser.ConfigParser()
-config.read('properties.cfg')
 
 
 class SeleniumWrapper(object):
-    # singleton
+    # Singleton instance
     _instance = None
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
+            # Configure logger
+            logging.config.fileConfig('logging.conf')
+            cls.logger = logging.getLogger(__name__)
+
+            # Read properties file
+            cls.config = ConfigParser.ConfigParser()
+            cls.config.read('properties.cfg')
+
+            # Create new instance
             cls._instance = super(SeleniumWrapper, cls).__new__(cls, *args, **kwargs)
         return cls._instance
 
@@ -30,7 +37,7 @@ class SeleniumWrapper(object):
         """
         Set up the browser driver
         """
-        if config.get('Server', 'enabled') == 'true':
+        if self.config.get('Server', 'enabled') == 'true':
             self._setup_remotedriver()
         else:
             self._setup_localdriver()
@@ -41,8 +48,10 @@ class SeleniumWrapper(object):
         """
         Setup webdriver in a remote server
         """
-        server_host = config.get('Server', 'host')
-        server_port = config.get('Server', 'port')
+        self.logger.info("Creating remote driver (browser = {0})".format(self.config.get('Browser', 'browser')))
+
+        server_host = self.config.get('Server', 'host')
+        server_port = self.config.get('Server', 'port')
         server_url = 'http://{0}:{1}/wd/hub'.format(server_host, server_port)
 
         capabilities_list = {
@@ -51,15 +60,17 @@ class SeleniumWrapper(object):
                         'iexplore': DesiredCapabilities.INTERNETEXPLORER,
                         'phantomjs': DesiredCapabilities.PHANTOMJS,
                        }
-        capabilities = capabilities_list.get(config.get('Browser', 'browser'))
+        capabilities = capabilities_list.get(self.config.get('Browser', 'browser'))
         self.driver = webdriver.Remote(command_executor=server_url, desired_capabilities=capabilities)
 
     def _setup_localdriver(self):
         """
         Setup webdriver in local machine
         """
+        self.logger.info("Creating local driver (browser = {0})".format(self.config.get('Browser', 'browser')))
+
         def unknown_driver():
-            assert False, 'Unknown driver {0}'.format(config.get('Browser', 'browser'))
+            assert False, 'Unknown driver {0}'.format(self.config.get('Browser', 'browser'))
 
         browser_config = {
                           'firefox': self._setup_firefox,
@@ -68,7 +79,7 @@ class SeleniumWrapper(object):
                           'phantomjs': self._setup_phantomjs,
                          }
 
-        browser_config.get(config.get('Browser', 'browser'), unknown_driver)()
+        browser_config.get(self.config.get('Browser', 'browser'), unknown_driver)()
 
     def _setup_firefox(self):
         """
@@ -79,7 +90,9 @@ class SeleniumWrapper(object):
             profile.native_events_enabled = True
             self.driver = webdriver.Firefox(firefox_profile=profile)
         except:
-            assert False, "Firefox driver can not be launched."
+            message = "Firefox driver can not be launched."
+            self.logger.error(message)
+            assert False, message
 
     def _setup_chrome(self):
         """
@@ -87,27 +100,33 @@ class SeleniumWrapper(object):
         """
         options = webdriver.ChromeOptions()
         try:
-            chromedriver = config.get('Browser', 'chromedriver_path')
+            chromedriver = self.config.get('Browser', 'chromedriver_path')
             self.driver = webdriver.Chrome(chromedriver, chrome_options=options)
         except:
-            assert False, "Chrome driver can not be launched. Path given in properties: %s " % (chromedriver)
+            message = "Chrome driver can not be launched. Path given in properties: %s " % (chromedriver)
+            self.logger.error(message)
+            assert False, message
 
     def _setup_explorer(self):
         """
         Setup Internet Explorer webdriver
         """
         try:
-            explorerdriver = config.get('Browser', 'explorerdriver_path')
+            explorerdriver = self.config.get('Browser', 'explorerdriver_path')
             self.driver = webdriver.Ie(explorerdriver)
         except:
-            assert False, "Explorer driver can not be launched. Path given in properties: %s " % (explorerdriver)
+            message = "Explorer driver can not be launched. Path given in properties: %s " % (explorerdriver)
+            self.logger.error(message)
+            assert False, message
 
     def _setup_phantomjs(self):
         """
         Setup phantomjs webdriver
         """
         try:
-            phantomdriver = config.get('Browser', 'phantomdriver_path')
+            phantomdriver = self.config.get('Browser', 'phantomdriver_path')
             self.driver = webdriver.PhantomJS(executable_path=phantomdriver)
         except:
-            assert False, "Phantom driver can not be launched. Path given in properties: %s " % (phantomdriver)
+            message = "Phantom driver can not be launched. Path given in properties: %s " % (phantomdriver)
+            self.logger.error(message)
+            assert False, message

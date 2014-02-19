@@ -11,4 +11,5 @@ been supplied.
 '''
 from pageobjects.common.selenium_wrapper import SeleniumWrapper
 
+# Get selenium instance
 selenium_driver = SeleniumWrapper()

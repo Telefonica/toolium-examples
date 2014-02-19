@@ -23,6 +23,7 @@ class RegisterUser(SeleniumTestCase):
         registerPage.name = "name1"
         registerPage.email = "user1@mailinator.com"
         registerPage.place = "Barcelona"
+        self.logger.debug("Registering a new user")
         registerPage.submit()
 
         expectedMessage = "The user has been registered"
