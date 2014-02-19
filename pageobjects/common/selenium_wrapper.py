@@ -10,10 +10,8 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
 from selenium import webdriver
-from selenium.webdriver.remote import webdriver as remotewebdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import ConfigParser
-import os
 
 config = ConfigParser.ConfigParser()
 config.read('properties.cfg')
@@ -36,7 +34,7 @@ class SeleniumWrapper(object):
             self._setup_remotedriver()
         else:
             self._setup_localdriver()
-            
+
         return self.driver
 
     def _setup_remotedriver(self):

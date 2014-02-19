@@ -35,7 +35,7 @@ class EmailElement(TextInputPageElement):
     def __init__(self):
         self.locator = locators["register.email"]
 
-        
+
 class PlaceElement(SelectPageElement):
     def __init__(self):
         self.locator = locators["register.place"]
