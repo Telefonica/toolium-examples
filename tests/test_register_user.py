@@ -9,9 +9,11 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
+import unittest
 from tests.common.selenium_test_case import SeleniumTestCase
 from pageobjects.register import RegisterPageObject
 from pageobjects.register_result import RegisterResultPageObject
+
 
 class RegisterUser(SeleniumTestCase):
     def test_successfull_register(self):
@@ -21,6 +23,7 @@ class RegisterUser(SeleniumTestCase):
         registerPage.name = "name1"
         registerPage.email = "user1@mailinator.com"
         registerPage.place = "Barcelona"
+        self.logger.debug("Registering a new user")
         registerPage.submit()
 
         expectedMessage = "The user has been registered"
