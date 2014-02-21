@@ -18,6 +18,8 @@ import ConfigParser
 class SeleniumWrapper(object):
     # Singleton instance
     _instance = None
+    # Selenium web driver
+    driver = None
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
@@ -37,7 +39,7 @@ class SeleniumWrapper(object):
         """
         Set up the browser driver
         """
-        if self.config.get('Server', 'enabled') == 'true':
+        if self.config.getboolean('Server', 'enabled'):
             self._setup_remotedriver()
         else:
             self._setup_localdriver()
@@ -53,6 +55,12 @@ class SeleniumWrapper(object):
 
         server_host = self.config.get('Server', 'host')
         server_port = self.config.get('Server', 'port')
+        self._setup_remotedriver_common(browser, server_host, server_port)
+
+    def _setup_remotedriver_common(self, browser, server_host, server_port):
+        """
+        Setup webdriver in a remote server
+        """
         server_url = 'http://{0}:{1}/wd/hub'.format(server_host, server_port)
 
         # Get browser type capabilities
@@ -71,8 +79,8 @@ class SeleniumWrapper(object):
 
         # Add browser version
         try:
-            capabilities['version'] = browser.split('-')[1]
-        except:
+            capabilities['version'] = browser.split('-')[6]
+        except IndexError:
             pass
 
         # Add platform capability
@@ -85,8 +93,13 @@ class SeleniumWrapper(object):
                               'mac': 'MAC',
                              }
             capabilities['platform'] = platforms_list.get(browser.split('-')[3])
-        except:
+        except IndexError:
             pass
+
+        # Add Appium server capabilities
+        for cap, cap_value in dict(self.config.items('AppiumCapabilities')).iteritems():
+            self.logger.debug("Added server capability: {0} = {1}".format(cap, cap_value))
+            capabilities[cap] = cap_value
 
         # Create remote driver
         self.driver = webdriver.Remote(command_executor=server_url, desired_capabilities=capabilities)
@@ -109,14 +122,14 @@ class SeleniumWrapper(object):
                           'opera': self._setup_opera,
                           'iexplore': self._setup_explorer,
                           'phantomjs': self._setup_phantomjs,
-                          'android': self._setup_android,
-                          'iphone': self._setup_iphone,
+                          'android': self._setup_appium,
+                          'iphone': self._setup_appium,
                          }
 
         try:
             browser_config.get(browser_name, unknown_driver)()
-        except Exception as e:
-            message = "{0} driver can not be launched: {1}".format(browser_name.title(), e)
+        except Exception as exc:
+            message = "{0} driver can not be launched: {1}".format(browser_name.title(), exc)
             self.logger.error(message)
             assert False, message
 
@@ -167,14 +180,25 @@ class SeleniumWrapper(object):
         self.logger.debug("Phantom driver path given in properties: {0}".format(phantomdriver))
         self.driver = webdriver.PhantomJS(executable_path=phantomdriver)
 
-    def _setup_android(self):
+    def _setup_appium(self):
         """
         Setup Android webdriver
         """
-        assert False
+        browser = self.config.get('Browser', 'browser')
+        server_host = '127.0.0.1'
+        server_port = '4723'
+        self._setup_remotedriver_common(browser, server_host, server_port)
 
-    def _setup_iphone(self):
-        """
-        Setup Iphone webdriver
-        """
-        assert False
+    def is_mobile_test(self):
+        '''
+        Returns true if the tests must be executed in a mobile
+        '''
+        browser_name = self.config.get('Browser', 'browser').split('-')[0]
+        return browser_name in ('android', 'iphone')
+
+    def is_web_test(self):
+        '''
+        Returns true if the tests must be executed in a browser
+        '''
+        appium_app = self.config.get('AppiumCapabilities', 'app')
+        return not self.is_mobile_test() or appium_app in ('chrome', 'safari')

@@ -24,8 +24,9 @@ class SeleniumTestCase(unittest.TestCase):
         # Create driver
         self.driver = selenium_driver.connect()
         # Maximize browser
-        self.driver.maximize_window()
-        self.logger.debug("Running new test: {0}".format(self.get_subclassmethod_name()))
+        if not selenium_driver.is_mobile_test():
+            self.driver.maximize_window()
+        self.logger.info("Running new test: {0}".format(self.get_subclassmethod_name()))
 
     def tearDown(self):
         # Close browser and stop driver
