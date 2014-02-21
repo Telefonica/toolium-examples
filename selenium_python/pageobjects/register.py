@@ -9,11 +9,11 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from pageobjects.common import selenium_driver
-from pageobjects.common.page_object import PageObject
-from pageobjects.common.text_input_page_element import TextInputPageElement
-from pageobjects.common.select_page_element import SelectPageElement
-from pageobjects import locators
+from selenium_python import selenium_driver
+from selenium_python.pageobjects.common.page_object import PageObject
+from selenium_python.pageobjects.common.text_input_page_element import TextInputPageElement
+from selenium_python.pageobjects.common.select_page_element import SelectPageElement
+from selenium_python.pageobjects import locators
 
 
 class UsernameElement(TextInputPageElement):
