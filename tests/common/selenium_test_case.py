@@ -10,7 +10,7 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
 import unittest
-from pageobjects.common import selenium_driver
+from selenium_python import selenium_driver
 import logging
 
 
