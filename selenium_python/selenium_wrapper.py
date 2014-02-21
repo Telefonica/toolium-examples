@@ -48,19 +48,43 @@ class SeleniumWrapper(object):
         """
         Setup webdriver in a remote server
         """
-        self.logger.info("Creating remote driver (browser = {0})".format(self.config.get('Browser', 'browser')))
+        browser = self.config.get('Browser', 'browser')
+        self.logger.info("Creating remote driver (browser = {0})".format(browser))
 
         server_host = self.config.get('Server', 'host')
         server_port = self.config.get('Server', 'port')
         server_url = 'http://{0}:{1}/wd/hub'.format(server_host, server_port)
 
+        # Get browser type capabilities
         capabilities_list = {
-                        'firefox': DesiredCapabilities.FIREFOX,
-                        'chrome': DesiredCapabilities.CHROME,
-                        'iexplore': DesiredCapabilities.INTERNETEXPLORER,
-                        'phantomjs': DesiredCapabilities.PHANTOMJS,
-                       }
-        capabilities = capabilities_list.get(self.config.get('Browser', 'browser'))
+                             'firefox': DesiredCapabilities.FIREFOX,
+                             'chrome': DesiredCapabilities.CHROME,
+                             'iexplore': DesiredCapabilities.INTERNETEXPLORER,
+                             'phantomjs': DesiredCapabilities.PHANTOMJS,
+                            }
+        browser_name = browser.split('-')[0]
+        capabilities = capabilities_list.get(browser_name)
+
+        # Add browser version
+        try:
+            capabilities.version = browser.split('-')[1]
+        except:
+            pass
+
+        # Add platform capability
+        try:
+            platforms_list = {
+                              'xp': 'XP',
+                              'windows_7': 'VISTA',
+                              'windows_8': 'WIN8',
+                              'linux': 'LINUX',
+                              'mac': 'MAC',
+                             }
+            capabilities.platform = platforms_list.get(browser.split('-')[3])
+        except:
+            pass
+
+        # Create remote driver
         self.driver = webdriver.Remote(command_executor=server_url, desired_capabilities=capabilities)
 
     def _setup_localdriver(self):
