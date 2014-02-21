@@ -10,8 +10,8 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
 import unittest
-from selenium_python import selenium_driver
 import logging
+from selenium_python import selenium_driver
 
 
 class SeleniumTestCase(unittest.TestCase):

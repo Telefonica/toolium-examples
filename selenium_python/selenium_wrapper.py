@@ -59,15 +59,19 @@ class SeleniumWrapper(object):
         capabilities_list = {
                              'firefox': DesiredCapabilities.FIREFOX,
                              'chrome': DesiredCapabilities.CHROME,
+                             'safari': DesiredCapabilities.SAFARI,
+                             'opera': DesiredCapabilities.OPERA,
                              'iexplore': DesiredCapabilities.INTERNETEXPLORER,
                              'phantomjs': DesiredCapabilities.PHANTOMJS,
+                             'android': DesiredCapabilities.ANDROID,
+                             'iphone': DesiredCapabilities.IPHONE,
                             }
         browser_name = browser.split('-')[0]
         capabilities = capabilities_list.get(browser_name)
 
         # Add browser version
         try:
-            capabilities.version = browser.split('-')[1]
+            capabilities['version'] = browser.split('-')[1]
         except:
             pass
 
@@ -80,7 +84,7 @@ class SeleniumWrapper(object):
                               'linux': 'LINUX',
                               'mac': 'MAC',
                              }
-            capabilities.platform = platforms_list.get(browser.split('-')[3])
+            capabilities['platform'] = platforms_list.get(browser.split('-')[3])
         except:
             pass
 
@@ -91,66 +95,86 @@ class SeleniumWrapper(object):
         """
         Setup webdriver in local machine
         """
-        self.logger.info("Creating local driver (browser = {0})".format(self.config.get('Browser', 'browser')))
+        browser = self.config.get('Browser', 'browser')
+        browser_name = browser.split('-')[0]
+        self.logger.info("Creating local driver (browser = {0})".format(browser))
 
         def unknown_driver():
-            assert False, 'Unknown driver {0}'.format(self.config.get('Browser', 'browser'))
+            assert False, 'Unknown driver {0}'.format(browser_name)
 
         browser_config = {
                           'firefox': self._setup_firefox,
                           'chrome': self._setup_chrome,
+                          'safari': self._setup_safari,
+                          'opera': self._setup_opera,
                           'iexplore': self._setup_explorer,
                           'phantomjs': self._setup_phantomjs,
+                          'android': self._setup_android,
+                          'iphone': self._setup_iphone,
                          }
 
-        browser_config.get(self.config.get('Browser', 'browser'), unknown_driver)()
+        try:
+            browser_config.get(browser_name, unknown_driver)()
+        except Exception as e:
+            message = "{0} driver can not be launched: {1}".format(browser_name.title(), e)
+            self.logger.error(message)
+            assert False, message
 
     def _setup_firefox(self):
         """
         Setup Firefox webdriver
         """
-        try:
-            profile = webdriver.FirefoxProfile()
-            profile.native_events_enabled = True
-            self.driver = webdriver.Firefox(firefox_profile=profile)
-        except:
-            message = "Firefox driver can not be launched."
-            self.logger.error(message)
-            assert False, message
+        profile = webdriver.FirefoxProfile()
+        profile.native_events_enabled = True
+        self.driver = webdriver.Firefox(firefox_profile=profile)
 
     def _setup_chrome(self):
         """
         Setup Chrome webdriver
         """
+        chromedriver = self.config.get('Browser', 'chromedriver_path')
+        self.logger.debug("Chrome driver path given in properties: {0}".format(chromedriver))
         options = webdriver.ChromeOptions()
-        try:
-            chromedriver = self.config.get('Browser', 'chromedriver_path')
-            self.driver = webdriver.Chrome(chromedriver, chrome_options=options)
-        except:
-            message = "Chrome driver can not be launched. Path given in properties: %s " % (chromedriver)
-            self.logger.error(message)
-            assert False, message
+        self.driver = webdriver.Chrome(chromedriver, chrome_options=options)
+
+    def _setup_safari(self):
+        """
+        Setup Safari webdriver
+        """
+        self.driver = webdriver.Safari()
+
+    def _setup_opera(self):
+        """
+        Setup Opera webdriver
+        """
+        seleniumserver = self.config.get('Browser', 'seleniumserver_path')
+        self.logger.debug("Selenium server path given in properties: {0}".format(seleniumserver))
+        self.driver = webdriver.Opera(seleniumserver)
 
     def _setup_explorer(self):
         """
         Setup Internet Explorer webdriver
         """
-        try:
-            explorerdriver = self.config.get('Browser', 'explorerdriver_path')
-            self.driver = webdriver.Ie(explorerdriver)
-        except:
-            message = "Explorer driver can not be launched. Path given in properties: %s " % (explorerdriver)
-            self.logger.error(message)
-            assert False, message
+        explorerdriver = self.config.get('Browser', 'explorerdriver_path')
+        self.logger.debug("Explorer driver path given in properties: {0}".format(explorerdriver))
+        self.driver = webdriver.Ie(explorerdriver)
 
     def _setup_phantomjs(self):
         """
         Setup phantomjs webdriver
         """
-        try:
-            phantomdriver = self.config.get('Browser', 'phantomdriver_path')
-            self.driver = webdriver.PhantomJS(executable_path=phantomdriver)
-        except:
-            message = "Phantom driver can not be launched. Path given in properties: %s " % (phantomdriver)
-            self.logger.error(message)
-            assert False, message
+        phantomdriver = self.config.get('Browser', 'phantomdriver_path')
+        self.logger.debug("Phantom driver path given in properties: {0}".format(phantomdriver))
+        self.driver = webdriver.PhantomJS(executable_path=phantomdriver)
+
+    def _setup_android(self):
+        """
+        Setup Android webdriver
+        """
+        assert False
+
+    def _setup_iphone(self):
+        """
+        Setup Iphone webdriver
+        """
+        assert False
