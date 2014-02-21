@@ -22,12 +22,12 @@ class SeleniumWrapper(object):
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             # Configure logger
-            logging.config.fileConfig('logging.conf')
+            logging.config.fileConfig('conf/logging.conf')
             cls.logger = logging.getLogger(__name__)
 
             # Read properties file
             cls.config = ConfigParser.ConfigParser()
-            cls.config.read('properties.cfg')
+            cls.config.read('conf/properties.cfg')
 
             # Create new instance
             cls._instance = super(SeleniumWrapper, cls).__new__(cls, *args, **kwargs)
