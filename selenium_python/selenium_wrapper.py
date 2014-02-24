@@ -11,8 +11,9 @@ been supplied.
 '''
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-import logging.config
-import ConfigParser
+from selenium_python.config import Config
+import logging
+import os
 
 
 class SeleniumWrapper(object):
@@ -24,16 +25,33 @@ class SeleniumWrapper(object):
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             # Configure logger
-            logging.config.fileConfig('conf/logging.conf')
+            Config().initialize_logger()
             cls.logger = logging.getLogger(__name__)
 
-            # Read properties file
-            cls.config = ConfigParser.ConfigParser()
-            cls.config.read('conf/properties.cfg')
+            # Configure properties
+            cls.config = Config().initialize_config()
 
             # Create new instance
             cls._instance = super(SeleniumWrapper, cls).__new__(cls, *args, **kwargs)
         return cls._instance
+
+    def _get_system_properties(self):
+        '''
+        Update all config properties values with system property values
+        '''
+        for section in self.config.sections:
+            for option in self.config.options(section):
+                self._get_system_property(section, option)
+
+    def _get_system_property(self, section, option):
+        '''
+        Update a config property value with system property value
+        '''
+        try:
+            propertyName = "{0}_{1}".format(section, option)
+            self.config.set(section, option, os.environ[propertyName])
+        except KeyError:
+            pass
 
     def connect(self):
         """
