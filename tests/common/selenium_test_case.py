@@ -24,7 +24,7 @@ class SeleniumTestCase(unittest.TestCase):
         # Create driver
         self.driver = selenium_driver.connect()
         # Maximize browser
-        if not selenium_driver.is_mobile_test():
+        if selenium_driver.is_maximizable():
             self.driver.maximize_window()
         self.logger.info("Running new test: {0}".format(self.get_subclassmethod_name()))
 

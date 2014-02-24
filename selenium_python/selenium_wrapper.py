@@ -119,6 +119,10 @@ class SeleniumWrapper(object):
             self.logger.debug("Added server capability: {0} = {1}".format(cap, cap_value))
             capabilities[cap] = cap_value
 
+        if browser_name == 'opera':
+            capabilities['opera.autostart'] = True
+            capabilities['opera.arguments'] = '-fullscreen'
+
         # Create remote driver
         self.driver = webdriver.Remote(command_executor=server_url, desired_capabilities=capabilities)
 
@@ -180,7 +184,10 @@ class SeleniumWrapper(object):
         """
         seleniumserver = self.config.get('Browser', 'seleniumserver_path')
         self.logger.debug("Selenium server path given in properties: {0}".format(seleniumserver))
-        self.driver = webdriver.Opera(seleniumserver)
+        capabilities = DesiredCapabilities.OPERA
+        capabilities['opera.autostart'] = True
+        capabilities['opera.arguments'] = '-fullscreen'
+        self.driver = webdriver.Opera(seleniumserver, desired_capabilities=capabilities)
 
     def _setup_explorer(self):
         """
@@ -220,3 +227,10 @@ class SeleniumWrapper(object):
         '''
         appium_app = self.config.get('AppiumCapabilities', 'app')
         return not self.is_mobile_test() or appium_app in ('chrome', 'safari')
+
+    def is_maximizable(self):
+        '''
+        Returns true if the browser is maximizable
+        '''
+        browser_name = self.config.get('Browser', 'browser').split('-')[0]
+        return not self.is_mobile_test() and browser_name != 'opera'
