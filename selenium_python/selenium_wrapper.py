@@ -21,6 +21,10 @@ class SeleniumWrapper(object):
     _instance = None
     # Selenium web driver
     driver = None
+    # Logger instance
+    logger = None
+    # Configuration instance
+    config = None
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:

@@ -12,6 +12,7 @@ been supplied.
 import logging
 import urllib2
 import re
+from selenium_python import selenium_driver
 
 # Configure logger
 logger = logging.getLogger(__name__)
@@ -29,19 +30,45 @@ def jira(test_key):
             try:
                 test_item(*args, **kwargs)
             except Exception as exc:
-                change_jira_status(test_key, 'Fail')
+                change_jira_status_with_config(test_key, 'Fail')
                 raise exc
-            change_jira_status(test_key, 'Pass')
+            change_jira_status_with_config(test_key, 'Pass')
         return modified_test
     return decorator
 
 
-def change_jira_status(test_key, test_status):
+def change_jira_status_with_config(test_key, test_status):
+    '''
+    Read Jira configuration properties and update test status in Jira
+    '''
+    config = selenium_driver.config
+    if config.getboolean('Jira', 'enabled'):
+        labels = config.get('Jira', 'labels')
+        comments = config.get('Jira', 'comments')
+        fixversion = config.get('Jira', 'fixversion')
+        build = config.get('Jira', 'build')
+        onlyifchanges = config.getboolean('Jira', 'onlyifchanges')
+        change_jira_status(test_key, test_status, labels, comments, fixversion, build, onlyifchanges)
+
+
+def change_jira_status(test_key, test_status, labels=None, comments=None, fixversion=None, build=None,
+                       onlyifchanges=False):
     '''
     Update test status in Jira
     '''
     logger.info("Updating Test Case '{0}' in Jira with status {1}".format(test_key, test_status))
     jira_execution_url = '{0}?jiraTestCaseId={1}&jiraStatus={2}'
+    if labels:
+        jira_execution_url += '&labels={0}'.format(labels)
+    if comments:
+        jira_execution_url += '&comments={0}'.format(comments)
+    if fixversion:
+        jira_execution_url += '&version={0}'.format(fixversion)
+    if build:
+        jira_execution_url += '&build={0}'.format(build)
+    if onlyifchanges:
+        jira_execution_url += '&onlyIfStatusChanges=true'
+
     try:
         response = urllib2.urlopen(jira_execution_url.format(JIRA_EXECUTION_URL, test_key, test_status))
         logger.debug(response.read().strip(' \t\n\r'))

@@ -33,9 +33,9 @@ class SeleniumTestCase(unittest.TestCase):
         # Check test result
         result = sys.exc_info()
         if result == (None, None, None):
-            self.logger.info("Test passed")
+            self.logger.info("The test '{0}' has passed".format(self.get_subclassmethod_name()))
         else:
-            self.logger.error("Test failed: {}".format(result[1]))
+            self.logger.error("The test '{0}' has failed: {1}".format(self.get_subclassmethod_name(), result[1]))
 
         # Close browser and stop driver
         self.driver.quit()
