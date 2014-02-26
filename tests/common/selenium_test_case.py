@@ -11,6 +11,7 @@ been supplied.
 '''
 import unittest
 import logging
+import sys
 from selenium_python import selenium_driver
 
 
@@ -29,5 +30,12 @@ class SeleniumTestCase(unittest.TestCase):
         self.logger.info("Running new test: {0}".format(self.get_subclassmethod_name()))
 
     def tearDown(self):
+        # Check test result
+        result = sys.exc_info()
+        if result == (None, None, None):
+            self.logger.info("Test passed")
+        else:
+            self.logger.error("Test failed: {}".format(result[1]))
+
         # Close browser and stop driver
         self.driver.quit()
