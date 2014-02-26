@@ -42,12 +42,12 @@ def change_jira_status_with_config(test_key, test_status):
     Read Jira configuration properties and update test status in Jira
     '''
     config = selenium_driver.config
-    if config.getboolean('Jira', 'enabled'):
-        labels = config.get('Jira', 'labels')
-        comments = config.get('Jira', 'comments')
-        fixversion = config.get('Jira', 'fixversion')
-        build = config.get('Jira', 'build')
-        onlyifchanges = config.getboolean('Jira', 'onlyifchanges')
+    if config.get_optional('Jira', 'enabled', False):
+        labels = config.get_optional('Jira', 'labels')
+        comments = config.get_optional('Jira', 'comments')
+        fixversion = config.get_optional('Jira', 'fixversion')
+        build = config.get_optional('Jira', 'build')
+        onlyifchanges = config.get_optional('Jira', 'onlyifchanges', False)
         change_jira_status(test_key, test_status, labels, comments, fixversion, build, onlyifchanges)
 
 
