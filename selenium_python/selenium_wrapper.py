@@ -61,7 +61,7 @@ class SeleniumWrapper(object):
         """
         Set up the browser driver
         """
-        if self.config.get_optional('Server', 'enabled', False):
+        if self.config.getboolean_optional('Server', 'enabled'):
             self._setup_remotedriver()
         else:
             self._setup_localdriver()

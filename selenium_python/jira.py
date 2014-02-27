@@ -10,6 +10,7 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
 import logging
+import urllib
 import urllib2
 import re
 from selenium_python import selenium_driver
@@ -42,12 +43,12 @@ def change_jira_status_with_config(test_key, test_status):
     Read Jira configuration properties and update test status in Jira
     '''
     config = selenium_driver.config
-    if config.get_optional('Jira', 'enabled', False):
+    if config.getboolean_optional('Jira', 'enabled'):
         labels = config.get_optional('Jira', 'labels')
         comments = config.get_optional('Jira', 'comments')
         fixversion = config.get_optional('Jira', 'fixversion')
         build = config.get_optional('Jira', 'build')
-        onlyifchanges = config.get_optional('Jira', 'onlyifchanges', False)
+        onlyifchanges = config.getboolean_optional('Jira', 'onlyifchanges')
         change_jira_status(test_key, test_status, labels, comments, fixversion, build, onlyifchanges)
 
 
@@ -57,20 +58,20 @@ def change_jira_status(test_key, test_status, labels=None, comments=None, fixver
     Update test status in Jira
     '''
     logger.info("Updating Test Case '{0}' in Jira with status {1}".format(test_key, test_status))
-    jira_execution_url = '{0}?jiraTestCaseId={1}&jiraStatus={2}'
+    jira_execution_url = '{0}?jiraTestCaseId={1}&jiraStatus={2}'.format(JIRA_EXECUTION_URL, test_key, test_status)
     if labels:
-        jira_execution_url += '&labels={0}'.format(labels)
+        jira_execution_url += '&labels={0}'.format(urllib.quote(labels))
     if comments:
-        jira_execution_url += '&comments={0}'.format(comments)
+        jira_execution_url += '&comments={0}'.format(urllib.quote(comments))
     if fixversion:
-        jira_execution_url += '&version={0}'.format(fixversion)
+        jira_execution_url += '&version={0}'.format(urllib.quote(fixversion))
     if build:
-        jira_execution_url += '&build={0}'.format(build)
+        jira_execution_url += '&build={0}'.format(urllib.quote(build))
     if onlyifchanges:
         jira_execution_url += '&onlyIfStatusChanges=true'
 
     try:
-        response = urllib2.urlopen(jira_execution_url.format(JIRA_EXECUTION_URL, test_key, test_status))
+        response = urllib2.urlopen(jira_execution_url)
         logger.debug(response.read().strip(' \t\n\r'))
         response.close()
     except urllib2.HTTPError as exc:
