@@ -25,10 +25,26 @@ pip install -r requirements_dev.txt
 
 The following packages will be installed:
   * selenium (http://docs.seleniumhq.org/)
+  * nose (https://pypi.python.org/pypi/nose/)
 
-Launch tests
-------------
+Running tests
+-------------
+
+Run all tests with:
 
 ```
-python tests/register_user.py
+nosetests
 ```
+
+Run a singular test with:
+
+```
+nosetests tests.test_register_user
+```
+
+Browser configuration
+---------------------
+
+Chrome: download driver from http://code.google.com/p/chromedriver/downloads/list
+Explorer: download driver from http://code.google.com/p/selenium/downloads/list
+PhantomJS: download driver from http://phantomjs.org/download.html
