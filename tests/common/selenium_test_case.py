@@ -12,6 +12,7 @@ been supplied.
 import unittest
 import logging
 import sys
+import os
 from selenium_python import selenium_driver
 
 
@@ -36,6 +37,15 @@ class SeleniumTestCase(unittest.TestCase):
             self.logger.info("The test '{0}' has passed".format(self.get_subclassmethod_name()))
         else:
             self.logger.error("The test '{0}' has failed: {1}".format(self.get_subclassmethod_name(), result[1]))
+            # Capture screenshot
+            test_name = self.get_subclassmethod_name().replace('.', '_')
+            filename = '{0:0=2d}_{1}.png'.format(selenium_driver.screenshots_number, test_name)
+            filepath = os.path.join(selenium_driver.screenshots_path, filename)
+            if not os.path.exists(selenium_driver.screenshots_path):
+                os.makedirs(selenium_driver.screenshots_path)
+            if self.driver.get_screenshot_as_file(filepath):
+                self.logger.error("Saved screenshot " + filepath)
+                selenium_driver.screenshots_number += 1
 
         # Close browser and stop driver
         self.driver.quit()
