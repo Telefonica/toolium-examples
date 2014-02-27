@@ -13,7 +13,7 @@ import unittest
 import logging
 import sys
 import os
-from selenium_python import selenium_driver
+from selenium_tid_python import selenium_driver
 
 
 class SeleniumTestCase(unittest.TestCase):

@@ -11,7 +11,7 @@ been supplied.
 '''
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from selenium_python.config import Config
+from selenium_tid_python.config import Config
 import logging
 import os
 import datetime

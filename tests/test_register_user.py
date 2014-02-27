@@ -9,11 +9,10 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-import unittest
-from tests.common.selenium_test_case import SeleniumTestCase
+from selenium_tid_python.selenium_test_case import SeleniumTestCase
+from selenium_tid_python.jira import jira
 from selenium_python.pageobjects.register import RegisterPageObject
 from selenium_python.pageobjects.register_result import RegisterResultPageObject
-from selenium_python.jira import jira
 
 
 class RegisterUser(SeleniumTestCase):
@@ -31,6 +30,3 @@ class RegisterUser(SeleniumTestCase):
         expectedMessage = "The user has been registered"
         resultPage = RegisterResultPageObject()
         self.assertIn(expectedMessage, resultPage.message)
-
-if __name__ == "__main__":
-    unittest.main()
