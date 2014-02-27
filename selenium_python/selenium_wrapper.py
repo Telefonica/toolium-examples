@@ -14,17 +14,17 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium_python.config import Config
 import logging
 import os
+import datetime
 
 
 class SeleniumWrapper(object):
     # Singleton instance
     _instance = None
-    # Selenium web driver
     driver = None
-    # Logger instance
     logger = None
-    # Configuration instance
     config = None
+    screenshots_path = None
+    screenshots_number = None
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
@@ -34,6 +34,12 @@ class SeleniumWrapper(object):
 
             # Configure properties
             cls.config = Config().initialize_config()
+
+            # Unique screenshots directory
+            date = datetime.datetime.now().strftime('%Y-%m-%d_%H%M%S')
+            browser_info = cls.config.get('Browser', 'browser').replace('-', '_')
+            cls.screenshots_path = os.path.join(os.getcwd(), 'dist', 'screenshots', date + '_' + browser_info)
+            cls.screenshots_number = 1
 
             # Create new instance
             cls._instance = super(SeleniumWrapper, cls).__new__(cls, *args, **kwargs)
@@ -101,7 +107,7 @@ class SeleniumWrapper(object):
 
         # Add browser version
         try:
-            capabilities['version'] = browser.split('-')[6]
+            capabilities['version'] = browser.split('-')[1]
         except IndexError:
             pass
 
@@ -118,10 +124,11 @@ class SeleniumWrapper(object):
         except IndexError:
             pass
 
-        # Add Appium server capabilities
-        for cap, cap_value in dict(self.config.items('AppiumCapabilities')).iteritems():
-            self.logger.debug("Added server capability: {0} = {1}".format(cap, cap_value))
-            capabilities[cap] = cap_value
+        if browser_name == 'android' or browser_name == 'iphone':
+            # Add Appium server capabilities
+            for cap, cap_value in dict(self.config.items('AppiumCapabilities')).iteritems():
+                self.logger.debug("Added server capability: {0} = {1}".format(cap, cap_value))
+                capabilities[cap] = cap_value
 
         if browser_name == 'opera':
             capabilities['opera.autostart'] = True

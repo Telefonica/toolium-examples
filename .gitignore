@@ -58,6 +58,7 @@ Docs
 /reports
 .sonar
 .coverage
+dist
 
 # Database
 *.sqlite3
