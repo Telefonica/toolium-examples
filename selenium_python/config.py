@@ -12,6 +12,7 @@ been supplied.
 import logging.config
 import ConfigParser
 import os
+import types
 
 
 class Config(object):
@@ -32,6 +33,34 @@ class Config(object):
         [self._get_system_property(config, section, option)
          for section in config.sections() for option in config.options(section)]
 
+        # Add new methods to config object
+        config = self._add_optional_methods(config)
+
+        return config
+
+    def _add_optional_methods(self, config):
+        def get_optional(self, section, option, default=None):
+            '''
+            Get an option value for a given section
+            If the section or the option are not found, the default value is returned
+            '''
+            try:
+                return self.get(section, option)
+            except (ConfigParser.NoSectionError, ConfigParser.NoOptionError):
+                return default
+
+        def getboolean_optional(self, section, option, default=False):
+            '''
+            Get an option boolean value for a given section
+            If the section or the option are not found, the default value is returned
+            '''
+            try:
+                return self.getboolean(section, option)
+            except (ConfigParser.NoSectionError, ConfigParser.NoOptionError):
+                return default
+
+        config.get_optional = types.MethodType(get_optional, config)
+        config.getboolean_optional = types.MethodType(getboolean_optional, config)
         return config
 
     def _get_system_property(self, config, section, option):

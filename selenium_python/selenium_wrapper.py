@@ -21,6 +21,10 @@ class SeleniumWrapper(object):
     _instance = None
     # Selenium web driver
     driver = None
+    # Logger instance
+    logger = None
+    # Configuration instance
+    config = None
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
@@ -57,7 +61,7 @@ class SeleniumWrapper(object):
         """
         Set up the browser driver
         """
-        if self.config.getboolean('Server', 'enabled'):
+        if self.config.getboolean_optional('Server', 'enabled'):
             self._setup_remotedriver()
         else:
             self._setup_localdriver()
@@ -225,7 +229,7 @@ class SeleniumWrapper(object):
         '''
         Returns true if the tests must be executed in a browser
         '''
-        appium_app = self.config.get('AppiumCapabilities', 'app')
+        appium_app = self.config.get_optional('AppiumCapabilities', 'app')
         return not self.is_mobile_test() or appium_app in ('chrome', 'safari')
 
     def is_maximizable(self):

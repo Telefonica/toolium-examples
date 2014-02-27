@@ -13,9 +13,11 @@ import unittest
 from tests.common.selenium_test_case import SeleniumTestCase
 from selenium_python.pageobjects.register import RegisterPageObject
 from selenium_python.pageobjects.register_result import RegisterResultPageObject
+from selenium_python.jira import jira
 
 
 class RegisterUser(SeleniumTestCase):
+    @jira('QAGROUP-1141')
     def test_successfull_register(self):
         registerPage = RegisterPageObject()
         registerPage.username = "user1"
