@@ -20,10 +20,11 @@ Configure a virtual environment with the required packages:
 ```
 virtualenv ENV
 source ENV/bin/activate
-pip install -r requirements_dev.txt
+pip install --upgrade -r requirements.txt
 ```
 
 The following packages will be installed:
+  * selenium-tid-python (https://pdihub.hi.inet/QA/selenium-tid-python)
   * selenium (http://docs.seleniumhq.org/)
   * nose (https://pypi.python.org/pypi/nose/)
 
