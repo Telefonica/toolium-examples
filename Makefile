@@ -32,7 +32,8 @@ default:
 	@echo "commands:"
 	@echo "    clean         - Remove generated files and directories"
 	@echo "    venv          - Create and update virtual environments"
-	@echo "    test      	 - Execute selenium tests"
+	@echo "    test          - Execute selenium tests"
+	@echo "    example       - Execute selenium example tests"
 	@echo "    pylint        - Run pylint"
 	@echo
 
@@ -49,11 +50,14 @@ $(VENV): $(REQ) $(TESTREQ)
 	$@/$(BIN)/pip install --upgrade -r $(TESTREQ); \
 
 test: init venv
-	$(VENV)/$(BIN)/nosetests $(TEST_ARGS)
+	$(VENV)/$(BIN)/nosetests tests $(TEST_ARGS)
+
+example: init venv
+	$(VENV)/$(BIN)/nosetests examples $(TEST_ARGS)
 
 pylint: init venv
 	$(VENV)/$(BIN)/pylint --rcfile=pylint.rc -f parseable $(APP) | tee dist/pylint.log
-	$(VENV)/$(BIN)/pylint --rcfile=pylint.rc -f parseable tests | tee dist/pylint.log
+	$(VENV)/$(BIN)/pylint --rcfile=pylint.rc -f parseable tests examples | tee dist/pylint.log
 	@echo ">>> OK. Pylint reports generated in $(ROOT)/dist"
 
 clean:
