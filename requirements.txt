@@ -1,0 +1,2 @@
+git+https://visitor:visitor@pdihub.hi.inet/QA/selenium-tid-python.git@master#egg=selenium_tid_python
+nose==1.3.0

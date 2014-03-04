@@ -18,19 +18,41 @@ Installation
 Configure a virtual environment with the required packages:
 
 ```
+make venv
+```
+
+or 
+
+```
 virtualenv ENV
 source ENV/bin/activate
-pip install -r requirements_dev.txt
+pip install --upgrade -r requirements.txt
 ```
 
 The following packages will be installed:
+  * selenium-tid-python (https://pdihub.hi.inet/QA/selenium-tid-python)
   * selenium (http://docs.seleniumhq.org/)
   * nose (https://pypi.python.org/pypi/nose/)
+
+Running examples
+----------------
+
+Run all example tests with:
+
+```
+make example
+```
 
 Running tests
 -------------
 
 Run all tests with:
+
+```
+make test
+```
+
+or 
 
 ```
 nosetests
@@ -46,5 +68,7 @@ Browser configuration
 ---------------------
 
 Chrome: download driver from http://code.google.com/p/chromedriver/downloads/list
+
 Explorer: download driver from http://code.google.com/p/selenium/downloads/list
+
 PhantomJS: download driver from http://phantomjs.org/download.html
