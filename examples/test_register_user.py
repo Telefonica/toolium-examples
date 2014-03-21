@@ -11,8 +11,8 @@ been supplied.
 '''
 from selenium_tid_python.selenium_test_case import SeleniumTestCase
 from selenium_tid_python.jira import jira
-from selenium_python.pageobjects.register import RegisterPageObject
-from selenium_python.pageobjects.register_result import RegisterResultPageObject
+from examples.pageobjects.register import RegisterPageObject
+from examples.pageobjects.register_result import RegisterResultPageObject
 
 
 class RegisterUser(SeleniumTestCase):
