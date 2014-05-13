@@ -23,10 +23,10 @@ class AndroidEbookStore(SeleniumTestCase):
         self.previous_browser = config.get('Browser', 'browser')
         if not config.getboolean_optional('Server', 'enabled'):
             config.set('Browser', 'browser', 'android')
-        config.set('AppiumCapabilities', 'device', 'android')
+        config.set('AppiumCapabilities', 'automationName', 'Appium')
+        config.set('AppiumCapabilities', 'platformName', 'Android')
+        config.set('AppiumCapabilities', 'deviceName', 'Android Emulator')
         config.set('AppiumCapabilities', 'app', 'http://qacore02/sites/seleniumExamples/EbookStore.apk')
-        config.set('AppiumCapabilities', 'app-package', 'com.tdigital.ebookstore')
-        config.set('AppiumCapabilities', 'app-activity', '.ui.activities.SplashViewActivity')
         super(AndroidEbookStore, self).setUp()
 
     def tearDown(self):
@@ -39,6 +39,10 @@ class AndroidEbookStore(SeleniumTestCase):
         book_title = "El Nombre de la Rosa"
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.element_to_be_clickable((By.NAME, book_title))).click()
-        opened_book_title = self.driver.find_element_by_xpath("//TextView[2]").text
+
+        # Wait until page has changed
+        wait.until(EC.invisibility_of_element_located((By.ID, "user_info")))
+
+        opened_book_title = self.driver.find_element_by_xpath("//android.widget.TextView[2]").text
         self.logger.debug("Book title: '" + opened_book_title + "'")
         self.assertEqual(book_title, opened_book_title, "The book title is wrong")
