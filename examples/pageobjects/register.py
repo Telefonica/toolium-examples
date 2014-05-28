@@ -55,4 +55,4 @@ class RegisterPageObject(PageObject):
         self.assertEqual(url, self.driver.current_url)
 
     def submit(self):
-        self.driver.find_element(locators["register.submit"][0], locators["register.submit"][1]).click()
+        self.driver.find_element(*locators["register.submit"]).click()
