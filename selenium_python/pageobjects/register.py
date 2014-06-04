@@ -50,7 +50,8 @@ class RegisterPageObject(PageObject):
 
     def __init__(self):
         self.driver = selenium_driver.driver
-        url = "http://qacore01.hi.inet/sites/seleniumExamples/register.html"
+        config = selenium_driver.config
+        url = config.get('Common', 'url')
         self.driver.get(url)
         self.assertEqual(url, self.driver.current_url)
 

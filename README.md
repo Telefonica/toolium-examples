@@ -34,15 +34,6 @@ The following packages will be installed:
   * selenium (http://docs.seleniumhq.org/)
   * nose (https://pypi.python.org/pypi/nose/)
 
-Running examples
-----------------
-
-Run all example tests with:
-
-```
-make example
-```
-
 Running tests
 -------------
 
@@ -55,7 +46,7 @@ make test
 or 
 
 ```
-nosetests
+nosetests tests
 ```
 
 Run a singular test with:
@@ -63,6 +54,17 @@ Run a singular test with:
 ```
 nosetests tests.test_register_user
 ```
+
+Running examples
+----------------
+
+Run all example tests with:
+
+```
+make example
+```
+
+Android examples require Appium and Android Emulator
 
 Browser configuration
 ---------------------

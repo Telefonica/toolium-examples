@@ -20,20 +20,15 @@ class AndroidEbookStore(SeleniumTestCase):
     def setUp(self):
         # Updating properties
         config = selenium_driver.config
-        self.previous_browser = config.get('Browser', 'browser')
         if not config.getboolean_optional('Server', 'enabled'):
+            previous_browser = config.get('Browser', 'browser')
             config.set('Browser', 'browser', 'android')
+            self.addCleanup(config.set, 'Browser', 'browser', previous_browser)
         config.set('AppiumCapabilities', 'automationName', 'Appium')
         config.set('AppiumCapabilities', 'platformName', 'Android')
         config.set('AppiumCapabilities', 'deviceName', 'Android Emulator')
         config.set('AppiumCapabilities', 'app', 'http://qacore02/sites/seleniumExamples/EbookStore.apk')
         super(AndroidEbookStore, self).setUp()
-
-    def tearDown(self):
-        # Updating properties to previous values
-        super(AndroidEbookStore, self).tearDown()
-        config = selenium_driver.config
-        config.set('Browser', 'browser', self.previous_browser)
 
     def test_open_book_by_title(self):
         book_title = "El Nombre de la Rosa"
