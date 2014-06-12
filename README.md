@@ -43,7 +43,7 @@ Run all tests with:
 make test
 ```
 
-or 
+or
 
 ```
 nosetests tests
@@ -64,7 +64,22 @@ Run all example tests with:
 make example
 ```
 
+or
+
+```
+nosetests examples
+```
+
 Android examples require Appium and Android Emulator
+
+Running lettuce examples
+------------------------
+
+Run lettuce example tests with:
+
+```
+lettuce examples
+```
 
 Browser configuration
 ---------------------
