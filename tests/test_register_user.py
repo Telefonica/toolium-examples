@@ -18,15 +18,15 @@ from selenium_python.pageobjects.register_result import RegisterResultPageObject
 class RegisterUser(SeleniumTestCase):
     @jira('QAGROUP-1141')
     def test_successfull_register(self):
-        registerPage = RegisterPageObject()
-        registerPage.username = "user1"
-        registerPage.password = "pass1"
-        registerPage.name = "name1"
-        registerPage.email = "user1@mailinator.com"
-        registerPage.place = "Barcelona"
+        register_page = RegisterPageObject()
+        register_page.username = "user1"
+        register_page.password = "pass1"
+        register_page.name = "name1"
+        register_page.email = "user1@mailinator.com"
+        register_page.place = "Barcelona"
         self.logger.debug("Registering a new user")
-        registerPage.submit()
+        register_page.submit()
 
-        expectedMessage = "The user has been registered"
-        resultPage = RegisterResultPageObject()
-        self.assertIn(expectedMessage, resultPage.message)
+        expected_message = "The user has been registered"
+        result_page = RegisterResultPageObject()
+        self.assertIn(expected_message, result_page.message)
