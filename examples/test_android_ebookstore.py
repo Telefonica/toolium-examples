@@ -27,6 +27,7 @@ class AndroidEbookStore(SeleniumTestCase):
         config.set('AppiumCapabilities', 'automationName', 'Appium')
         config.set('AppiumCapabilities', 'platformName', 'Android')
         config.set('AppiumCapabilities', 'deviceName', 'Android Emulator')
+        config.set('AppiumCapabilities', 'browserName', '')
         config.set('AppiumCapabilities', 'app', 'http://qacore02/sites/seleniumExamples/EbookStore.apk')
         super(AndroidEbookStore, self).setUp()
 
@@ -38,6 +39,6 @@ class AndroidEbookStore(SeleniumTestCase):
         # Wait until page has changed
         wait.until(EC.invisibility_of_element_located((By.ID, "user_info")))
 
-        opened_book_title = self.driver.find_element_by_xpath("//android.widget.TextView[2]").text
+        opened_book_title = self.driver.find_element_by_xpath("(//android.widget.TextView)[2]").text
         self.logger.debug("Book title: '" + opened_book_title + "'")
         self.assertEqual(book_title, opened_book_title, "The book title is wrong")
