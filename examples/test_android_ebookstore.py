@@ -33,11 +33,10 @@ class AndroidEbookStore(SeleniumTestCase):
 
     def test_open_book_by_title(self):
         book_title = "El Nombre de la Rosa"
-        wait = WebDriverWait(self.driver, 10)
-        wait.until(EC.element_to_be_clickable((By.NAME, book_title))).click()
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.NAME, book_title))).click()
 
         # Wait until page has changed
-        wait.until(EC.invisibility_of_element_located((By.ID, "user_info")))
+        self.utils.wait_until_element_not_visible((By.ID, "user_info"))
 
         opened_book_title = self.driver.find_element_by_xpath("(//android.widget.TextView)[2]").text
         self.logger.debug("Book title: '" + opened_book_title + "'")
