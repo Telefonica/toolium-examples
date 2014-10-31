@@ -9,8 +9,8 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from selenium_tid_python.selenium_test_case import SeleniumTestCase
-from selenium_tid_python.jira import jira
+from seleniumtid.selenium_test_case import SeleniumTestCase
+from seleniumtid.jira import jira
 from examples.pageobjects.register import RegisterPageObject
 from examples.pageobjects.register_result import RegisterResultPageObject
 

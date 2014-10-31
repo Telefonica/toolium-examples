@@ -1,6 +1,6 @@
 from lettuce import before, after, world
-from selenium_tid_python import selenium_driver
-from selenium_tid_python.utils import Utils
+from seleniumtid import selenium_driver
+from seleniumtid.utils import Utils
 import logging
 import sys
 
