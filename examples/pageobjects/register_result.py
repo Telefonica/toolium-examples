@@ -15,13 +15,12 @@ from seleniumtid.pageelements.text_page_element import TextPageElement
 from examples.pageobjects import locators
 
 
-class MessageElement(TextPageElement):
-    def __init__(self):
-        self.locator = locators["register.result.message"]
-
-
 class RegisterResultPageObject(PageObject):
-    message = MessageElement()
+    def __init__(self, driver=None):
+        # Allow a second driver different from selenium_driver
+        if driver:
+            self.driver = driver
+        else:
+            self.driver = selenium_driver.driver
 
-    def __init__(self):
-        self.driver = selenium_driver.driver
+        self.message = TextPageElement(locators["register.result.message"])

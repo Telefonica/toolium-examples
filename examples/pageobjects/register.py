@@ -16,43 +16,24 @@ from seleniumtid.pageelements.select_page_element import SelectPageElement
 from examples.pageobjects import locators
 
 
-class UsernameElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.username"]
-
-
-class PasswordElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.password"]
-
-
-class NameElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.name"]
-
-
-class EmailElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.email"]
-
-
-class PlaceElement(SelectPageElement):
-    def __init__(self):
-        self.locator = locators["register.place"]
-
-
 class RegisterPageObject(PageObject):
-    username = UsernameElement()
-    password = PasswordElement()
-    name = NameElement()
-    email = EmailElement()
-    place = PlaceElement()
+    def __init__(self, driver=None):
+        # Allow a second driver different from selenium_driver
+        if driver:
+            self.driver = driver
+        else:
+            self.driver = selenium_driver.driver
 
-    def __init__(self):
-        self.driver = selenium_driver.driver
-        url = "http://qacore01.hi.inet/sites/seleniumExamples/register.html"
+        self.username = TextInputPageElement(locators["register.username"], self.driver)
+        self.password = TextInputPageElement(locators["register.password"], self.driver)
+        self.name = TextInputPageElement(locators["register.name"], self.driver)
+        self.email = TextInputPageElement(locators["register.email"], self.driver)
+        self.place = SelectPageElement(locators["register.place"], self.driver)
+
+        config = selenium_driver.config
+        url = config.get('Common', 'url')
         self.driver.get(url)
         self.assertEqual(url, self.driver.current_url)
 
     def submit(self):
-        self.driver.find_element(*locators["register.submit"]).click()
+        self.driver.find_element(locators["register.submit"][0], locators["register.submit"][1]).click()

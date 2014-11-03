@@ -16,40 +16,16 @@ from seleniumtid.pageelements.select_page_element import SelectPageElement
 from selenium_python.pageobjects import locators
 
 
-class UsernameElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.username"]
-
-
-class PasswordElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.password"]
-
-
-class NameElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.name"]
-
-
-class EmailElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.email"]
-
-
-class PlaceElement(SelectPageElement):
-    def __init__(self):
-        self.locator = locators["register.place"]
-
-
 class RegisterPageObject(PageObject):
-    username = UsernameElement()
-    password = PasswordElement()
-    name = NameElement()
-    email = EmailElement()
-    place = PlaceElement()
-
     def __init__(self):
         self.driver = selenium_driver.driver
+
+        self.username = TextInputPageElement(locators["register.username"])
+        self.password = TextInputPageElement(locators["register.password"])
+        self.name = TextInputPageElement(locators["register.name"])
+        self.email = TextInputPageElement(locators["register.email"])
+        self.place = SelectPageElement(locators["register.place"])
+
         config = selenium_driver.config
         url = config.get('Common', 'url')
         self.driver.get(url)
