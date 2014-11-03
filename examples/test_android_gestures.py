@@ -27,6 +27,7 @@ class AndroidGestures(SeleniumTestCase):
         config.set('AppiumCapabilities', 'deviceName', 'Android Emulator')
         config.set('AppiumCapabilities', 'browserName', '')
         config.set('AppiumCapabilities', 'app', 'http://qacore02/sites/seleniumExamples/ApiDemos-debug.apk')
+        config.set('AppiumCapabilities', 'appWaitActivity', '')
         super(AndroidGestures, self).setUp()
 
     def test_drag_and_drop(self):
