@@ -10,11 +10,10 @@ def setup_driver(scenario):
     # Configure logger
     world.logger = logging.getLogger()
     # Create driver
-    if not hasattr(world, 'driver') or world.driver == None:
+    if not hasattr(world, 'driver') or not world.driver:
         world.driver = selenium_driver.connect()
     # Add implicitly wait
-    config = selenium_driver.config
-    implicitly_wait = config.get_optional('Common', 'implicitly_wait')
+    implicitly_wait = selenium_driver.config.get_optional('Common', 'implicitly_wait')
     if (implicitly_wait):
         world.driver.implicitly_wait(implicitly_wait)
     # Maximize browser
@@ -31,8 +30,7 @@ def teardown_driver(scenario):
         Utils(world.driver).capture_screenshot(scenario.name.replace(' ', '_'))
 
     # Close browser and stop driver
-    config = selenium_driver.config
-    reuse_driver = config.get_optional('Common', 'reuse_driver')
+    reuse_driver = selenium_driver.config.get_optional('Common', 'reuse_driver')
     if not reuse_driver:
         world.driver.quit()
         world.driver = None
@@ -40,6 +38,6 @@ def teardown_driver(scenario):
 
 @after.all
 def teardown_driver_all(total):
-    if hasattr(world, 'driver') and world.driver != None:
+    if hasattr(world, 'driver') and world.driver:
         world.driver.quit()
         world.driver = None

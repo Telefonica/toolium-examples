@@ -9,13 +9,11 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from seleniumtid import selenium_driver
 from seleniumtid.pageobjects.page_object import PageObject
-from seleniumtid.pageelements.text_page_element import TextPageElement
-from selenium_python.pageobjects import locators
+from seleniumtid.pageelements import Text
+from selenium.webdriver.common.by import By
 
 
 class RegisterResultPageObject(PageObject):
-    def __init__(self):
-        self.driver = selenium_driver.driver
-        self.message = TextPageElement(locators["register.result.message"])
+    def init_page_elements(self):
+        self.message = Text(By.XPATH, "//div[@id='content']/div/div/div/b[2]")

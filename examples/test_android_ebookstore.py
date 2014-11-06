@@ -15,7 +15,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from seleniumtid import selenium_driver
 from seleniumtid.config_driver import ConfigDriver
-from seleniumtid.config import Config
 from examples.pageobjects.register import RegisterPageObject
 
 
@@ -48,7 +47,8 @@ class AndroidEbookStore(SeleniumTestCase):
         self.assertEqual(book_title, opened_book_title, "The book title is wrong")
 
     def test_mobile_and_browser(self):
-        config = Config().deepcopy(selenium_driver.config)
+        # Create a second driver
+        config = selenium_driver.config.deepcopy()
         config.set('Browser', 'browser', 'firefox')
         firefoxdriver = ConfigDriver(config).create_driver()
         self.addCleanup(firefoxdriver.quit)
@@ -58,11 +58,8 @@ class AndroidEbookStore(SeleniumTestCase):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.NAME, book_title))).click()
 
         # Web: register user
+        user = {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com',
+                'place': 'Barcelona'}
         register_page = RegisterPageObject(firefoxdriver)
-        register_page.username = "user1"
-        register_page.password = "pass1"
-        register_page.name = "name1"
-        register_page.email = "user1@mailinator.com"
-        register_page.place = "Barcelona"
-        self.logger.debug("Registering a new user")
-        register_page.submit()
+        register_page.open()
+        register_page.register(user)

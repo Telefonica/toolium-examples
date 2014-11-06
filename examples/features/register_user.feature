@@ -5,7 +5,7 @@ Feature: Register user
     	And I fill in field "password" with "<password>"
     	And I fill in field "name" with "name1"
     	And I fill in field "email" with "user1@mailinator.com"
-    	And I fill in field "place" with "Barcelona"
+    	And I select "Barcelona" from "place"
     	And I submit the registration form
     	Then I should see "The user has been registered"
 
