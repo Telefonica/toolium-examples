@@ -9,51 +9,28 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from selenium_tid_python import selenium_driver
-from selenium_tid_python.pageobjects.page_object import PageObject
-from selenium_tid_python.pageelements.text_input_page_element import TextInputPageElement
-from selenium_tid_python.pageelements.select_page_element import SelectPageElement
-from selenium_python.pageobjects import locators
-
-
-class UsernameElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.username"]
-
-
-class PasswordElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.password"]
-
-
-class NameElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.name"]
-
-
-class EmailElement(TextInputPageElement):
-    def __init__(self):
-        self.locator = locators["register.email"]
-
-
-class PlaceElement(SelectPageElement):
-    def __init__(self):
-        self.locator = locators["register.place"]
+from seleniumtid.pageobjects.page_object import PageObject
+from seleniumtid.pageelements import InputText, Select, PageElement
+from selenium.webdriver.common.by import By
 
 
 class RegisterPageObject(PageObject):
-    username = UsernameElement()
-    password = PasswordElement()
-    name = NameElement()
-    email = EmailElement()
-    place = PlaceElement()
+    def init_page_elements(self):
+        self.username = InputText(By.NAME, 'username')
+        self.password = InputText(By.ID, 'password')
+        self.name = InputText(By.ID, 'name')
+        self.email = InputText(By.ID, 'email')
+        self.place = Select(By.ID, 'place')
+        self.submit = PageElement(By.ID, 'registerButton')
 
-    def __init__(self):
-        self.driver = selenium_driver.driver
-        config = selenium_driver.config
-        url = config.get('Common', 'url')
-        self.driver.get(url)
-        self.assertEqual(url, self.driver.current_url)
+    def open(self):
+        self.driver.get(self.config.get('Common', 'url'))
 
-    def submit(self):
-        self.driver.find_element(locators["register.submit"][0], locators["register.submit"][1]).click()
+    def register(self, user):
+        self.logger.debug("Registering a new user")
+        self.username.text = user['username']
+        self.password.text = user['password']
+        self.name.text = user['name']
+        self.email.text = user['email']
+        self.place.option = user['place']
+        self.submit.element().click()
