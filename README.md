@@ -30,8 +30,10 @@ pip install --upgrade -r requirements.txt
 ```
 
 The following packages will be installed:
-  * selenium-tid-python (https://pdihub.hi.inet/QA/selenium-tid-python)
+  * seleniumtid (https://pdihub.hi.inet/QA/selenium-tid-python)
   * selenium (http://docs.seleniumhq.org/)
+  * Appium-Python-Client (https://github.com/appium/python-client)
+  * lettuce (http://lettuce.it)
   * nose (https://pypi.python.org/pypi/nose/)
 
 Running tests
@@ -70,7 +72,7 @@ or
 nosetests examples
 ```
 
-Android examples require Appium and Android Emulator
+The Android examples require that Appium Server and Android Emulator are started at localhost
 
 Running lettuce examples
 ------------------------
