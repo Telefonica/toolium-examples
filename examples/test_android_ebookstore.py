@@ -9,11 +9,13 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from selenium_tid_python.selenium_test_case import SeleniumTestCase
+from seleniumtid.selenium_test_case import SeleniumTestCase
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium_tid_python import selenium_driver
+from seleniumtid import selenium_driver
+from seleniumtid.config_driver import ConfigDriver
+from examples.pageobjects.register import RegisterPageObject
 
 
 class AndroidEbookStore(SeleniumTestCase):
@@ -29,16 +31,35 @@ class AndroidEbookStore(SeleniumTestCase):
         config.set('AppiumCapabilities', 'deviceName', 'Android Emulator')
         config.set('AppiumCapabilities', 'browserName', '')
         config.set('AppiumCapabilities', 'app', 'http://qacore02/sites/seleniumExamples/EbookStore.apk')
+        config.set('AppiumCapabilities', 'appWaitActivity',
+                   '.ui.activities.SplashViewActivity, .ui.activities.ListBookActivity')
         super(AndroidEbookStore, self).setUp()
 
     def test_open_book_by_title(self):
         book_title = "El Nombre de la Rosa"
-        wait = WebDriverWait(self.driver, 10)
-        wait.until(EC.element_to_be_clickable((By.NAME, book_title))).click()
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.NAME, book_title))).click()
 
         # Wait until page has changed
-        wait.until(EC.invisibility_of_element_located((By.ID, "user_info")))
+        self.utils.wait_until_element_not_visible((By.ID, "user_info"))
 
         opened_book_title = self.driver.find_element_by_xpath("(//android.widget.TextView)[2]").text
         self.logger.debug("Book title: '" + opened_book_title + "'")
         self.assertEqual(book_title, opened_book_title, "The book title is wrong")
+
+    def test_mobile_and_browser(self):
+        # Create a second driver
+        config = selenium_driver.config.deepcopy()
+        config.set('Browser', 'browser', 'firefox')
+        firefoxdriver = ConfigDriver(config).create_driver()
+        self.addCleanup(firefoxdriver.quit)
+
+        # Mobile: open book
+        book_title = "El Nombre de la Rosa"
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.NAME, book_title))).click()
+
+        # Web: register user
+        user = {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com',
+                'place': 'Barcelona'}
+        register_page = RegisterPageObject(firefoxdriver)
+        register_page.open()
+        register_page.register(user)

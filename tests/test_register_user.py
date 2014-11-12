@@ -9,8 +9,8 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from selenium_tid_python.selenium_test_case import SeleniumTestCase
-from selenium_tid_python.jira import jira
+from seleniumtid.selenium_test_case import SeleniumTestCase
+from seleniumtid.jira import jira
 from selenium_python.pageobjects.register import RegisterPageObject
 from selenium_python.pageobjects.register_result import RegisterResultPageObject
 
@@ -18,15 +18,13 @@ from selenium_python.pageobjects.register_result import RegisterResultPageObject
 class RegisterUser(SeleniumTestCase):
     @jira('QAGROUP-1141')
     def test_successfull_register(self):
-        register_page = RegisterPageObject()
-        register_page.username = "user1"
-        register_page.password = "pass1"
-        register_page.name = "name1"
-        register_page.email = "user1@mailinator.com"
-        register_page.place = "Barcelona"
-        self.logger.debug("Registering a new user")
-        register_page.submit()
+        user = {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com',
+                'place': 'Barcelona'}
 
-        expected_message = "The user has been registered"
+        register_page = RegisterPageObject()
+        register_page.open()
+        register_page.register(user)
+
         result_page = RegisterResultPageObject()
-        self.assertIn(expected_message, result_page.message)
+        expected_message = "The user has been registered"
+        self.assertIn(expected_message, result_page.message.text)
