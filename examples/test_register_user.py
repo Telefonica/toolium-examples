@@ -11,11 +11,19 @@ been supplied.
 '''
 from seleniumtid.selenium_test_case import SeleniumTestCase
 from seleniumtid.jira import jira
+from seleniumtid import selenium_driver
 from examples.pageobjects.register import RegisterPageObject
 from examples.pageobjects.register_result import RegisterResultPageObject
 
 
 class RegisterUser(SeleniumTestCase):
+    def setUp(self):
+        # Updating properties
+        config = selenium_driver.config
+        config.set('Browser', 'browser', 'firefox')
+        config.set('Common', 'url', 'http://qacore01.hi.inet/sites/seleniumExamples/register.html')
+        super(RegisterUser, self).setUp()
+
     @jira('QAGROUP-1141')
     def test_successfull_register(self):
         user = {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com',

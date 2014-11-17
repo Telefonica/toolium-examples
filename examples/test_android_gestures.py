@@ -18,10 +18,7 @@ class AndroidGestures(SeleniumTestCase):
     def setUp(self):
         # Updating properties
         config = selenium_driver.config
-        if not config.getboolean_optional('Server', 'enabled'):
-            previous_browser = config.get('Browser', 'browser')
-            config.set('Browser', 'browser', 'android')
-            self.addCleanup(config.set, 'Browser', 'browser', previous_browser)
+        config.set('Browser', 'browser', 'android')
         config.set('AppiumCapabilities', 'automationName', 'Appium')
         config.set('AppiumCapabilities', 'platformName', 'Android')
         config.set('AppiumCapabilities', 'deviceName', 'Android Emulator')
