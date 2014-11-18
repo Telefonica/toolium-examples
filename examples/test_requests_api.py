@@ -9,22 +9,18 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from seleniumtid.test_cases import SeleniumTestCase
-from seleniumtid.jira import jira
-from selenium_python.pageobjects.register import RegisterPageObject
-from selenium_python.pageobjects.register_result import RegisterResultPageObject
+import requests
+from nose.tools import assert_equal, assert_in
+from seleniumtid.test_cases import BasicTestCase
 
 
-class RegisterUser(SeleniumTestCase):
-    @jira('QAGROUP-1141')
+class RegisterUser(BasicTestCase):
     def test_successfull_register(self):
+        url = 'http://qacore01.hi.inet/sites/seleniumExamples/register.php'
         user = {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com',
                 'place': 'Barcelona'}
 
-        register_page = RegisterPageObject()
-        register_page.open()
-        register_page.register(user)
-
-        result_page = RegisterResultPageObject()
-        expected_message = "The user has been registered"
-        self.assertIn(expected_message, result_page.message.text)
+        self.logger.debug("Registering a new user through the api")
+        r = requests.post(url, user)
+        assert_equal(r.status_code, 200)
+        assert_in('The user has been registered', r.text)
