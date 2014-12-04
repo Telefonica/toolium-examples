@@ -17,7 +17,7 @@ from selenium_python.pageobjects.register_result import RegisterResultPageObject
 
 class RegisterUser(SeleniumTestCase):
     @jira('QAGROUP-1141')
-    def test_successfull_register(self):
+    def test_successful_register(self):
         user = {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com',
                 'place': 'Barcelona'}
 

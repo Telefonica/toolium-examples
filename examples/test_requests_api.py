@@ -15,7 +15,7 @@ from seleniumtid.test_cases import BasicTestCase
 
 
 class RegisterUser(BasicTestCase):
-    def test_successfull_register(self):
+    def test_successful_register(self):
         url = 'http://qacore01.hi.inet/sites/seleniumExamples/register.php'
         user = {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com',
                 'place': 'Barcelona'}

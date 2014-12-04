@@ -27,7 +27,7 @@ class RegisterUser(SeleniumTestCase):
         super(RegisterUser, self).setUp()
 
     @jira('QAGROUP-1141')
-    def test_successfull_register(self):
+    def test_successful_register(self):
         user = {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com',
                 'place': 'Barcelona'}
 
@@ -39,7 +39,7 @@ class RegisterUser(SeleniumTestCase):
         expected_message = "The user has been registered"
         self.assertIn(expected_message, result_page.message.text)
 
-    def test_successfull_register_without_page_objects(self):
+    def test_successful_register_without_page_objects(self):
         user = {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com',
                 'place': 'Barcelona'}
 
