@@ -1,3 +1,5 @@
 -i http://artifactory.hi.inet/artifactory/api/pypi/pypi/simple
 seleniumtid
 nose==1.3.0
+requests
+ddt

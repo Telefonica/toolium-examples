@@ -24,6 +24,7 @@ def select_from(step, value, field_name):
 
 @step('I submit the registration form')
 def submit_registration_form(step):
+    world.logger.debug('Registering a new user')
     world.register_page.submit.element().click()
 
 

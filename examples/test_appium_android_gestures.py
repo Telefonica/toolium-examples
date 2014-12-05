@@ -9,7 +9,7 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from seleniumtid.selenium_test_case import SeleniumTestCase
+from seleniumtid.test_cases import SeleniumTestCase
 from seleniumtid import selenium_driver
 from appium.webdriver.common.touch_action import TouchAction
 
@@ -18,10 +18,7 @@ class AndroidGestures(SeleniumTestCase):
     def setUp(self):
         # Updating properties
         config = selenium_driver.config
-        if not config.getboolean_optional('Server', 'enabled'):
-            previous_browser = config.get('Browser', 'browser')
-            config.set('Browser', 'browser', 'android')
-            self.addCleanup(config.set, 'Browser', 'browser', previous_browser)
+        config.set('Browser', 'browser', 'android')
         config.set('AppiumCapabilities', 'automationName', 'Appium')
         config.set('AppiumCapabilities', 'platformName', 'Android')
         config.set('AppiumCapabilities', 'deviceName', 'Android Emulator')
