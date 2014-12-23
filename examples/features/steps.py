@@ -1,7 +1,22 @@
+# -*- coding: utf-8 -*-
+'''
+(c) Copyright 2014 Telefonica, I+D. Printed in Spain (Europe). All Rights
+Reserved.
+
+The copyright to the software program(s) is property of Telefonica I+D.
+The program(s) may be used and or copied only with the express written
+consent of Telefonica I+D or in accordance with the terms and conditions
+stipulated in the agreement/contract under which the program(s) have
+been supplied.
+'''
 from lettuce import step, world
 from examples.pageobjects.register import RegisterPageObject
 from examples.pageobjects.register_result import RegisterResultPageObject
 from nose.tools import assert_in
+'''
+Uncomment unittest2 and lettuce dependencies in requeriments.txt
+and install them with pip install -r requirements.txt
+'''
 
 
 @step('I go to the registration form')

@@ -1,5 +1,6 @@
 -i http://artifactory.hi.inet/artifactory/api/pypi/pypi/simple
 seleniumtid
-nose==1.3.0
-requests
+nose
 ddt
+#unittest2             # lettuce tests
+#lettuce               # lettuce tests
