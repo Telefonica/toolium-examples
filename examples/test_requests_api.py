@@ -10,7 +10,6 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
 import requests
-from nose.tools import assert_equal, assert_in
 from seleniumtid.test_cases import BasicTestCase
 
 
@@ -22,5 +21,5 @@ class RegisterUser(BasicTestCase):
 
         self.logger.debug("Registering a new user through the api")
         r = requests.post(url, user)
-        assert_equal(r.status_code, 200)
-        assert_in('The user has been registered', r.text)
+        self.assertEqual(r.status_code, 200)
+        self.assertIn('The user has been registered', r.text)

@@ -31,10 +31,11 @@ pip install --upgrade -r requirements.txt
 
 The following packages will be installed:
   * seleniumtid (https://pdihub.hi.inet/QA/selenium-tid-python)
+  * requests (http://docs.python-requests.org)
   * selenium (http://docs.seleniumhq.org/)
   * Appium-Python-Client (https://github.com/appium/python-client)
-  * lettuce (http://lettuce.it)
   * nose (https://pypi.python.org/pypi/nose/)
+  * lettuce (http://lettuce.it) -> not installed by default, see requirements.txt
 
 Running tests
 -------------
