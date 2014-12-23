@@ -9,7 +9,7 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from seleniumtid.test_cases import SeleniumTestCase
+from seleniumtid.test_cases import AppiumTestCase
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -18,7 +18,7 @@ from seleniumtid.config_driver import ConfigDriver
 from examples.pageobjects.register import RegisterPageObject
 
 
-class AndroidEbookStore(SeleniumTestCase):
+class AndroidEbookStore(AppiumTestCase):
     def setUp(self):
         # Updating properties
         config = selenium_driver.config

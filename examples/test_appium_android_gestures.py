@@ -9,12 +9,12 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from seleniumtid.test_cases import SeleniumTestCase
+from seleniumtid.test_cases import AppiumTestCase
 from seleniumtid import selenium_driver
 from appium.webdriver.common.touch_action import TouchAction
 
 
-class AndroidGestures(SeleniumTestCase):
+class AndroidGestures(AppiumTestCase):
     def setUp(self):
         # Updating properties
         config = selenium_driver.config
