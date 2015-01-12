@@ -23,7 +23,7 @@ class RegisterUser(SeleniumTestCase):
         # Updating properties
         config = selenium_driver.config
         config.set('Browser', 'browser', 'firefox')
-        config.set('Common', 'url', 'http://qacore01.hi.inet/sites/seleniumExamples/register.html')
+        config.set('Common', 'url', 'http://qacore02.hi.inet/sites/seleniumExamples/register.html')
         super(RegisterUser, self).setUp()
 
     @jira('QAGROUP-1141')
