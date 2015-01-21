@@ -34,6 +34,7 @@ class RegisterUser(SeleniumTestCase):
         register_page = RegisterPageObject()
         register_page.open()
         register_page.register(user)
+        self.assertScreenshot('body', 'register_result')
 
         result_page = RegisterResultPageObject()
         expected_message = "The user has been registered"
@@ -52,6 +53,7 @@ class RegisterUser(SeleniumTestCase):
         self.email = self.driver.find_element(By.ID, 'email').send_keys(user['email'])
         Select(self.driver.find_element(By.ID, 'place')).select_by_visible_text(user['place'])
         self.driver.find_element(By.ID, 'registerButton').click()
+        self.assertScreenshot('body', 'register_result')
 
         result_message = self.driver.find_element(By.XPATH, "//div[@id='content']/div/div/div/b[2]").text
         expected_message = "The user has been registered"

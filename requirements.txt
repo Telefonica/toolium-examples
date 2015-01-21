@@ -3,4 +3,6 @@ seleniumtid
 nose
 ddt
 #unittest2             # lettuce tests
+#colorama==0.3.2       # lettuce tests
 #lettuce               # lettuce tests
+needle                # visual tests

@@ -12,7 +12,7 @@ been supplied.
 from lettuce import step, world
 from examples.pageobjects.register import RegisterPageObject
 from examples.pageobjects.register_result import RegisterResultPageObject
-from nose.tools import assert_in
+from nose.tools import assert_in  # @UnresolvedImport
 '''
 Uncomment unittest2 and lettuce dependencies in requeriments.txt
 and install them with pip install -r requirements.txt
@@ -41,6 +41,7 @@ def select_from(step, value, field_name):
 def submit_registration_form(step):
     world.logger.debug('Registering a new user')
     world.register_page.submit.element().click()
+    world.assertScreenshot('body', 'register_result')
 
 
 @step('I should see "(.*?)"')
