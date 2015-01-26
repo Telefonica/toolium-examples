@@ -24,6 +24,7 @@ class RegisterUser(SeleniumTestCase):
         register_page = RegisterPageObject()
         register_page.open()
         register_page.register(user)
+        self.assertScreenshot('body', 'register_result')
 
         result_page = RegisterResultPageObject()
         expected_message = "The user has been registered"
