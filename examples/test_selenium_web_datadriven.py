@@ -10,11 +10,11 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
 from seleniumtid.test_cases import SeleniumTestCase
-from seleniumtid import selenium_driver
 from seleniumtid.jira import jira
 from examples.pageobjects.register import RegisterPageObject
 from examples.pageobjects.register_result import RegisterResultPageObject
 from ddt import ddt, data
+import os
 
 users = (
     {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com', 'place': 'Barcelona'},
@@ -25,10 +25,7 @@ users = (
 @ddt
 class RegisterUser(SeleniumTestCase):
     def setUp(self):
-        # Updating properties
-        config = selenium_driver.config
-        config.set('Browser', 'browser', 'firefox')
-        config.set('Common', 'url', 'http://qacore02.hi.inet/sites/seleniumExamples/register.html')
+        os.environ['Files_properties'] = 'conf/examples/properties.cfg'
         super(RegisterUser, self).setUp()
 
     @data(*users)

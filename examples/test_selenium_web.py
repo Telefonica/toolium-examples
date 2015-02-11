@@ -16,14 +16,12 @@ from examples.pageobjects.register import RegisterPageObject
 from examples.pageobjects.register_result import RegisterResultPageObject
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+import os
 
 
 class RegisterUser(SeleniumTestCase):
     def setUp(self):
-        # Updating properties
-        config = selenium_driver.config
-        config.set('Browser', 'browser', 'firefox')
-        config.set('Common', 'url', 'http://qacore02.hi.inet/sites/seleniumExamples/register.html')
+        os.environ['Files_properties'] = 'conf/examples/properties.cfg'
         super(RegisterUser, self).setUp()
 
     @jira('QAGROUP-1141')
