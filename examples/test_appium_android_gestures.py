@@ -10,21 +10,13 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
 from seleniumtid.test_cases import AppiumTestCase
-from seleniumtid import selenium_driver
 from appium.webdriver.common.touch_action import TouchAction
+import os
 
 
 class AndroidGestures(AppiumTestCase):
     def setUp(self):
-        # Updating properties
-        config = selenium_driver.config
-        config.set('Browser', 'browser', 'android')
-        config.set('AppiumCapabilities', 'automationName', 'Appium')
-        config.set('AppiumCapabilities', 'platformName', 'Android')
-        config.set('AppiumCapabilities', 'deviceName', 'Android Emulator')
-        config.set('AppiumCapabilities', 'browserName', '')
-        config.set('AppiumCapabilities', 'app', 'http://qacore02/sites/seleniumExamples/ApiDemos-debug.apk')
-        config.set('AppiumCapabilities', 'appWaitActivity', '')
+        os.environ['Files_properties'] = 'conf/examples/properties.cfg;conf/examples/android-apidemos-properties.cfg'
         super(AndroidGestures, self).setUp()
 
     def test_drag_and_drop(self):

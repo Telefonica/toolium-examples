@@ -1,7 +1,8 @@
 Selenium Python
 ===============
 
-Example Python project to start using Selenium WebDriver
+Example python project to start using Selenium WebDriver for testing api, web and mobile applications 
+using requests, selenium and appium tools
 
 Requirements
 ------------

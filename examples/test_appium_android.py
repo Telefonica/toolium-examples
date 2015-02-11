@@ -16,20 +16,12 @@ from selenium.webdriver.common.by import By
 from seleniumtid import selenium_driver
 from seleniumtid.config_driver import ConfigDriver
 from examples.pageobjects.register import RegisterPageObject
+import os
 
 
 class AndroidEbookStore(AppiumTestCase):
     def setUp(self):
-        # Updating properties
-        config = selenium_driver.config
-        config.set('Browser', 'browser', 'android')
-        config.set('AppiumCapabilities', 'automationName', 'Appium')
-        config.set('AppiumCapabilities', 'platformName', 'Android')
-        config.set('AppiumCapabilities', 'deviceName', 'Android Emulator')
-        config.set('AppiumCapabilities', 'browserName', '')
-        config.set('AppiumCapabilities', 'app', 'http://qacore02/sites/seleniumExamples/EbookStore.apk')
-        config.set('AppiumCapabilities', 'appWaitActivity',
-                   '.ui.activities.SplashViewActivity, .ui.activities.ListBookActivity')
+        os.environ['Files_properties'] = 'conf/examples/properties.cfg;conf/examples/android-ebook-properties.cfg'
         super(AndroidEbookStore, self).setUp()
 
     def test_open_book_by_title(self):
