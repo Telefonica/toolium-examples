@@ -21,7 +21,9 @@ import os
 
 class RegisterUser(SeleniumTestCase):
     def setUp(self):
-        os.environ['Files_properties'] = 'conf/examples/properties.cfg'
+        root_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+        os.environ['Files_properties'] = os.path.join(root_path, 'conf', 'examples', 'properties.cfg')
+        os.environ['Files_logging'] = os.path.join(root_path, 'conf', 'examples', 'logging.conf')
         super(RegisterUser, self).setUp()
 
     @jira('QAGROUP-1141')

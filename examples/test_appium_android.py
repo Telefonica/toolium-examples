@@ -21,7 +21,11 @@ import os
 
 class AndroidEbookStore(AppiumTestCase):
     def setUp(self):
-        os.environ['Files_properties'] = 'conf/examples/properties.cfg;conf/examples/android-ebook-properties.cfg'
+        root_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+        config_file = os.path.join(root_path, 'conf', 'examples', 'properties.cfg')
+        android_config_file = os.path.join(root_path, 'conf', 'examples', 'android-ebook-properties.cfg')
+        os.environ['Files_properties'] = '{};{}'.format(config_file, android_config_file)
+        os.environ['Files_logging'] = os.path.join(root_path, 'conf', 'examples', 'logging.conf')
         super(AndroidEbookStore, self).setUp()
 
     def test_open_book_by_title(self):
