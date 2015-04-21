@@ -10,9 +10,12 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
 from lettuce import step, world
+from nose.tools import assert_in  # @UnresolvedImport
+
 from examples.pageobjects.register import RegisterPageObject
 from examples.pageobjects.register_result import RegisterResultPageObject
-from nose.tools import assert_in  # @UnresolvedImport
+
+
 '''
 Uncomment unittest2 and lettuce dependencies in requeriments.txt
 and install them with pip install -r requirements.txt

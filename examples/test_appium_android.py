@@ -9,14 +9,16 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from seleniumtid.test_cases import AppiumTestCase
+import os
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+
+from seleniumtid.test_cases import AppiumTestCase
 from seleniumtid import selenium_driver
 from seleniumtid.config_driver import ConfigDriver
 from examples.pageobjects.register import RegisterPageObject
-import os
 
 
 class AndroidEbookStore(AppiumTestCase):
@@ -26,6 +28,7 @@ class AndroidEbookStore(AppiumTestCase):
         android_config_file = os.path.join(root_path, 'conf', 'examples', 'android-ebook-properties.cfg')
         os.environ['Files_properties'] = '{};{}'.format(config_file, android_config_file)
         os.environ['Files_logging'] = os.path.join(root_path, 'conf', 'examples', 'logging.conf')
+        os.environ['Files_output_path'] = os.path.join(root_path, 'dist')
         super(AndroidEbookStore, self).setUp()
 
     def test_open_book_by_title(self):

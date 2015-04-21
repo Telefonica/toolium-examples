@@ -9,14 +9,16 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
+import os
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
+
 from seleniumtid.test_cases import SeleniumTestCase
 from seleniumtid.jira import jira
 from seleniumtid import selenium_driver
 from examples.pageobjects.register import RegisterPageObject
 from examples.pageobjects.register_result import RegisterResultPageObject
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select
-import os
 
 
 class RegisterUser(SeleniumTestCase):
@@ -24,6 +26,7 @@ class RegisterUser(SeleniumTestCase):
         root_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
         os.environ['Files_properties'] = os.path.join(root_path, 'conf', 'examples', 'properties.cfg')
         os.environ['Files_logging'] = os.path.join(root_path, 'conf', 'examples', 'logging.conf')
+        os.environ['Files_output_path'] = os.path.join(root_path, 'dist')
         super(RegisterUser, self).setUp()
 
     @jira('QAGROUP-1141')

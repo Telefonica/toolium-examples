@@ -9,12 +9,15 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
+import os
+
+from ddt import ddt, data
+
 from seleniumtid.test_cases import SeleniumTestCase
 from seleniumtid.jira import jira
 from examples.pageobjects.register import RegisterPageObject
 from examples.pageobjects.register_result import RegisterResultPageObject
-from ddt import ddt, data
-import os
+
 
 users = (
     {'username': 'user1', 'password': 'pass1', 'name': 'name1', 'email': 'user1@mailinator.com', 'place': 'Barcelona'},
@@ -28,6 +31,7 @@ class RegisterUser(SeleniumTestCase):
         root_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
         os.environ['Files_properties'] = os.path.join(root_path, 'conf', 'examples', 'properties.cfg')
         os.environ['Files_logging'] = os.path.join(root_path, 'conf', 'examples', 'logging.conf')
+        os.environ['Files_output_path'] = os.path.join(root_path, 'dist')
         super(RegisterUser, self).setUp()
 
     @data(*users)

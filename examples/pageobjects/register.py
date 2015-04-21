@@ -9,9 +9,10 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
+from selenium.webdriver.common.by import By
+
 from seleniumtid.pageobjects.page_object import PageObject
 from seleniumtid.pageelements import InputText, Select, PageElement
-from selenium.webdriver.common.by import By
 
 
 class RegisterPageObject(PageObject):

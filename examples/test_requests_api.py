@@ -9,9 +9,11 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-import requests
-from seleniumtid.test_cases import BasicTestCase
 import os
+
+import requests
+
+from seleniumtid.test_cases import BasicTestCase
 
 
 class RegisterUser(BasicTestCase):
@@ -19,6 +21,7 @@ class RegisterUser(BasicTestCase):
         root_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
         os.environ['Files_properties'] = os.path.join(root_path, 'conf', 'examples', 'properties.cfg')
         os.environ['Files_logging'] = os.path.join(root_path, 'conf', 'examples', 'logging.conf')
+        os.environ['Files_output_path'] = os.path.join(root_path, 'dist')
         super(RegisterUser, self).setUp()
 
     def test_successful_register(self):

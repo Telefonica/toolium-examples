@@ -9,9 +9,11 @@ consent of Telefonica I+D or in accordance with the terms and conditions
 stipulated in the agreement/contract under which the program(s) have
 been supplied.
 '''
-from seleniumtid.test_cases import AppiumTestCase
-from appium.webdriver.common.touch_action import TouchAction
 import os
+
+from appium.webdriver.common.touch_action import TouchAction
+
+from seleniumtid.test_cases import AppiumTestCase
 
 
 class AndroidGestures(AppiumTestCase):
@@ -21,6 +23,7 @@ class AndroidGestures(AppiumTestCase):
         android_config_file = os.path.join(root_path, 'conf', 'examples', 'android-apidemos-properties.cfg')
         os.environ['Files_properties'] = '{};{}'.format(config_file, android_config_file)
         os.environ['Files_logging'] = os.path.join(root_path, 'conf', 'examples', 'logging.conf')
+        os.environ['Files_output_path'] = os.path.join(root_path, 'dist')
         super(AndroidGestures, self).setUp()
 
     def test_drag_and_drop(self):
