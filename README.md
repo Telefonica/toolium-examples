@@ -27,6 +27,7 @@ or
 ```
 virtualenv ENV
 source ENV/bin/activate
+easy_install pillow
 pip install --upgrade -r requirements.txt
 ```
 
