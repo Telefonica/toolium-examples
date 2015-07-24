@@ -46,7 +46,7 @@ $(VENV): $(REQ) $(TESTREQ)
 	mkdir -p $@; \
 	export GIT_SSL_NO_VERIFY=true; \
 	$(VIRTUALENV) --no-site-packages --distribute -p $(PYTHON) $@; \
-	$@/$(BIN)/easy_install Pillow; \
+	$@/$(BIN)/easy_install --upgrade Pillow; \
 	$@/$(BIN)/pip install --upgrade -r $(REQ); \
 	$@/$(BIN)/pip install --upgrade -r $(TESTREQ); \
 

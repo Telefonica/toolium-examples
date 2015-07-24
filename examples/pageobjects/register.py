@@ -14,7 +14,7 @@ been supplied.
 from selenium.webdriver.common.by import By
 
 from seleniumtid.pageobjects.page_object import PageObject
-from seleniumtid.pageelements import InputText, Select, PageElement
+from seleniumtid.pageelements import InputText, Select, Button
 
 
 class RegisterPageObject(PageObject):
@@ -24,7 +24,7 @@ class RegisterPageObject(PageObject):
         self.name = InputText(By.ID, 'name')
         self.email = InputText(By.ID, 'email')
         self.place = Select(By.ID, 'place')
-        self.submit = PageElement(By.ID, 'registerButton')
+        self.submit = Button(By.ID, 'registerButton')
 
     def open(self):
         self.driver.get(self.config.get('Common', 'url'))
@@ -36,4 +36,4 @@ class RegisterPageObject(PageObject):
         self.name.text = user['name']
         self.email.text = user['email']
         self.place.option = user['place']
-        self.submit.element().click()
+        self.submit.click()
