@@ -89,8 +89,8 @@ lettuce examples
 Browser configuration
 ---------------------
 
-Chrome: download driver from http://code.google.com/p/chromedriver/downloads/list
+Chrome: download driver from http://chromedriver.storage.googleapis.com/index.html
 
-Explorer: download driver from http://code.google.com/p/selenium/downloads/list
+Explorer: download driver from http://selenium-release.storage.googleapis.com/index.html 
 
 PhantomJS: download driver from http://phantomjs.org/download.html
