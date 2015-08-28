@@ -7,11 +7,7 @@ using requests, selenium and appium tools
 Requirements
 ------------
 
-Python 2.7.4 (http://www.python.org)
-
-distribute 0.6.36 (https://pypi.python.org/pypi/distribute)
-
-pip 1.3.1 (https://pypi.python.org/pypi/pip)
+Python 2.7.10 (http://www.python.org)
 
 Installation
 ------------
@@ -58,32 +54,6 @@ Run a singular test with:
 
 ```
 nosetests tests.test_register_user
-```
-
-Running examples
-----------------
-
-Run all example tests with:
-
-```
-make example
-```
-
-or
-
-```
-nosetests examples
-```
-
-The Android examples require that Appium Server and Android Emulator are started at localhost
-
-Running lettuce examples
-------------------------
-
-Run lettuce example tests with:
-
-```
-lettuce examples
 ```
 
 Browser configuration

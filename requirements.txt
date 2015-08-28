@@ -1,8 +1,8 @@
 -i http://artifactory.hi.inet/artifactory/api/pypi/pypi/simple
 seleniumtid
 nose
-ddt
+needle                # visual tests
+#ddt                   # data-driven tests
 #unittest2             # lettuce tests
 #colorama==0.3.2       # lettuce tests
 #lettuce               # lettuce tests
-needle                # visual tests

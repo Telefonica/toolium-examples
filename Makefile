@@ -33,7 +33,6 @@ default:
 	@echo "    clean         - Remove generated files and directories"
 	@echo "    venv          - Create and update virtual environments"
 	@echo "    test          - Execute selenium tests"
-	@echo "    example       - Execute selenium example tests"
 	@echo "    pylint        - Run pylint"
 	@echo
 
@@ -52,9 +51,6 @@ $(VENV): $(REQ) $(TESTREQ)
 
 test: init venv
 	$(VENV)/$(BIN)/nosetests tests $(TEST_ARGS)
-
-example: init venv
-	$(VENV)/$(BIN)/nosetests examples $(TEST_ARGS)
 
 pylint: init venv
 	$(VENV)/$(BIN)/pylint --rcfile=pylint.rc -f parseable $(APP) | tee dist/pylint.log
