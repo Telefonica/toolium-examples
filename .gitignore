@@ -79,3 +79,6 @@ tmp
 # Database
 *.sqlite3
 *.db3
+
+# Local properties
+local-*properties.cfg
