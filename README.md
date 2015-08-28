@@ -93,4 +93,6 @@ Chrome: download driver from http://chromedriver.storage.googleapis.com/index.ht
 
 Explorer: download driver from http://selenium-release.storage.googleapis.com/index.html 
 
+Edge: download driver from https://www.microsoft.com/en-us/download/details.aspx?id=48212
+
 PhantomJS: download driver from http://phantomjs.org/download.html
