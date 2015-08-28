@@ -33,7 +33,7 @@ The following packages will be installed:
   * selenium (http://docs.seleniumhq.org/)
   * Appium-Python-Client (https://github.com/appium/python-client)
   * nose (https://pypi.python.org/pypi/nose/)
-  * lettuce (http://lettuce.it) -> not installed by default, see requirements.txt
+  * lettuce (http://lettuce.it) *not installed by default, see requirements.txt*
 
 Running tests
 -------------
@@ -59,10 +59,44 @@ nosetests tests.test_register_user
 Browser configuration
 ---------------------
 
-Chrome: download driver from http://chromedriver.storage.googleapis.com/index.html
+Configure browser property in [Browser] section of properties.cfg file  
+Valid values are: firefox, chrome, iexplore, edge, safari, opera, phantomjs, iphone, android
+```
+browser: firefox
+```
 
-Explorer: download driver from http://selenium-release.storage.googleapis.com/index.html 
+Firefox:
+  * No extra configuration is needed
 
-Edge: download driver from https://www.microsoft.com/en-us/download/details.aspx?id=48212
+Chrome:
+  * Download chromedriver_*.zip from http://chromedriver.storage.googleapis.com/index.html
+  * Unzip file and save the executable in a local folder
+  * Configure driver path in [Browser] section of properties.cfg file  
+    ```
+    chromedriver_path: C:\Drivers\chromedriver.exe
+    ```
 
-PhantomJS: download driver from http://phantomjs.org/download.html
+Explorer:
+  * Download IEDriverServer_Win32_*.zip from http://selenium-release.storage.googleapis.com/index.html
+  * Use always Win32 version, because x64 version is very slow
+  * Unzip file and save the executable in a local folder
+  * Configure driver path in [Browser] section of properties.cfg file  
+    ```
+    explorerdriver_path: C:\Drivers\IEDriverServer.exe
+    ```
+
+Edge:
+  * Download MicrosoftWebDriver.msi from https://www.microsoft.com/en-us/download/details.aspx?id=48212
+  * Install MicrosoftWebDriver.msi
+  * Configure driver path in [Browser] section of properties.cfg file  
+    ```
+    edgedriver_path: C:\Drivers\MicrosoftWebDriver.exe
+    ```
+
+PhantomJS:
+  * Download phantomjs-*.zip from http://phantomjs.org/download.html
+  * Unzip file and save the executable in a local folder
+  * Configure driver path in [Browser] section of properties.cfg file  
+    ```
+    phantomdriver_path: C:\Drivers\phantomjs.exe
+    ```
