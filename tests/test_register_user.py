@@ -11,8 +11,8 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 """
 
-from seleniumtid.test_cases import SeleniumTestCase
 from seleniumtid.jira import jira
+from selenium_python.test_cases import SeleniumTestCase
 from selenium_python.pageobjects.register import RegisterPageObject
 from selenium_python.pageobjects.register_result import RegisterResultPageObject
 
