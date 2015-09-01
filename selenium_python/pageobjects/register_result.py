@@ -14,7 +14,7 @@ been supplied.
 from selenium.webdriver.common.by import By
 
 from seleniumtid.pageobjects.page_object import PageObject
-from seleniumtid.pageelements import Text
+from seleniumtid.pageelements import *
 
 
 class RegisterResultPageObject(PageObject):

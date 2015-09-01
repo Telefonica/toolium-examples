@@ -7,11 +7,7 @@ using requests, selenium and appium tools
 Requirements
 ------------
 
-Python 2.7.4 (http://www.python.org)
-
-distribute 0.6.36 (https://pypi.python.org/pypi/distribute)
-
-pip 1.3.1 (https://pypi.python.org/pypi/pip)
+Python 2.7.10 (http://www.python.org)
 
 Installation
 ------------
@@ -37,7 +33,7 @@ The following packages will be installed:
   * selenium (http://docs.seleniumhq.org/)
   * Appium-Python-Client (https://github.com/appium/python-client)
   * nose (https://pypi.python.org/pypi/nose/)
-  * lettuce (http://lettuce.it) -> not installed by default, see requirements.txt
+  * lettuce (http://lettuce.it) *not installed by default, see requirements.txt*
 
 Running tests
 -------------
@@ -60,37 +56,47 @@ Run a singular test with:
 nosetests tests.test_register_user
 ```
 
-Running examples
-----------------
-
-Run all example tests with:
-
-```
-make example
-```
-
-or
-
-```
-nosetests examples
-```
-
-The Android examples require that Appium Server and Android Emulator are started at localhost
-
-Running lettuce examples
-------------------------
-
-Run lettuce example tests with:
-
-```
-lettuce examples
-```
-
 Browser configuration
 ---------------------
 
-Chrome: download driver from http://code.google.com/p/chromedriver/downloads/list
+Configure browser property in [Browser] section of properties.cfg file  
+Valid values are: firefox, chrome, iexplore, edge, safari, opera, phantomjs, iphone, android
+```
+browser: firefox
+```
 
-Explorer: download driver from http://code.google.com/p/selenium/downloads/list
+Firefox:
+  * No extra configuration is needed
 
-PhantomJS: download driver from http://phantomjs.org/download.html
+Chrome:
+  * Download chromedriver_*.zip from http://chromedriver.storage.googleapis.com/index.html
+  * Unzip file and save the executable in a local folder
+  * Configure driver path in [Browser] section of properties.cfg file  
+    ```
+    chromedriver_path: C:\Drivers\chromedriver.exe
+    ```
+
+Explorer:
+  * Download IEDriverServer_Win32_*.zip from http://selenium-release.storage.googleapis.com/index.html
+  * Use always Win32 version, because x64 version is very slow
+  * Unzip file and save the executable in a local folder
+  * Configure driver path in [Browser] section of properties.cfg file  
+    ```
+    explorerdriver_path: C:\Drivers\IEDriverServer.exe
+    ```
+
+Edge:
+  * Download MicrosoftWebDriver.msi from https://www.microsoft.com/en-us/download/details.aspx?id=48212
+  * Install MicrosoftWebDriver.msi
+  * Configure driver path in [Browser] section of properties.cfg file  
+    ```
+    edgedriver_path: C:\Drivers\MicrosoftWebDriver.exe
+    ```
+
+PhantomJS:
+  * Download phantomjs-*.zip from http://phantomjs.org/download.html
+  * Unzip file and save the executable in a local folder
+  * Configure driver path in [Browser] section of properties.cfg file  
+    ```
+    phantomdriver_path: C:\Drivers\phantomjs.exe
+    ```
