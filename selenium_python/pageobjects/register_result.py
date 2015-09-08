@@ -18,5 +18,4 @@ from seleniumtid.pageelements import *
 
 
 class RegisterResultPageObject(PageObject):
-    def init_page_elements(self):
-        self.message = Text(By.XPATH, "//div[@id='content']/div/div/div/b[2]")
+    message = Text(By.XPATH, "//div[@id='content']/div/div/div/b[2]")

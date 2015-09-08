@@ -18,13 +18,12 @@ from seleniumtid.pageelements import *
 
 
 class RegisterPageObject(PageObject):
-    def init_page_elements(self):
-        self.username = InputText(By.NAME, 'username')
-        self.password = InputText(By.ID, 'password')
-        self.name = InputText(By.ID, 'name')
-        self.email = InputText(By.ID, 'email')
-        self.place = Select(By.ID, 'place')
-        self.submit = Button(By.ID, 'registerButton')
+    username = InputText(By.NAME, 'username')
+    password = InputText(By.ID, 'password')
+    name = InputText(By.ID, 'name')
+    email = InputText(By.ID, 'email')
+    place = Select(By.ID, 'place')
+    submit = Button(By.ID, 'registerButton')
 
     def open(self):
         self.driver.get(self.config.get('Common', 'url'))
