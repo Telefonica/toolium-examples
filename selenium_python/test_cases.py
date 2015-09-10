@@ -20,11 +20,9 @@ class SeleniumTestCase(test_cases.SeleniumTestCase):
     """Test Case base class for Selenium tests"""
 
     def setUp(self):
-        os.environ['Files_properties'] = '{};{}'.format(get_config_file_path('properties.cfg'),
-                                                        get_config_file_path('local-properties.cfg'))
-        os.environ['Files_logging'] = get_config_file_path('logging.conf')
-        os.environ['Files_log_filename'] = os.path.join(get_root_path(), 'selenium.log')
-        os.environ['Files_output_path'] = os.path.join(get_root_path(), 'dist')
+        self.set_config_directory(os.path.join(get_root_path(), 'conf'))
+        self.set_output_directory(os.path.join(get_root_path(), 'output'))
+        self.set_config_properties_filenames('properties.cfg', 'local-properties.cfg')
         super(SeleniumTestCase, self).setUp()
 
 
@@ -34,12 +32,3 @@ def get_root_path():
     :returns: root folder path
     """
     return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-
-
-def get_config_file_path(filename):
-    """Returns absolute path of a configuration file
-
-    :param filename: config file name
-    :returns: config file path
-    """
-    return os.path.join(get_root_path(), 'conf', filename)
