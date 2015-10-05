@@ -24,7 +24,7 @@ or
 virtualenv ENV
 source ENV/bin/activate
 easy_install pillow
-pip install --upgrade -r requirements.txt
+pip install --upgrade -r requirements.txt --trusted-host artifactory.hi.inet
 ```
 
 The following packages will be installed:

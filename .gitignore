@@ -75,6 +75,7 @@ Docs
 .sonar
 .coverage
 tmp
+output
 
 # Database
 *.sqlite3
