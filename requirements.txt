@@ -1,5 +1,4 @@
--i http://artifactory.hi.inet/artifactory/api/pypi/pypi/simple
-seleniumtid
+toolium
 nose
 needle                # visual tests
 #ddt                   # data-driven tests

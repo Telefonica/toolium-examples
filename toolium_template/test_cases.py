@@ -13,7 +13,7 @@ been supplied.
 
 import os
 
-from seleniumtid import test_cases
+from toolium import test_cases
 
 
 class SeleniumTestCase(test_cases.SeleniumTestCase):

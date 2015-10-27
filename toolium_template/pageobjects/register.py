@@ -13,8 +13,8 @@ been supplied.
 
 from selenium.webdriver.common.by import By
 
-from seleniumtid.pageobjects.page_object import PageObject
-from seleniumtid.pageelements import *
+from toolium.pageobjects.page_object import PageObject
+from toolium.pageelements import *
 
 
 class RegisterPageObject(PageObject):
