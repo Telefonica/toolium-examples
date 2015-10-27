@@ -39,7 +39,7 @@ Run all tests with:
 Run a singular test with:
 ::
 
-    nosetests tests.test_register_user
+    nosetests tests/test_login.py:Login.test_wrong_login
 
 Browser configuration
 ---------------------

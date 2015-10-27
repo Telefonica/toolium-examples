@@ -20,7 +20,18 @@ from selenium.webdriver.common.by import By
 
 from toolium.pageobjects.page_object import PageObject
 from toolium.pageelements import *
+from message import MessagePageObject
+import login
 
 
-class RegisterResultPageObject(PageObject):
-    message = Text(By.XPATH, "//div[@id='content']/div/div/div/b[2]")
+class SecureAreaPageObject(PageObject):
+    message = MessagePageObject()
+    logout_button = Button(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]")
+
+    def logout(self):
+        """ Log out of secure area
+
+        :returns: login page object instance
+        """
+        self.logout_button.click()
+        return login.LoginPageObject()

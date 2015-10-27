@@ -20,24 +20,32 @@ from selenium.webdriver.common.by import By
 
 from toolium.pageobjects.page_object import PageObject
 from toolium.pageelements import *
+from message import MessagePageObject
+import secure_area
 
 
-class RegisterPageObject(PageObject):
-    username = InputText(By.NAME, 'username')
+class LoginPageObject(PageObject):
+    username = InputText(By.ID, 'username')
     password = InputText(By.ID, 'password')
-    name = InputText(By.ID, 'name')
-    email = InputText(By.ID, 'email')
-    place = Select(By.ID, 'place')
-    submit = Button(By.ID, 'registerButton')
+    login_button = Button(By.XPATH, "//form[@id='login']/button")
+    message = MessagePageObject()
 
     def open(self):
-        self.driver.get(self.config.get('Common', 'url'))
+        """ Open login url in browser
 
-    def register(self, user):
-        self.logger.debug("Registering a new user")
+        :returns: page object instance
+        """
+        self.driver.get(self.config.get('Common', 'url'))
+        return self
+
+    def login(self, user):
+        """ Fill login form and submit it
+
+        :param user: dict with username and password values
+        :returns: secure area page object instance
+        """
+        self.logger.debug("Login with user '{}'".format(user['username']))
         self.username.text = user['username']
         self.password.text = user['password']
-        self.name.text = user['name']
-        self.email.text = user['email']
-        self.place.option = user['place']
-        self.submit.click()
+        self.login_button.click()
+        return secure_area.SecureAreaPageObject()

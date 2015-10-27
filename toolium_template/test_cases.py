@@ -31,6 +31,26 @@ class SeleniumTestCase(test_cases.SeleniumTestCase):
         super(SeleniumTestCase, self).setUp()
 
 
+class AndroidTestCase(test_cases.AppiumTestCase):
+    """Test Case base class for Android tests"""
+
+    def setUp(self):
+        self.set_config_directory(os.path.join(get_root_path(), 'conf'))
+        self.set_output_directory(os.path.join(get_root_path(), 'output'))
+        self.set_config_properties_filenames('properties.cfg', 'android-properties.cfg', 'local-android-properties.cfg')
+        super(AndroidTestCase, self).setUp()
+
+
+class iOSTestCase(test_cases.AppiumTestCase):
+    """Test Case base class for iOS tests"""
+
+    def setUp(self):
+        self.set_config_directory(os.path.join(get_root_path(), 'conf'))
+        self.set_output_directory(os.path.join(get_root_path(), 'output'))
+        self.set_config_properties_filenames('properties.cfg', 'ios-properties.cfg', 'local-ios-properties.cfg')
+        super(iOSTestCase, self).setUp()
+
+
 def get_root_path():
     """Returns absolute path of the project root folder
 
