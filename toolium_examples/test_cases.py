@@ -41,6 +41,28 @@ class AndroidTestCase(test_cases.AppiumTestCase):
         super(AndroidTestCase, self).setUp()
 
 
+class AndroidHybridTestCase(test_cases.AppiumTestCase):
+    """Test Case base class for Android tests (Hybrid app)"""
+
+    def setUp(self):
+        self.set_config_directory(os.path.join(get_root_path(), 'conf'))
+        self.set_output_directory(os.path.join(get_root_path(), 'output'))
+        self.set_config_properties_filenames('properties.cfg', 'android-hybrid-properties.cfg',
+                                             'local-android-properties.cfg')
+        super(AndroidHybridTestCase, self).setUp()
+
+
+class AndroidWebTestCase(test_cases.AppiumTestCase):
+    """Test Case base class for Android tests (web app)"""
+
+    def setUp(self):
+        self.set_config_directory(os.path.join(get_root_path(), 'conf'))
+        self.set_output_directory(os.path.join(get_root_path(), 'output'))
+        self.set_config_properties_filenames('properties.cfg', 'android-web-properties.cfg',
+                                             'local-android-properties.cfg')
+        super(AndroidWebTestCase, self).setUp()
+
+
 class iOSTestCase(test_cases.AppiumTestCase):
     """Test Case base class for iOS tests"""
 
