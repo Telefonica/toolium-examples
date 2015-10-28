@@ -34,4 +34,4 @@ class SecureAreaPageObject(PageObject):
         :returns: login page object instance
         """
         self.logout_button.click()
-        return login.LoginPageObject()
+        return login.LoginPageObject(self.driver)

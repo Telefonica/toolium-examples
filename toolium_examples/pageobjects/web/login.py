@@ -48,4 +48,4 @@ class LoginPageObject(PageObject):
         self.username.text = user['username']
         self.password.text = user['password']
         self.login_button.click()
-        return secure_area.SecureAreaPageObject()
+        return secure_area.SecureAreaPageObject(self.driver)
