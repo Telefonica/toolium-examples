@@ -30,3 +30,4 @@ class TabsPageObject(PageObject):
     content1 = Text(By.ID, 'io.appium.android.apis:id/view1')
     content2 = Text(By.ID, 'io.appium.android.apis:id/view2')
     content3 = Text(By.ID, 'io.appium.android.apis:id/view3')
+    container = PageElement(By.ID, 'android:id/content')
