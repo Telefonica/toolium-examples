@@ -1,7 +1,7 @@
-Toolium template
+Toolium examples
 ================
 
-Base project to start using toolium for your testing automation projects
+Set of examples to learn how to use toolium different functionalities
 
 Requirements
 ------------
@@ -39,7 +39,7 @@ Run all tests with:
 Run a singular test with:
 ::
 
-    nosetests tests/test_login.py:Login.test_wrong_login
+    nosetests tests/web/test_web_login.py:Login.test_successful_login_logout
 
 Browser configuration
 ---------------------
