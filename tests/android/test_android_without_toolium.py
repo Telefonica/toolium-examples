@@ -31,8 +31,7 @@ class Tabs(TestCase):
         capabilities['platformName'] = 'Android'
         capabilities['deviceName'] = 'Android Emulator'
         capabilities['browserName'] = ''
-        capabilities[
-            'app'] = 'https://github.com/appium/sample-code/blob/master/sample-code/apps/ApiDemos/bin/ApiDemos-debug.apk?raw=true'
+        capabilities['app'] = 'https://github.com/appium/javascript-workshop/blob/master/apps/ApiDemos.apk?raw=true'
         capabilities['appWaitActivity'] = ''
 
         # Create a new appium driver before each test
