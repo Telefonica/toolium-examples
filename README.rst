@@ -1,97 +1,55 @@
-Toolium examples
+Toolium Examples
 ================
 
-Set of examples to learn how to use toolium different functionalities
+Set of examples to learn how to use `Toolium <https://github.com/Telefonica/toolium>`_ to test web, Android or iOS
+applications, in different scenarios.
 
-Requirements
-------------
+Getting Started
+---------------
 
-Python 2.7.10 (http://www.python.org)
+The requirements to install Toolium are `Python 2.7 <http://www.python.org>`_ and
+`pip <https://pypi.python.org/pypi/pip>`_. If you use Python 2.7.9+, you don't need to install pip separately.
 
-Installation
-------------
+Clone `toolium-examples <https://github.com/Telefonica/toolium-examples>`_ repository and install requirements. It's
+highly recommendable to use a virtualenv.
 
-Configure a virtual environment with the required packages:
+.. code:: console
 
-::
+    $ git clone git@github.com:Telefonica/toolium-example.git
+    $ pip install -r requirements.txt
 
-    virtualenv ENV
-    source ENV/bin/activate
-    pip install -r requirements.txt
-
-The following packages will be installed:
-
-- toolium (https://github.com/Telefonica/toolium)
-- requests (http://docs.python-requests.org)
-- selenium (http://docs.seleniumhq.org/)
-- Appium-Python-Client (https://github.com/appium/python-client)
-- nose (https://pypi.python.org/pypi/nose/)
-- lettuce (http://lettuce.it) *not installed by default, see requirements.txt*
-
-Running tests
+Running Tests
 -------------
 
-Run all tests with:
-::
+**Web**
 
-    nosetests tests
+By default, example tests are configured to run in firefox locally, so firefox must be installed in your machine.
 
-Run a singular test with:
-::
+To run web tests:
 
-    nosetests tests/web/test_web.py:Login.test_successful_login_logout
+.. code:: console
 
-Browser configuration
----------------------
+    $ nosetests tests/web
 
-Configure browser property in [Browser] section of properties.cfg file
+To run a single test:
 
-Valid values are: firefox, chrome, iexplore, edge, safari, opera, phantomjs,
-iphone, android
-::
+.. code:: console
 
-    browser: firefox
+    $ nosetests tests/web/test_web.py:Login.test_successful_login_logout
 
-Firefox:
+**Android or iOS**
 
-- No extra configuration is needed
+`Appium <http://appium.io/slate/en/master/?ruby#setting-up-appium>`_ must be installed and configured before executing
+Android or iOS tests.
 
-Chrome:
+To run Android tests, launch Appium server, connect an Android device (or create an Android Emulator) and execute:
 
-- Download chromedriver\_*.zip from
-  http://chromedriver.storage.googleapis.com/index.html
-- Unzip file and save the executable in a local folder
-- Configure driver path in [Browser] section of properties.cfg file
-::
+.. code:: console
 
-    chromedriver_path: C:\Drivers\chromedriver.exe
+    $ nosetests tests/android
 
-Explorer:
+To run iOS tests on iOS Simulator, launch Appium server in a Mac OS X and execute:
 
-- Download IEDriverServer\_Win32\_*.zip from
-  http://selenium-release.storage.googleapis.com/index.html
-- Use always Win32 version, because x64 version is very slow
-- Unzip file and save the executable in a local folder
-- Configure driver path in [Browser] section of properties.cfg file
-::
+.. code:: console
 
-    explorerdriver_path: C:\Drivers\IEDriverServer.exe
-
-Edge:
-
-- Download MicrosoftWebDriver.msi from
-  https://www.microsoft.com/en-us/download/details.aspx?id=48212
-- Install MicrosoftWebDriver.msi
-- Configure driver path in [Browser] section of properties.cfg file
-::
-
-    edgedriver_path: C:\Drivers\MicrosoftWebDriver.exe
-
-PhantomJS:
-
-- Download phantomjs-*.zip from http://phantomjs.org/download.html
-- Unzip file and save the executable in a local folder
-- Configure driver path in [Browser] section of properties.cfg file
-::
-
-    phantomdriver_path: C:\Drivers\phantomjs.exe
+    $ nosetests tests/ios
