@@ -33,9 +33,17 @@ class LoginPageObject(PageObject):
     def open(self):
         """ Open login url in browser
 
-        :returns: page object instance
+        :returns: this page object instance
         """
         self.driver.get(self.config.get('Common', 'url'))
+        return self
+
+    def wait_until_loaded(self):
+        """ Wait until login page is loaded
+
+        :returns: this page object instance
+        """
+        self.utils.wait_until_element_visible(self.username.locator)
         return self
 
     def login(self, user):
