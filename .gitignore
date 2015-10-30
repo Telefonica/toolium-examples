@@ -81,5 +81,5 @@ output
 *.sqlite3
 *.db3
 
-# Local properties
+# Local properties files
 local-*properties.cfg
