@@ -16,6 +16,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
 from toolium_examples.test_cases import SeleniumTestCase
 
 
@@ -37,5 +41,6 @@ class Login(SeleniumTestCase):
 
         # Logout and check logout message
         self.driver.find_element_by_xpath("//div[@id='content']//a[contains(@class,'button')]").click()
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
         message = self.driver.find_element_by_id('flash').text.splitlines()[0]
         self.assertEqual(expected_logout_message, message)
