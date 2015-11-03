@@ -28,8 +28,8 @@ class Login(SeleniumTestCase):
 
         # Login and check welcome message
         secure_area = LoginPageObject().open().login(user)
-        self.assertEqual(expected_login_message, secure_area.message.get_message())
+        self.assertIn(expected_login_message, secure_area.message.get_message())
 
         # Logout and check logout message
         login_page = secure_area.logout()
-        self.assertEqual(expected_logout_message, login_page.message.get_message())
+        self.assertIn(expected_logout_message, login_page.message.get_message())

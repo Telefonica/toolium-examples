@@ -47,10 +47,10 @@ class Login(TestCase):
         self.driver.find_element_by_id('password').send_keys(user['password'])
         self.driver.find_element_by_xpath("//form[@id='login']/button").click()
         message = self.driver.find_element_by_id('flash').text.splitlines()[0]
-        self.assertEqual(expected_login_message, message)
+        self.assertIn(expected_login_message, message)
 
         # Logout and check logout message
         self.driver.find_element_by_xpath("//div[@id='content']//a[contains(@class,'button')]").click()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
         message = self.driver.find_element_by_id('flash').text.splitlines()[0]
-        self.assertEqual(expected_logout_message, message)
+        self.assertIn(expected_logout_message, message)
