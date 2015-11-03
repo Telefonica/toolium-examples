@@ -36,7 +36,7 @@ class Login(SeleniumTestCase):
         """
         login_page = LoginPageObject().open()
         login_page.login(user)
-        self.assertEqual(user['expected_message'], login_page.message.get_message())
+        self.assertIn(user['expected_message'], login_page.message.get_message())
 
     @data(*users_dict)
     def test_wrong_login_dict(self, user):

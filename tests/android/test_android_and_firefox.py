@@ -42,7 +42,7 @@ class TwoDrivers(AndroidTestCase):
         expected_login_message = "You logged into a secure area!"
         expected_logout_message = "You logged out of the secure area!"
         secure_area = LoginPageObject(firefox_driver).open().login(user)
-        self.assertEqual(expected_login_message, secure_area.message.get_message())
+        self.assertIn(expected_login_message, secure_area.message.get_message())
 
         # [Mobile] Open second tab and check content
         tabs_page.tab2.click()
@@ -50,4 +50,4 @@ class TwoDrivers(AndroidTestCase):
 
         # [Web] Logout and check logout message
         login_page = secure_area.logout()
-        self.assertEqual(expected_logout_message, login_page.message.get_message())
+        self.assertIn(expected_logout_message, login_page.message.get_message())

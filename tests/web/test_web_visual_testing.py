@@ -38,14 +38,14 @@ class Login(SeleniumTestCase):
 
         # Login and check welcome message
         secure_area = login_page.login(user)
-        self.assertEqual(expected_login_message, secure_area.message.get_message())
+        self.assertIn(expected_login_message, secure_area.message.get_message())
 
         # Assert the full screen
         self.assertFullScreenshot('login_secure_area')
 
         # Logout and check logout message
         login_page = secure_area.logout()
-        self.assertEqual(expected_logout_message, login_page.message.get_message())
+        self.assertIn(expected_logout_message, login_page.message.get_message())
 
         # Assert the full screen
         self.assertFullScreenshot('login_logout')

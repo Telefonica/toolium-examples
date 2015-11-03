@@ -19,12 +19,16 @@ limitations under the License.
 from unittest import TestCase
 
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 class Login(TestCase):
     def setUp(self):
         # Create a new firefox driver before each test
         self.driver = webdriver.Firefox()
+        self.driver.implicitly_wait(5)
 
     def tearDown(self):
         # Close driver and browser
@@ -43,9 +47,10 @@ class Login(TestCase):
         self.driver.find_element_by_id('password').send_keys(user['password'])
         self.driver.find_element_by_xpath("//form[@id='login']/button").click()
         message = self.driver.find_element_by_id('flash').text.splitlines()[0]
-        self.assertEqual(expected_login_message, message)
+        self.assertIn(expected_login_message, message)
 
         # Logout and check logout message
         self.driver.find_element_by_xpath("//div[@id='content']//a[contains(@class,'button')]").click()
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
         message = self.driver.find_element_by_id('flash').text.splitlines()[0]
-        self.assertEqual(expected_logout_message, message)
+        self.assertIn(expected_logout_message, message)
