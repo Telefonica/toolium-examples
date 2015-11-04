@@ -20,8 +20,8 @@ from selenium.webdriver.common.by import By
 
 from toolium.pageobjects.page_object import PageObject
 from toolium.pageelements import *
-from message import MessagePageObject
-import secure_area
+from toolium_examples.pageobjects.web.message import MessagePageObject
+from toolium_examples.pageobjects.web.secure_area import SecureAreaPageObject
 
 
 class LoginPageObject(PageObject):
@@ -56,4 +56,4 @@ class LoginPageObject(PageObject):
         self.username.text = user['username']
         self.password.text = user['password']
         self.login_button.click()
-        return secure_area.SecureAreaPageObject(self.driver)
+        return SecureAreaPageObject(self.driver)

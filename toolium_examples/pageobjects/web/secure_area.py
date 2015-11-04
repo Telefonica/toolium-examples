@@ -20,8 +20,7 @@ from selenium.webdriver.common.by import By
 
 from toolium.pageobjects.page_object import PageObject
 from toolium.pageelements import *
-from message import MessagePageObject
-import login
+from toolium_examples.pageobjects.web.message import MessagePageObject
 
 
 class SecureAreaPageObject(PageObject):
@@ -33,5 +32,7 @@ class SecureAreaPageObject(PageObject):
 
         :returns: login page object instance
         """
+        from toolium_examples.pageobjects.web.login import LoginPageObject
+
         self.logout_button.click()
-        return login.LoginPageObject(self.driver).wait_until_loaded()
+        return LoginPageObject(self.driver).wait_until_loaded()
