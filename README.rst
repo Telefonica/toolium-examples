@@ -16,6 +16,7 @@ highly recommendable to use a virtualenv.
 .. code:: console
 
     $ git clone git@github.com:Telefonica/toolium-examples.git
+    $ cd toolium-examples
     $ pip install -r requirements.txt
 
 Running Tests
