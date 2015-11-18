@@ -1,4 +1,3 @@
 toolium
 nose
-needle                # visual tests
 ddt                   # data-driven tests
