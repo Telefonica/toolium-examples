@@ -39,7 +39,11 @@ class Gestures(AndroidTestCase):
     def test_swipe_simple(self):
         self.driver.swipe(50, 400, 50, 200, 500)
 
-    def test_swipe(self):
+    def test_swipe_element(self):
+        content = self.driver.find_element(By.XPATH, "//*[@text='Content']")
+        self.utils.swipe(content, 0, -200)
+
+    def test_swipe_check(self):
         views_element = None
         for i in range(10):
             elements = self.driver.find_elements(By.XPATH, "//*[@text='Views']")

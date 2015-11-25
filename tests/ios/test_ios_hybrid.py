@@ -53,3 +53,18 @@ class iOSHybrid(iOSHybridTestCase):
         self.driver.switch_to.context('NATIVE_APP')
         self.driver.swipe(50, 400, 50, 200, 500)
         self.driver.switch_to.context('WEBVIEW')
+
+    def test_search_employees_swipe_element_ios9(self):
+        search_letter = 'a'
+
+        # Switch to webview context
+        c = self.driver.contexts
+        self.driver.switch_to.context('WEBVIEW')
+
+        # Search employees that starts with selected letter
+        input_text = self.utils.wait_until_element_visible((By.TAG_NAME, 'input'))
+        input_text.send_keys(search_letter)
+
+        # Swipe
+        first_employee = self.driver.find_element(By.TAG_NAME, 'li')
+        self.utils.swipe(first_employee, 0, -200)

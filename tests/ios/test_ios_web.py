@@ -49,3 +49,8 @@ class iOSWeb(iOSWebTestCase):
         self.driver.switch_to.context('NATIVE_APP')
         self.driver.swipe(50, 400, 50, 200, 500)
         self.driver.switch_to.context('WEBVIEW')
+
+    def test_swipe_element_ios9(self):
+        self.driver.get('http://the-internet.herokuapp.com/infinite_scroll')
+        scroll_elem = self.driver.find_element(By.XPATH, "//*[@class='jscroll-inner']")
+        self.utils.swipe(scroll_elem, 0, -200)
