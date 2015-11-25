@@ -16,9 +16,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from toolium_examples.test_cases import AndroidTestCase
-from toolium_examples.pageobjects.android.menu import MenuPageObject
+from selenium.webdriver.common.by import By
+
 from toolium_examples.pageobjects.android.drag_and_drop import DragAndDropPageObject
+from toolium_examples.pageobjects.android.menu import MenuPageObject
+from toolium_examples.test_cases import AndroidTestCase
 
 
 class Gestures(AndroidTestCase):
@@ -33,3 +35,17 @@ class Gestures(AndroidTestCase):
         # Check movement
         result = self.driver.find_element_by_id('io.appium.android.apis:id/drag_result_text')
         self.assertEqual('Dropped!', drag_and_drop_page.result.text)
+
+    def test_swipe_simple(self):
+        self.driver.swipe(50, 400, 50, 200, 500)
+
+    def test_swipe(self):
+        views_element = None
+        for i in range(10):
+            elements = self.driver.find_elements(By.XPATH, "//*[@text='Views']")
+            if len(elements) > 0:
+                views_element = elements[0]
+                break
+            self.driver.swipe(50, 400, 50, 200, 500)
+        self.assertIsNotNone(views_element)
+        views_element.click()
