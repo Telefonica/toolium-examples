@@ -35,4 +35,4 @@ class SecureAreaPageObject(PageObject):
         from toolium_examples.pageobjects.web.login import LoginPageObject
 
         self.logout_button.click()
-        return LoginPageObject(self.driver).wait_until_loaded()
+        return LoginPageObject(self.driver_wrapper).wait_until_loaded()
