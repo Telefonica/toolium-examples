@@ -16,4 +16,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from toolium.behave.environment import before_scenario, after_scenario, after_all
+import os
+
+from toolium.behave.environment import before_all as toolium_before_all, before_scenario, after_scenario, after_all
+from toolium.config_files import ConfigFiles
+
+
+def before_all(context):
+    config_files = ConfigFiles()
+    config_files.set_config_directory(os.path.join(get_root_path(), 'conf'))
+    config_files.set_output_directory(os.path.join(get_root_path(), 'output'))
+    config_files.set_config_properties_filenames('properties.cfg', 'local-properties.cfg')
+    context.config_files = config_files
+    toolium_before_all(context)
+
+
+def get_root_path():
+    """Returns absolute path of the project root folder
+
+    :returns: root folder path
+    """
+    return os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
