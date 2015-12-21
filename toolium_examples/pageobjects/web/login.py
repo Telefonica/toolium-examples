@@ -25,10 +25,11 @@ from toolium_examples.pageobjects.web.secure_area import SecureAreaPageObject
 
 
 class LoginPageObject(PageObject):
-    username = InputText(By.ID, 'username')
-    password = InputText(By.ID, 'password')
-    login_button = Button(By.XPATH, "//form[@id='login']/button")
-    message = MessagePageObject()
+    def init_page_elements(self):
+        self.username = InputText(By.ID, 'username')
+        self.password = InputText(By.ID, 'password')
+        self.login_button = Button(By.XPATH, "//form[@id='login']/button")
+        self.message = MessagePageObject()
 
     def open(self):
         """ Open login url in browser
