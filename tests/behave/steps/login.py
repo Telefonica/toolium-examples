@@ -22,4 +22,4 @@ def step_impl(context):
 
 @then('the message "{message}" is shown')
 def step_impl(context, message):
-    assert context.current_page.message.get_message() == message
+    assert message in context.current_page.message.get_message()

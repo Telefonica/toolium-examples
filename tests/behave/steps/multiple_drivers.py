@@ -26,4 +26,4 @@ def step_impl(context, username, password, browser):
 
 @then('the message "{message}" is shown in {browser}')
 def step_impl(context, message, browser):
-    assert context.current_page[browser].message.get_message() == message
+    assert message in context.current_page[browser].message.get_message()
