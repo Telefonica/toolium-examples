@@ -1,3 +1,5 @@
 toolium
 nose
-ddt                   # data-driven tests
+ddt         # data-driven tests
+behave      # behave tests
+lettuce     # lettuce tests
