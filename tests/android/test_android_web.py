@@ -16,8 +16,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from toolium_examples.test_cases import AndroidWebTestCase
+from selenium.webdriver.common.by import By
+
 from toolium_examples.pageobjects.web.login import LoginPageObject
+from toolium_examples.test_cases import AndroidWebTestCase
 
 
 class Login(AndroidWebTestCase):
@@ -33,3 +35,14 @@ class Login(AndroidWebTestCase):
         # Logout and check logout message
         login_page = secure_area.logout()
         self.assertIn(expected_logout_message, login_page.message.get_message())
+
+    def test_swipe(self):
+        self.driver.get('http://the-internet.herokuapp.com/infinite_scroll')
+        self.driver.switch_to.context('NATIVE_APP')
+        self.driver.swipe(50, 400, 50, 200, 500)
+        self.driver.switch_to.context('WEBVIEW')
+
+    def test_swipe_element(self):
+        self.driver.get('http://the-internet.herokuapp.com/infinite_scroll')
+        scroll_elem = self.driver.find_element(By.XPATH, "//*[@class='jscroll-inner']")
+        self.utils.swipe(scroll_elem, 0, -200)

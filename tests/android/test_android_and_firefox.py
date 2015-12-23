@@ -16,21 +16,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from toolium_examples.test_cases import AndroidTestCase
+from toolium.driver_wrapper import DriverWrapper
 from toolium_examples.pageobjects.android.menu import MenuPageObject
 from toolium_examples.pageobjects.android.tabs import TabsPageObject
 from toolium_examples.pageobjects.web.login import LoginPageObject
-from toolium import toolium_driver
-from toolium.config_driver import ConfigDriver
+from toolium_examples.test_cases import AndroidTestCase
 
 
 class TwoDrivers(AndroidTestCase):
     def test_change_tab_and_successful_login(self):
         # Create a second driver
-        config = toolium_driver.config.deepcopy()
-        config.set('Browser', 'browser', 'firefox')
-        firefox_driver = ConfigDriver(config).create_driver()
-        self.addCleanup(firefox_driver.quit)
+        second_wrapper = DriverWrapper()
+        second_wrapper.config.set('Browser', 'browser', 'firefox')
+        second_wrapper.connect()
 
         # [Mobile] Open tabs activity
         MenuPageObject().open_option('Views').open_option('Tabs').open_option('1. Content By Id')
@@ -41,7 +39,7 @@ class TwoDrivers(AndroidTestCase):
         user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
         expected_login_message = "You logged into a secure area!"
         expected_logout_message = "You logged out of the secure area!"
-        secure_area = LoginPageObject(firefox_driver).open().login(user)
+        secure_area = LoginPageObject(second_wrapper).open().login(user)
         self.assertIn(expected_login_message, secure_area.message.get_message())
 
         # [Mobile] Open second tab and check content
