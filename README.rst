@@ -54,3 +54,27 @@ To run iOS tests on iOS Simulator, launch Appium server in a Mac OS X and execut
 .. code:: console
 
     $ nosetests tests/ios
+
+**Behave**
+
+To run behave web tests:
+
+.. code:: console
+
+    $ behave tests/behave_web
+
+To run behave android tests:
+
+.. code:: console
+
+    $ behave tests/behave_android
+
+**Lettuce**
+
+To run lettuce web tests:
+
+.. code:: console
+
+    $ lettuce tests/lettuce_web
+
+Lettuce works only in Python 2.
