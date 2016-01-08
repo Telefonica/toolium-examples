@@ -16,6 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from nose.tools import assert_equal
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -30,11 +31,11 @@ class IosTestApp(iOSTestCase):
 
         # Input numbers and click button
         first_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//UIATextField[1]")))
+                EC.presence_of_element_located((By.XPATH, "//UIATextField[1]")))
         first_element.send_keys(first_number)
         self.driver.find_element_by_xpath("//UIATextField[2]").send_keys(second_number)
         self.driver.find_element_by_accessibility_id("ComputeSumButton").click()
 
         # Check expected result
         result = int(self.driver.find_element_by_xpath("//UIAStaticText[1]").text)
-        self.assertEqual(first_number + second_number, result, "Wrong sum")
+        assert_equal(first_number + second_number, result, "Wrong sum")

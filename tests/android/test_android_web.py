@@ -16,6 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from nose.tools import assert_in
 from selenium.webdriver.common.by import By
 
 from toolium_examples.pageobjects.web.login import LoginPageObject
@@ -30,11 +31,11 @@ class Login(AndroidWebTestCase):
 
         # Login and check welcome message
         secure_area = LoginPageObject().open().login(user)
-        self.assertIn(expected_login_message, secure_area.message.get_message())
+        assert_in(expected_login_message, secure_area.message.get_message())
 
         # Logout and check logout message
         login_page = secure_area.logout()
-        self.assertIn(expected_logout_message, login_page.message.get_message())
+        assert_in(expected_logout_message, login_page.message.get_message())
 
     def test_swipe(self):
         self.driver.get('http://the-internet.herokuapp.com/infinite_scroll')

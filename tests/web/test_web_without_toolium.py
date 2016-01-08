@@ -18,10 +18,11 @@ limitations under the License.
 
 from unittest import TestCase
 
+from nose.tools import assert_in
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class Login(TestCase):
@@ -47,10 +48,10 @@ class Login(TestCase):
         self.driver.find_element_by_id('password').send_keys(user['password'])
         self.driver.find_element_by_xpath("//form[@id='login']/button").click()
         message = self.driver.find_element_by_id('flash').text.splitlines()[0]
-        self.assertIn(expected_login_message, message)
+        assert_in(expected_login_message, message)
 
         # Logout and check logout message
         self.driver.find_element_by_xpath("//div[@id='content']//a[contains(@class,'button')]").click()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
         message = self.driver.find_element_by_id('flash').text.splitlines()[0]
-        self.assertIn(expected_logout_message, message)
+        assert_in(expected_logout_message, message)

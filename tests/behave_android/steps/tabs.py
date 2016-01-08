@@ -17,6 +17,7 @@ limitations under the License.
 """
 
 from behave import given, when, then
+from nose.tools import assert_in
 
 from toolium_examples.pageobjects.android.menu import MenuPageObject
 from toolium_examples.pageobjects.android.tabs import TabsPageObject
@@ -40,4 +41,4 @@ def step_impl(context):
 
 @then('the second tab contains "{message}"')
 def step_impl(context, message):
-    assert message in context.current_page.content2.text
+    assert_in(message, context.current_page.content2.text)

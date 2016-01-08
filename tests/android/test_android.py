@@ -16,9 +16,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from toolium_examples.test_cases import AndroidTestCase
+from nose.tools import assert_equal
+
 from toolium_examples.pageobjects.android.menu import MenuPageObject
 from toolium_examples.pageobjects.android.tabs import TabsPageObject
+from toolium_examples.test_cases import AndroidTestCase
 
 
 class Tabs(AndroidTestCase):
@@ -28,8 +30,8 @@ class Tabs(AndroidTestCase):
         tabs_page = TabsPageObject()
 
         # Check that the first tab is open
-        self.assertEqual('tab1', tabs_page.content1.text)
+        assert_equal('tab1', tabs_page.content1.text)
 
         # Open second tab and check content
         tabs_page.tab2.click()
-        self.assertEqual('tab2', tabs_page.content2.text)
+        assert_equal('tab2', tabs_page.content2.text)

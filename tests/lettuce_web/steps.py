@@ -18,6 +18,7 @@ limitations under the License.
 
 from lettuce import step, world
 from nose.tools import assert_in
+
 from toolium_examples.pageobjects.web.login import LoginPageObject
 
 
@@ -40,4 +41,4 @@ def logout(step):
 
 @step('the message "(.*?)" is shown')
 def step_impl(step, message):
-    assert message in world.current_page.message.get_message()
+    assert_in(message, world.current_page.message.get_message())
