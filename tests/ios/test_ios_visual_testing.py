@@ -35,4 +35,4 @@ class IosTestApp(iOSTestCase):
         result = int(calc.result.text)
         self.logger.debug("{} + {} = {}".format(first_number, second_number, result))
         assert_equal(first_number + second_number, result, "Wrong sum")
-        self.assertFullScreenshot('Sum', exclude_elements=[calc.status_bar])
+        self.assert_full_screenshot('Sum', exclude_elements=[calc.status_bar])

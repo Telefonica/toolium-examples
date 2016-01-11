@@ -31,9 +31,9 @@ class Tabs(AndroidTestCase):
 
         # Check that the first tab is open
         assert_equal('tab1', tabs_page.content1.text)
-        tabs_page.container.assertScreenshot('tab1')
+        tabs_page.container.assert_screenshot('tab1')
 
         # Open second tab and check content
         tabs_page.tab2.click()
         assert_equal('tab2', tabs_page.content2.text)
-        tabs_page.container.assertScreenshot('tab2')
+        tabs_page.container.assert_screenshot('tab2')
