@@ -17,9 +17,10 @@ limitations under the License.
 """
 
 from ddt import ddt, data, file_data
+from nose.tools import assert_in
 
-from toolium_examples.test_cases import SeleniumTestCase
 from toolium_examples.pageobjects.web.login import LoginPageObject
+from toolium_examples.test_cases import SeleniumTestCase
 
 users_dict = (
     {'username': 'peter', 'password': 'pass', 'expected_message': 'Your username is invalid!'},
@@ -36,7 +37,7 @@ class Login(SeleniumTestCase):
         """
         login_page = LoginPageObject().open()
         login_page.login(user)
-        self.assertIn(user['expected_message'], login_page.message.get_message())
+        assert_in(user['expected_message'], login_page.message.get_message())
 
     @data(*users_dict)
     def test_wrong_login_dict(self, user):

@@ -16,8 +16,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from toolium_examples.test_cases import SeleniumTestCase
+from nose.tools import assert_in
+
 from toolium_examples.pageobjects.web.login import LoginPageObject
+from toolium_examples.test_cases import SeleniumTestCase
 
 
 class Login(SeleniumTestCase):
@@ -28,8 +30,8 @@ class Login(SeleniumTestCase):
 
         # Login and check welcome message
         secure_area = LoginPageObject().open().login(user)
-        self.assertIn(expected_login_message, secure_area.message.get_message())
+        assert_in(expected_login_message, secure_area.message.get_message())
 
         # Logout and check logout message
         login_page = secure_area.logout()
-        self.assertIn(expected_logout_message, login_page.message.get_message())
+        assert_in(expected_logout_message, login_page.message.get_message())

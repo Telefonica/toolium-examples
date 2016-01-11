@@ -16,6 +16,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from nose.tools import assert_equal, assert_in
+
 from toolium.driver_wrapper import DriverWrapper
 from toolium_examples.pageobjects.android.menu import MenuPageObject
 from toolium_examples.pageobjects.android.tabs import TabsPageObject
@@ -33,19 +35,19 @@ class TwoDrivers(AndroidTestCase):
         # [Mobile] Open tabs activity
         MenuPageObject().open_option('Views').open_option('Tabs').open_option('1. Content By Id')
         tabs_page = TabsPageObject()
-        self.assertEqual('tab1', tabs_page.content1.text)
+        assert_equal('tab1', tabs_page.content1.text)
 
         # [Web] Login and check welcome message
         user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
         expected_login_message = "You logged into a secure area!"
         expected_logout_message = "You logged out of the secure area!"
         secure_area = LoginPageObject(second_wrapper).open().login(user)
-        self.assertIn(expected_login_message, secure_area.message.get_message())
+        assert_in(expected_login_message, secure_area.message.get_message())
 
         # [Mobile] Open second tab and check content
         tabs_page.tab2.click()
-        self.assertEqual('tab2', tabs_page.content2.text)
+        assert_equal('tab2', tabs_page.content2.text)
 
         # [Web] Logout and check logout message
         login_page = secure_area.logout()
-        self.assertIn(expected_logout_message, login_page.message.get_message())
+        assert_in(expected_logout_message, login_page.message.get_message())

@@ -16,6 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from nose.tools import assert_equal
 from selenium.webdriver.common.by import By
 
 from toolium_examples.test_cases import iOSHybridTestCase
@@ -36,7 +37,7 @@ class iOSHybrid(iOSHybridTestCase):
 
         # Count employees
         employees = self.driver.find_elements(By.TAG_NAME, 'li')
-        self.assertEqual(expected_employees, len(employees), 'Wrong number of employees')
+        assert_equal(expected_employees, len(employees), 'Wrong number of employees')
 
     def test_search_employees_swipe_ios9(self):
         search_letter = 'a'

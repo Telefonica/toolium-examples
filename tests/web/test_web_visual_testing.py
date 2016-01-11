@@ -16,8 +16,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from toolium_examples.test_cases import SeleniumTestCase
+from nose.tools import assert_in
+
 from toolium_examples.pageobjects.web.login import LoginPageObject
+from toolium_examples.test_cases import SeleniumTestCase
 
 
 class Login(SeleniumTestCase):
@@ -30,22 +32,22 @@ class Login(SeleniumTestCase):
         login_page = LoginPageObject().open()
 
         # Assert the full screen
-        self.assertFullScreenshot('login_form')
+        self.assert_full_screenshot('login_form')
         # Assert the full screen excluding a web element
-        self.assertFullScreenshot('login_form_no_password', exclude_elements=[login_page.password])
+        self.assert_full_screenshot('login_form_no_password', exclude_elements=[login_page.password])
         # Assert only a web element
-        self.assertScreenshot(login_page.login_button, 'login_submit_button')
+        self.assert_screenshot(login_page.login_button, 'login_submit_button')
 
         # Login and check welcome message
         secure_area = login_page.login(user)
-        self.assertIn(expected_login_message, secure_area.message.get_message())
+        assert_in(expected_login_message, secure_area.message.get_message())
 
         # Assert the full screen
-        self.assertFullScreenshot('login_secure_area')
+        self.assert_full_screenshot('login_secure_area')
 
         # Logout and check logout message
         login_page = secure_area.logout()
-        self.assertIn(expected_logout_message, login_page.message.get_message())
+        assert_in(expected_logout_message, login_page.message.get_message())
 
         # Assert the full screen
-        self.assertFullScreenshot('login_logout')
+        self.assert_full_screenshot('login_logout')
