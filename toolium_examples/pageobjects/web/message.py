@@ -30,4 +30,4 @@ class MessagePageObject(PageObject):
 
         :returns: str with message
         """
-        return self.message.text.splitlines()[0]
+        return self.message.wait_until_visible(2).text.splitlines()[0]
