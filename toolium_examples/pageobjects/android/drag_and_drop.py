@@ -30,4 +30,4 @@ class DragAndDropPageObject(PageObject):
     result = Text(By.ID, 'io.appium.android.apis:id/drag_result_text')
 
     def drag_and_drop(self):
-        TouchAction(self.driver).long_press(self.dot3.element()).move_to(self.dot2.element()).release().perform()
+        TouchAction(self.driver).long_press(self.dot3.web_element).move_to(self.dot2.web_element).release().perform()
