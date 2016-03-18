@@ -17,7 +17,8 @@ limitations under the License.
 """
 
 from nose.tools import assert_equal
-from selenium.webdriver.common.action_chains import ActionChains, Keys
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 from toolium_examples.test_cases import SeleniumTestCase
 
