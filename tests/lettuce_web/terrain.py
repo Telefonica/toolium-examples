@@ -16,44 +16,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import os
-
-from lettuce import after, before, world
-
-from toolium.config_files import ConfigFiles
+from lettuce import after, before
 from toolium.lettuce.terrain import (setup_driver as toolium_setup_driver, teardown_driver as toolium_teardown_driver,
                                      teardown_driver_all as toolium_teardown_driver_all)
 
 
 @before.each_scenario
 def setup_driver(scenario):
-    """Scenario initialization
-
-    :param scenario: running scenario
-    """
-    config_files = ConfigFiles()
-    config_files.set_config_directory(os.path.join(get_root_path(), 'conf'))
-    config_files.set_output_directory(os.path.join(get_root_path(), 'output'))
-    config_files.set_config_properties_filenames('properties.cfg', 'local-properties.cfg')
-    world.config_files = config_files
     toolium_setup_driver(scenario)
 
 
 @after.each_scenario
 def teardown_driver(scenario):
-    """Clean method that will be executed after each scenario
-
-    :param scenario: running scenario
-    """
     toolium_teardown_driver(scenario)
 
 
 @after.all
 def teardown_driver_all(total):
-    """Clean method that will be executed after all features are finished
-
-    :param total: results of executed features
-    """
     toolium_teardown_driver_all(total)
 
 

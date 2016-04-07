@@ -29,7 +29,7 @@ class TwoDrivers(AndroidTestCase):
     def test_change_tab_and_successful_login(self):
         # Create a second driver
         second_wrapper = DriverWrapper()
-        second_wrapper.config.set('Browser', 'browser', 'firefox')
+        second_wrapper.config.set('Driver', 'type', 'firefox')
         second_wrapper.connect()
 
         # [Mobile] Open tabs activity
