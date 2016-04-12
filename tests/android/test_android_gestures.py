@@ -16,6 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from nose.tools import assert_equal, assert_is_not_none
 from selenium.webdriver.common.by import By
 
 from toolium_examples.pageobjects.android.drag_and_drop import DragAndDropPageObject
@@ -34,7 +35,7 @@ class Gestures(AndroidTestCase):
 
         # Check movement
         result = self.driver.find_element_by_id('io.appium.android.apis:id/drag_result_text')
-        self.assertEqual('Dropped!', drag_and_drop_page.result.text)
+        assert_equal('Dropped!', drag_and_drop_page.result.text)
 
     def test_swipe_simple(self):
         self.driver.swipe(50, 400, 50, 200, 500)
@@ -51,5 +52,5 @@ class Gestures(AndroidTestCase):
                 views_element = elements[0]
                 break
             self.driver.swipe(50, 400, 50, 200, 500)
-        self.assertIsNotNone(views_element)
+        assert_is_not_none(views_element)
         views_element.click()

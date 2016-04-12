@@ -16,28 +16,29 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from behave import given, when, then
+from lettuce import step, world
+from nose.tools import assert_in
 
 from toolium_examples.pageobjects.web.login import LoginPageObject
 
 
-@given('the home page is open')
-def step_impl(context):
-    context.current_page = LoginPageObject()
-    context.current_page.open()
+@step('the home page is open')
+def open_home_page(step):
+    world.current_page = LoginPageObject()
+    world.current_page.open()
 
 
-@when('the user logs in with username "{username}" and password "{password}"')
-def step_impl(context, username, password):
+@step('the user logs in with username "(.*?)" and password "(.*?)"')
+def login(step, username, password):
     user = {'username': username, 'password': password}
-    context.current_page = context.current_page.login(user)
+    world.current_page = world.current_page.login(user)
 
 
-@when('the user logs out')
-def step_impl(context):
-    context.current_page = context.current_page.logout()
+@step('the user logs out')
+def logout(step):
+    world.current_page = world.current_page.logout()
 
 
-@then('the message "{message}" is shown')
-def step_impl(context, message):
-    assert message in context.current_page.message.get_message()
+@step('the message "(.*?)" is shown')
+def step_impl(step, message):
+    assert_in(message, world.current_page.message.get_message())

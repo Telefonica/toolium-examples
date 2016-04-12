@@ -16,24 +16,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import os
+from lettuce import after, before
+from toolium.lettuce.terrain import (setup_driver as toolium_setup_driver, teardown_driver as toolium_teardown_driver,
+                                     teardown_driver_all as toolium_teardown_driver_all)
 
-from toolium.behave.environment import before_all as toolium_before_all, before_scenario, after_scenario, after_all
-from toolium.config_files import ConfigFiles
+
+@before.each_scenario
+def setup_driver(scenario):
+    toolium_setup_driver(scenario)
 
 
-def before_all(context):
-    """Initialization method that will be executed before the test execution
+@after.each_scenario
+def teardown_driver(scenario):
+    toolium_teardown_driver(scenario)
 
-    :param context: behave context
-    """
-    config_files = ConfigFiles()
-    config_files.set_config_directory(os.path.join(get_root_path(), 'conf'))
-    config_files.set_output_directory(os.path.join(get_root_path(), 'output'))
-    config_files.set_config_properties_filenames('properties.cfg', 'android-properties.cfg',
-                                                 'local-android-properties.cfg')
-    context.config_files = config_files
-    toolium_before_all(context)
+
+@after.all
+def teardown_driver_all(total):
+    toolium_teardown_driver_all(total)
 
 
 def get_root_path():

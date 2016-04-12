@@ -16,8 +16,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from toolium_examples.test_cases import iOSTestCase
+from nose.tools import assert_equal
+
 from toolium_examples.pageobjects.ios.calc import CalcPageObject
+from toolium_examples.test_cases import iOSTestCase
 
 
 class IosTestApp(iOSTestCase):
@@ -32,4 +34,4 @@ class IosTestApp(iOSTestCase):
         # Check expected result
         result = int(calc.result.text)
         self.logger.debug("{} + {} = {}".format(first_number, second_number, result))
-        self.assertEqual(first_number + second_number, result, "Wrong sum")
+        assert_equal(first_number + second_number, result, "Wrong sum")

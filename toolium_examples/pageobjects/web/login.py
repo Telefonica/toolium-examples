@@ -44,7 +44,7 @@ class LoginPageObject(PageObject):
 
         :returns: this page object instance
         """
-        self.utils.wait_until_element_visible(self.username.locator)
+        self.username.wait_until_visible()
         return self
 
     def login(self, user):

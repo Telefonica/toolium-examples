@@ -1,5 +1,6 @@
 toolium
 nose
-ddt         # data-driven tests
+ddt==1.0.0  # data-driven tests
 behave      # behave tests
 lettuce     # lettuce tests
+needle      # visual testing
