@@ -39,9 +39,10 @@ class Login(AndroidWebTestCase):
 
     def test_swipe(self):
         self.driver.get('http://the-internet.herokuapp.com/infinite_scroll')
+        current_context = self.driver.current_context
         self.driver.switch_to.context('NATIVE_APP')
         self.driver.swipe(50, 400, 50, 200, 500)
-        self.driver.switch_to.context('WEBVIEW')
+        self.driver.switch_to.context(current_context)
 
     def test_swipe_element(self):
         self.driver.get('http://the-internet.herokuapp.com/infinite_scroll')
