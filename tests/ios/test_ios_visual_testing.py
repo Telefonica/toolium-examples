@@ -19,10 +19,10 @@ limitations under the License.
 from nose.tools import assert_equal
 
 from toolium_examples.pageobjects.ios.calc import CalcPageObject
-from toolium_examples.test_cases import iOSTestCase
+from toolium_examples.test_cases import IosTestCase
 
 
-class IosTestApp(iOSTestCase):
+class IosTestApp(IosTestCase):
     def test_sum(self):
         first_number = 2
         second_number = 3

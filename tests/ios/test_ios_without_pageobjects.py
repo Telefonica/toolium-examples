@@ -21,10 +21,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from toolium_examples.test_cases import iOSTestCase
+from toolium_examples.test_cases import IosTestCase
 
 
-class IosTestApp(iOSTestCase):
+class IosTestApp(IosTestCase):
     def test_sum(self):
         first_number = 2
         second_number = 3

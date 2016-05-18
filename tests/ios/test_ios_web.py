@@ -20,10 +20,10 @@ from nose.tools import assert_in
 from selenium.webdriver.common.by import By
 
 from toolium_examples.pageobjects.web.login import LoginPageObject
-from toolium_examples.test_cases import iOSWebTestCase
+from toolium_examples.test_cases import IosWebTestCase
 
 
-class iOSWeb(iOSWebTestCase):
+class IosWeb(IosWebTestCase):
     def test_successful_login_logout(self):
         user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
         expected_login_message = "You logged into a secure area!"

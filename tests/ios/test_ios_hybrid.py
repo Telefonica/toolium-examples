@@ -19,10 +19,10 @@ limitations under the License.
 from nose.tools import assert_equal
 from selenium.webdriver.common.by import By
 
-from toolium_examples.test_cases import iOSHybridTestCase
+from toolium_examples.test_cases import IosHybridTestCase
 
 
-class iOSHybrid(iOSHybridTestCase):
+class IosHybrid(IosHybridTestCase):
     def test_search_employees(self):
         search_letter = 'j'
         expected_employees = 5
