@@ -16,24 +16,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from nose.tools import assert_equal
 from selenium.webdriver.common.by import By
 
-from toolium_examples.test_cases import AndroidHybridTestCase
+from toolium.pageobjects.page_object import PageObject
+from toolium.pageelements import *
 
 
-class Hybrid(AndroidHybridTestCase):
-    def test_search_employees(self):
-        search_letter = 'j'
-        expected_employees = 5
-
-        # Switch to webview context
-        self.driver.switch_to.context('WEBVIEW')
-
-        # Search employees that starts with selected letter
-        input_text = self.utils.wait_until_element_visible((By.TAG_NAME, 'input'))
-        input_text.send_keys(search_letter)
-
-        # Count employees
-        employees = self.driver.find_elements(By.TAG_NAME, 'li')
-        assert_equal(expected_employees, len(employees), 'Wrong number of employees')
+class TabsPageObject(PageObject):
+    tab_xpath = '(//android.widget.TabWidget//android.widget.TextView)[{}]'
+    tab1 = Button(By.XPATH, tab_xpath.format('1'))
+    tab2 = Button(By.XPATH, tab_xpath.format('2'))
+    tab3 = Button(By.XPATH, tab_xpath.format('3'))
+    content1 = Text(By.ID, 'io.appium.android.apis:id/view1')
+    content2 = Text(By.ID, 'io.appium.android.apis:id/view2')
+    content3 = Text(By.ID, 'io.appium.android.apis:id/view3')
+    container = PageElement(By.ID, 'android:id/content')

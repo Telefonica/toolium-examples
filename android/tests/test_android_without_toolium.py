@@ -24,6 +24,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 class Tabs(TestCase):
+    """This is the same test as test_android.py but without using Toolium"""
     def setUp(self):
         server_url = 'http://127.0.0.1:4723/wd/hub'
 

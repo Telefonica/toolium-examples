@@ -18,9 +18,9 @@ limitations under the License.
 
 from nose.tools import assert_equal
 
-from toolium_examples.pageobjects.android.menu import MenuPageObject
-from toolium_examples.pageobjects.android.tabs import TabsPageObject
-from toolium_examples.test_cases import AndroidTestCase
+from android.pageobjects.menu import MenuPageObject
+from android.pageobjects.tabs import TabsPageObject
+from android.test_cases import AndroidTestCase
 
 
 class Tabs(AndroidTestCase):

@@ -19,9 +19,9 @@ limitations under the License.
 from nose.tools import assert_equal, assert_is_not_none
 from selenium.webdriver.common.by import By
 
-from toolium_examples.pageobjects.android.drag_and_drop import DragAndDropPageObject
-from toolium_examples.pageobjects.android.menu import MenuPageObject
-from toolium_examples.test_cases import AndroidTestCase
+from android.pageobjects.drag_and_drop import DragAndDropPageObject
+from android.pageobjects.menu import MenuPageObject
+from android.test_cases import AndroidTestCase
 
 
 class Gestures(AndroidTestCase):
