@@ -23,7 +23,8 @@ from toolium.pageelements import *
 
 
 class MessagePageObject(PageObject):
-    message = Text(By.ID, 'flash')
+    def init_page_elements(self):
+        self.message = Text(By.ID, 'flash')
 
     def get_message(self):
         """ Get first line of actual message

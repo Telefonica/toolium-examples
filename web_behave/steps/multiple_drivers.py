@@ -20,7 +20,7 @@ from behave import given, when, then
 from nose.tools import assert_in
 
 from toolium.driver_wrapper import DriverWrapper
-from toolium_examples.pageobjects.web.login import LoginPageObject
+from web_behave.pageobjects.login import LoginPageObject
 
 
 @given('the home page is open in {browser}')

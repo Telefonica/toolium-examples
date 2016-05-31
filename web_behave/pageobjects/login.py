@@ -20,8 +20,8 @@ from selenium.webdriver.common.by import By
 
 from toolium.pageobjects.page_object import PageObject
 from toolium.pageelements import *
-from toolium_examples.pageobjects.web.message import MessagePageObject
-from toolium_examples.pageobjects.web.secure_area import SecureAreaPageObject
+from web_behave.pageobjects.message import MessagePageObject
+from web_behave.pageobjects.secure_area import SecureAreaPageObject
 
 
 class LoginPageObject(PageObject):
@@ -36,7 +36,7 @@ class LoginPageObject(PageObject):
 
         :returns: this page object instance
         """
-        self.driver.get(self.config.get('Common', 'url'))
+        self.driver.get('{}/login'.format(self.config.get('Test', 'url')))
         return self
 
     def wait_until_loaded(self):
