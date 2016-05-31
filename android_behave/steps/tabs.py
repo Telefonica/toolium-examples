@@ -19,8 +19,8 @@ limitations under the License.
 from behave import given, when, then
 from nose.tools import assert_in
 
-from toolium_examples.pageobjects.android.menu import MenuPageObject
-from toolium_examples.pageobjects.android.tabs import TabsPageObject
+from android_behave.pageobjects.menu import MenuPageObject
+from android_behave.pageobjects.tabs import TabsPageObject
 
 
 @given('the menu is open')

@@ -18,7 +18,6 @@ limitations under the License.
 
 from toolium.behave.environment import (before_all as toolium_before_all, before_scenario as toolium_before_scenario,
                                         after_scenario as toolium_after_scenario, after_all as toolium_after_all)
-from toolium.config_files import ConfigFiles
 
 
 def before_all(context):
@@ -26,10 +25,8 @@ def before_all(context):
 
     :param context: behave context
     """
-    config_files = ConfigFiles()
-    config_files.set_config_properties_filenames('properties.cfg', 'android-properties.cfg',
-                                                 'local-android-properties.cfg')
-    context.config_files = config_files
+    # Set Android as default environment
+    context.config.userdata.setdefault('env', 'android')
     toolium_before_all(context)
 
 
