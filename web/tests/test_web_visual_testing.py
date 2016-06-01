@@ -18,8 +18,8 @@ limitations under the License.
 
 from nose.tools import assert_in
 
-from toolium_examples.pageobjects.web.login import LoginPageObject
-from toolium_examples.test_cases import SeleniumTestCase
+from web.pageobjects.login import LoginPageObject
+from web.test_cases import SeleniumTestCase
 
 
 class Login(SeleniumTestCase):
@@ -28,10 +28,26 @@ class Login(SeleniumTestCase):
         expected_login_message = "You logged into a secure area!"
         expected_logout_message = "You logged out of the secure area!"
 
+        # Open login form
+        login_page = LoginPageObject().open()
+
+        # Assert the full screen
+        self.assert_full_screenshot('login_form')
+        # Assert the full screen excluding a web element
+        self.assert_full_screenshot('login_form_no_password', exclude_elements=[login_page.password])
+        # Assert only a web element
+        self.assert_screenshot(login_page.login_button, 'login_submit_button')
+
         # Login and check welcome message
-        secure_area = LoginPageObject().open().login(user)
+        secure_area = login_page.login(user)
         assert_in(expected_login_message, secure_area.message.get_message())
+
+        # Assert the full screen
+        self.assert_full_screenshot('login_secure_area', force=True)
 
         # Logout and check logout message
         login_page = secure_area.logout()
         assert_in(expected_logout_message, login_page.message.get_message())
+
+        # Assert the full screen
+        self.assert_full_screenshot('login_logout')

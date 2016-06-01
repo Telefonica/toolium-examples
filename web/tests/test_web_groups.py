@@ -18,8 +18,8 @@ limitations under the License.
 
 from nose.tools import assert_equal, assert_is_not_none
 
-from toolium_examples.pageobjects.web.tables import TablesPageObject
-from toolium_examples.test_cases import SeleniumTestCase
+from web.pageobjects.tables import TablesPageObject
+from web.test_cases import SeleniumTestCase
 
 
 class Tables(SeleniumTestCase):
@@ -29,7 +29,7 @@ class Tables(SeleniumTestCase):
                 'web': 'http://www.jdoe.com'}
 
         # Open url
-        self.driver.get('http://the-internet.herokuapp.com/tables')
+        self.driver.get('{}/tables'.format(self.config.get('Test', 'url')))
 
         # Search user in first table
         found_row = None

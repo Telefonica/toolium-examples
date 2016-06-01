@@ -19,8 +19,8 @@ limitations under the License.
 from ddt import ddt, data, file_data
 from nose.tools import assert_in
 
-from toolium_examples.pageobjects.web.login import LoginPageObject
-from toolium_examples.test_cases import SeleniumTestCase
+from web.pageobjects.login import LoginPageObject
+from web.test_cases import SeleniumTestCase
 
 users_dict = (
     {'username': 'peter', 'password': 'pass', 'expected_message': 'Your username is invalid!'},

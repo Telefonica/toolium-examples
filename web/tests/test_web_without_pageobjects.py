@@ -21,17 +21,19 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from toolium_examples.test_cases import SeleniumTestCase
+from web.test_cases import SeleniumTestCase
 
 
 class Login(SeleniumTestCase):
+    """This is the same test as test_web.py but without using page objects"""
+
     def test_successful_login_logout(self):
         user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
         expected_login_message = "You logged into a secure area!"
         expected_logout_message = "You logged out of the secure area!"
 
         # Open url
-        self.driver.get(self.config.get('Common', 'url'))
+        self.driver.get('{}/login'.format(self.config.get('Test', 'url')))
 
         # Login and check welcome message
         self.driver.find_element_by_id('username').send_keys(user['username'])

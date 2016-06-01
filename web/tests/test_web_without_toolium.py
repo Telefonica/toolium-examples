@@ -26,6 +26,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 class Login(TestCase):
+    """This is the same test as test_web.py but without using Toolium"""
+
     def setUp(self):
         # Create a new firefox driver before each test
         self.driver = webdriver.Firefox()

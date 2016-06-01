@@ -20,13 +20,13 @@ from nose.tools import assert_equal
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
-from toolium_examples.test_cases import SeleniumTestCase
+from web.test_cases import SeleniumTestCase
 
 
 class Actions(SeleniumTestCase):
     def test_mouse_hover(self):
         # Open url
-        self.driver.get('http://the-internet.herokuapp.com/hovers')
+        self.driver.get('{}/hovers'.format(self.config.get('Test', 'url')))
 
         # Move mouse over second image
         image2 = self.driver.find_element_by_xpath("//div[@class='figure'][2]/img")
@@ -38,7 +38,7 @@ class Actions(SeleniumTestCase):
 
     def test_keyboard_open_tab(self):
         # Open url
-        self.driver.get('http://the-internet.herokuapp.com/login')
+        self.driver.get('{}/login'.format(self.config.get('Test', 'url')))
 
         # Open a new tab (Ctrl+t)
         ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('t').key_up(Keys.CONTROL).perform()
