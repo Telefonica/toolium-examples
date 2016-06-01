@@ -27,8 +27,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 class IosTestApp(TestCase):
+    """This is the same test as test_ios.py but without using Toolium"""
+
     def setUp(self):
         server_url = 'http://127.0.0.1:4723/wd/hub'
+        app = 'https://github.com/appium/javascript-workshop/blob/master/apps/TestApp7.1.app.zip?raw=true&fake=.zip'
 
         capabilities = DesiredCapabilities.IPHONE
         capabilities['automationName'] = 'Appium'
@@ -36,9 +39,7 @@ class IosTestApp(TestCase):
         capabilities['deviceName'] = 'iPhone 6'
         capabilities['platformVersion'] = '8.3'
         capabilities['browserName'] = ''
-        capabilities[
-            'app'] = 'https://github.com/appium/javascript-workshop/blob/master/apps/TestApp7.1.app.zip?raw=true'
-
+        capabilities['app'] = app
         # Create a new appium driver before each test
         self.driver = WebDriver(command_executor=server_url, desired_capabilities=capabilities)
         self.driver.implicitly_wait(5)
@@ -53,7 +54,7 @@ class IosTestApp(TestCase):
 
         # Input numbers and click button
         first_element = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, "//UIATextField[1]")))
+            EC.presence_of_element_located((By.XPATH, "//UIATextField[1]")))
         first_element.send_keys(first_number)
         self.driver.find_element_by_xpath("//UIATextField[2]").send_keys(second_number)
         self.driver.find_element_by_accessibility_id("ComputeSumButton").click()

@@ -18,8 +18,8 @@ limitations under the License.
 
 from nose.tools import assert_equal
 
-from toolium_examples.pageobjects.ios.calc import CalcPageObject
-from toolium_examples.test_cases import IosTestCase
+from ios.pageobjects.calc import CalcPageObject
+from ios.test_cases import IosTestCase
 
 
 class IosTestApp(IosTestCase):
@@ -32,7 +32,5 @@ class IosTestApp(IosTestCase):
         calc.sum(first_number, second_number)
 
         # Check expected result
-        result = int(calc.result.text)
-        self.logger.debug("{} + {} = {}".format(first_number, second_number, result))
-        assert_equal(first_number + second_number, result, "Wrong sum")
+        assert_equal(first_number + second_number, calc.get_sum_result(), "Wrong sum")
         self.assert_full_screenshot('Sum', exclude_elements=[calc.status_bar])

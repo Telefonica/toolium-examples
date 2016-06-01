@@ -17,21 +17,23 @@ limitations under the License.
 """
 
 from nose.tools import assert_equal
+from selenium.webdriver.common.by import By
 
-from toolium_examples.pageobjects.ios.calc import CalcPageObject
-from toolium_examples.test_cases import IosTestCase
+from ios.test_cases import IosHybridTestCase
 
 
-class IosTestApp(IosTestCase):
-    def test_sum(self):
-        first_number = 2
-        second_number = 3
+class IosHybrid(IosHybridTestCase):
+    def test_search_employees(self):
+        search_letter = 'j'
+        expected_employees = 5
 
-        # Sum numbers
-        calc = CalcPageObject()
-        calc.sum(first_number, second_number)
+        # Switch to webview context
+        self.utils.switch_to_first_webview_context()
 
-        # Check expected result
-        result = int(calc.result.text)
-        self.logger.debug("{} + {} = {}".format(first_number, second_number, result))
-        assert_equal(first_number + second_number, result, "Wrong sum")
+        # Search employees that starts with selected letter
+        input_text = self.utils.wait_until_element_visible((By.TAG_NAME, 'input'))
+        input_text.send_keys(search_letter)
+
+        # Count employees
+        employees = self.driver.find_elements(By.TAG_NAME, 'li')
+        assert_equal(expected_employees, len(employees), 'Wrong number of employees')

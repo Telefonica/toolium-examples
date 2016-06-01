@@ -21,17 +21,19 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from toolium_examples.test_cases import IosTestCase
+from ios.test_cases import IosTestCase
 
 
 class IosTestApp(IosTestCase):
+    """This is the same test as test_ios.py but without using page objects"""
+
     def test_sum(self):
         first_number = 2
         second_number = 3
 
         # Input numbers and click button
         first_element = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, "//UIATextField[1]")))
+            EC.presence_of_element_located((By.XPATH, "//UIATextField[1]")))
         first_element.send_keys(first_number)
         self.driver.find_element_by_xpath("//UIATextField[2]").send_keys(second_number)
         self.driver.find_element_by_accessibility_id("ComputeSumButton").click()

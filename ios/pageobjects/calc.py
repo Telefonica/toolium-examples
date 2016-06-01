@@ -31,8 +31,22 @@ class CalcPageObject(PageObject):
     status_bar = PageElement(By.XPATH, '//UIAStatusBar[1]')
 
     def sum(self, first_number, second_number):
+        """Add two numbers
+
+        :param first_number: first value
+        :param second_number: second value
+        :returns: calc page object
+        """
         self.first_op.wait_until_visible()
         self.first_op.text = first_number
         self.second_op.text = second_number
         self.driver.hide_keyboard(key_name='Done')
         self.compute.click()
+        return self
+
+    def get_sum_result(self):
+        """Get sum result from calculator
+
+        :returns: int with sum result
+        """
+        return int(self.result.text)
