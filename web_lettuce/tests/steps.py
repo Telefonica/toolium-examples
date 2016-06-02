@@ -19,7 +19,7 @@ limitations under the License.
 from lettuce import step, world
 from nose.tools import assert_in
 
-from toolium_examples.pageobjects.web.login import LoginPageObject
+from web_lettuce.pageobjects.login import LoginPageObject
 
 
 @step('the home page is open')

@@ -16,23 +16,39 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from lettuce import after, before
+import os
+
+from lettuce import after, before, world
+
+from toolium.config_files import ConfigFiles
 from toolium.lettuce.terrain import (setup_driver as toolium_setup_driver, teardown_driver as toolium_teardown_driver,
                                      teardown_driver_all as toolium_teardown_driver_all)
 
 
 @before.each_scenario
 def setup_driver(scenario):
+    """Scenario initialization
+
+    :param scenario: running scenario
+    """
     toolium_setup_driver(scenario)
 
 
 @after.each_scenario
 def teardown_driver(scenario):
+    """Clean method that will be executed after each scenario
+
+    :param scenario: running scenario
+    """
     toolium_teardown_driver(scenario)
 
 
 @after.all
 def teardown_driver_all(total):
+    """Clean method that will be executed after all features are finished
+
+    :param total: results of executed features
+    """
     toolium_teardown_driver_all(total)
 
 
@@ -41,4 +57,4 @@ def get_root_path():
 
     :returns: root folder path
     """
-    return os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+    return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
