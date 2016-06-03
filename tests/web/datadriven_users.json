@@ -1,4 +1,0 @@
-{
-    "wrong_username": {"username": "peter", "password": "pass", "expected_message": "Your username is invalid!"},
-    "wrong_password": {"username": "tomsmith", "password": "pass", "expected_message": "Your password is invalid!"}
-}
