@@ -17,7 +17,6 @@ limitations under the License.
 """
 
 from behave import given, when, then
-from nose.tools import assert_equal
 
 from ios_behave.pageobjects.calc import CalcPageObject
 
@@ -34,4 +33,4 @@ def step_impl(context, first_number, second_number):
 
 @then('the result is {expected_result}')
 def step_impl(context, expected_result):
-    assert_equal(int(expected_result), context.current_page.get_sum_result())
+    assert int(expected_result) == context.current_page.get_sum_result()

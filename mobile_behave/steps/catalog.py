@@ -17,7 +17,6 @@ limitations under the License.
 """
 
 from behave import given, when, then
-from nose.tools import assert_equal, assert_greater
 
 from mobile_behave.pageobjects.initial import BaseInitialPageObject
 
@@ -34,5 +33,5 @@ def step_impl(context):
 
 @then('just arrived collections are shown')
 def step_impl(context):
-    assert_equal(context.current_page.title.text.upper(), 'JUST ARRIVED')
-    assert_greater(len(context.current_page.get_collections()), 1)
+    assert context.current_page.title.text.upper() == 'JUST ARRIVED'
+    assert len(context.current_page.get_collections()) > 1

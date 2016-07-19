@@ -1,6 +1,8 @@
 toolium
 nose
-ddt==1.0.0  # data-driven tests
-behave      # behave tests
-lettuce     # lettuce tests
-needle      # visual testing
+ddt==1.0.0     # data-driven tests
+behave         # behave tests
+behave-pytest  # pytest assertions in behave tests
+lettuce        # lettuce tests
+needle         # visual testing
+Pillow==3.2.0  # visual testing, 3.3.0 has an installation issue

@@ -17,7 +17,6 @@ limitations under the License.
 """
 
 from behave import given, when, then
-from nose.tools import assert_in
 
 from android_behave.pageobjects.menu import MenuPageObject
 from android_behave.pageobjects.tabs import TabsPageObject
@@ -41,4 +40,4 @@ def step_impl(context):
 
 @then('the second tab contains "{message}"')
 def step_impl(context, message):
-    assert_in(message, context.current_page.content2.text)
+    assert message in context.current_page.content2.text
