@@ -17,7 +17,6 @@ limitations under the License.
 """
 
 from behave import given, when, then
-from nose.tools import assert_in
 
 from toolium.driver_wrapper import DriverWrapper
 from web_behave.pageobjects.login import LoginPageObject
@@ -45,4 +44,4 @@ def step_impl(context, username, password, browser):
 
 @then('the message "{message}" is shown in {browser}')
 def step_impl(context, message, browser):
-    assert_in(message, context.current_page[browser].message.get_message())
+    assert message in context.current_page[browser].message.get_message()

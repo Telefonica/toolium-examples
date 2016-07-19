@@ -17,7 +17,6 @@ limitations under the License.
 """
 
 from behave import given, when, then
-from nose.tools import assert_in
 
 from web_behave.pageobjects.login import LoginPageObject
 
@@ -41,4 +40,4 @@ def step_impl(context):
 
 @then('the message "{message}" is shown')
 def step_impl(context, message):
-    assert_in(message, context.current_page.message.get_message())
+    assert message in context.current_page.message.get_message()

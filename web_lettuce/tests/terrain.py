@@ -20,7 +20,6 @@ import os
 
 from lettuce import after, before, world
 
-from toolium.config_files import ConfigFiles
 from toolium.lettuce.terrain import (setup_driver as toolium_setup_driver, teardown_driver as toolium_teardown_driver,
                                      teardown_driver_all as toolium_teardown_driver_all)
 
