@@ -69,13 +69,13 @@ To run behave web tests in an Android device:
 
 .. code:: console
 
-    $ behave web_behave/features/login.feature -D env=android
+    $ behave web_behave/features/login.feature -D Config_environment=android
 
 To run behave web tests in an iOS device:
 
 .. code:: console
 
-    $ behave web_behave/features/login.feature -D env=ios
+    $ behave web_behave/features/login.feature -D Config_environment=ios
 
 **android_behave**
 
@@ -95,20 +95,20 @@ To run behave iOS tests:
 
 **mobile_behave**
 
-This folder contains a behave test that could be executed either in Android or iOS depending on *env* behave user
-property.
+This folder contains a behave test that could be executed either in Android or iOS depending on *Config_environment*
+behave user property.
 
 To run behave test in Android:
 
 .. code:: console
 
-    $ behave mobile_behave -D env=android
+    $ behave mobile_behave -D Config_environment=android
 
 To run behave test in iOS:
 
 .. code:: console
 
-    $ behave mobile_behave -D env=ios
+    $ behave mobile_behave -D Config_environment=ios
 
 **web_lettuce**
 

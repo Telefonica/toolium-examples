@@ -26,7 +26,7 @@ def before_all(context):
     :param context: behave context
     """
     # Set iOS as default environment
-    context.config.userdata.setdefault('env', 'ios')
+    context.config.userdata.setdefault('Config_environment', 'ios')
     toolium_before_all(context)
 
 
