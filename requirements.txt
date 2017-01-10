@@ -5,5 +5,4 @@ behave         # behave tests
 behave-pytest  # pytest assertions in behave tests
 pytest==2.9.2  # behave-pytest is not compatible with pytest 3
 lettuce        # lettuce tests
-git+https://github.com/bfirsh/needle.git@09f32a5d#egg=needle  # visual testing
-Pillow==3.2.0  # visual testing, 3.3.0 has an installation issue
+needle==0.4.1  # visual testing
