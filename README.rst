@@ -25,7 +25,16 @@ Running Tests
 Each folder contains a sample project to test web, Android or iOS applications using nose, behave or lettuce to execute
 them.
 
-By default, web tests are configured to run in firefox locally, so firefox must be installed in your machine.
+By default, web tests are configured to run in chrome locally, so chrome must be installed in your machine and the
+chrome driver must be downloaded and configured:
+
+- Download `chromedriver_*.zip <http://chromedriver.storage.googleapis.com/index.html>`_
+- Unzip file and save the executable in a local folder
+- Configure driver path in *[Driver]* section in properties.cfg file ::
+
+    [Driver]
+    chrome_driver_path: C:\Drivers\chromedriver.exe
+
 
 And mobile tests are configured to run against a local Appium server, so
 `Appium <http://appium.io/slate/en/master/?ruby#setting-up-appium>`_ must be installed, configured and started before

@@ -24,13 +24,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+# TODO: Configure CHROME_DRIVER_PATH with your chrome driver local path
+CHROME_DRIVER_PATH = "C:\\Drivers\\chromedriver.exe"
+
 
 class Login(TestCase):
     """This is the same test as test_web.py but without using Toolium"""
 
     def setUp(self):
-        # Create a new firefox driver before each test
-        self.driver = webdriver.Firefox()
+        # Create a new chrome driver before each test
+        self.driver = webdriver.Chrome(CHROME_DRIVER_PATH)
         self.driver.implicitly_wait(5)
 
     def tearDown(self):
