@@ -9,7 +9,6 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 """
 
-from appium.webdriver.common.mobileby import MobileBy
 from selenium.webdriver.common.by import By
 
 from toolium.pageelements import *
@@ -31,6 +30,5 @@ class AndroidShopPageObject(BaseShopPageObject):
 
 
 class IosShopPageObject(BaseShopPageObject):
-    title = Text(MobileBy.IOS_UIAUTOMATION,
-                 ".navigationBars().firstWithPredicate(\"name == 'BFBannersView'\").staticTexts()[0]")
-    collections = Buttons(MobileBy.IOS_UIAUTOMATION, '.tableViews()[0].cells()')
+    title = Text(By.XPATH, "//XCUIElementTypeStaticText[1]")
+    collections = Buttons(By.XPATH, '//XCUIElementTypeTable/XCUIElementTypeCell')

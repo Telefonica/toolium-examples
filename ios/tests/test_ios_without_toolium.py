@@ -34,10 +34,10 @@ class IosTestApp(TestCase):
         app = 'https://github.com/appium/javascript-workshop/blob/master/apps/TestApp7.1.app.zip?raw=true&fake=.zip'
 
         capabilities = DesiredCapabilities.IPHONE
-        capabilities['automationName'] = 'Appium'
+        capabilities['automationName'] = 'XCUITest'
         capabilities['platformName'] = 'iOS'
-        capabilities['deviceName'] = 'iPhone 6'
-        capabilities['platformVersion'] = '8.3'
+        capabilities['deviceName'] = 'iPhone 7'
+        capabilities['platformVersion'] = '10.0'
         capabilities['browserName'] = ''
         capabilities['app'] = app
         # Create a new appium driver before each test

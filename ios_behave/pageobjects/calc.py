@@ -24,11 +24,11 @@ from toolium.pageelements import *
 
 
 class CalcPageObject(PageObject):
-    first_op = InputText(By.XPATH, '//UIATextField[1]')
-    second_op = InputText(By.XPATH, '//UIATextField[2]')
+    first_op = InputText(By.XPATH, '//XCUIElementTypeTextField[1]')
+    second_op = InputText(By.XPATH, '//XCUIElementTypeTextField[2]')
     compute = Button(MobileBy.ACCESSIBILITY_ID, 'ComputeSumButton')
-    result = Text(By.XPATH, '//UIAStaticText[1]')
-    status_bar = PageElement(By.XPATH, '//UIAStatusBar[1]')
+    result = Text(By.XPATH, '//XCUIElementTypeStaticText[1]')
+    status_bar = PageElement(By.XPATH, '//XCUIElementTypeStatusBar[1]')
 
     def sum(self, first_number, second_number):
         """Add two numbers

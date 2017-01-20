@@ -25,7 +25,16 @@ Running Tests
 Each folder contains a sample project to test web, Android or iOS applications using nose, behave or lettuce to execute
 them.
 
-By default, web tests are configured to run in firefox locally, so firefox must be installed in your machine.
+By default, web tests are configured to run in chrome locally, so chrome must be installed in your machine and the
+chrome driver must be downloaded and configured:
+
+- Download `chromedriver_*.zip <http://chromedriver.storage.googleapis.com/index.html>`_
+- Unzip file and save the executable in a local folder
+- Configure driver path in *[Driver]* section in properties.cfg file ::
+
+    [Driver]
+    chrome_driver_path: C:\Drivers\chromedriver.exe
+
 
 And mobile tests are configured to run against a local Appium server, so
 `Appium <http://appium.io/slate/en/master/?ruby#setting-up-appium>`_ must be installed, configured and started before
@@ -69,13 +78,13 @@ To run behave web tests in an Android device:
 
 .. code:: console
 
-    $ behave web_behave/features/login.feature -D env=android
+    $ behave web_behave/features/login.feature -D Config_environment=android
 
 To run behave web tests in an iOS device:
 
 .. code:: console
 
-    $ behave web_behave/features/login.feature -D env=ios
+    $ behave web_behave/features/login.feature -D Config_environment=ios
 
 **android_behave**
 
@@ -95,20 +104,20 @@ To run behave iOS tests:
 
 **mobile_behave**
 
-This folder contains a behave test that could be executed either in Android or iOS depending on *env* behave user
-property.
+This folder contains a behave test that could be executed either in Android or iOS depending on *Config_environment*
+behave user property.
 
 To run behave test in Android:
 
 .. code:: console
 
-    $ behave mobile_behave -D env=android
+    $ behave mobile_behave -D Config_environment=android
 
 To run behave test in iOS:
 
 .. code:: console
 
-    $ behave mobile_behave -D env=ios
+    $ behave mobile_behave -D Config_environment=ios
 
 **web_lettuce**
 
