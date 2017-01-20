@@ -9,14 +9,13 @@ stipulated in the agreement/contract under which the program(s) have
 been supplied.
 """
 
-from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.common.touch_action import TouchAction
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 from mobile_behave.pageobjects.shop import BaseShopPageObject
 from toolium.pageelements import *
 from toolium.pageobjects.mobile_page_object import MobilePageObject
-from selenium.common.exceptions import NoSuchElementException
 
 
 class BaseInitialPageObject(MobilePageObject):
@@ -50,10 +49,10 @@ class AndroidInitialPageObject(BaseInitialPageObject):
 
 
 class IosInitialPageObject(BaseInitialPageObject):
-    country = Button(MobileBy.IOS_UIAUTOMATION, '.scrollViews()[0].buttons()[0]')
-    accept = Button(MobileBy.IOS_UIAUTOMATION, '.scrollViews()[0].buttons()[1]')
-    skip = Button(MobileBy.IOS_UIAUTOMATION, '.scrollViews()[0].buttons()[3]')
-    alert = PageElement(MobileBy.IOS_UIAUTOMATION, ".elements().firstWithPredicate(\"name == 'APNSAlert'\")")
+    country = Button(By.XPATH, '//XCUIElementTypeButton[1]')
+    accept = Button(By.XPATH, '//XCUIElementTypeButton[2]')
+    skip = Button(By.XPATH, '//XCUIElementTypeButton[4]')
+    alert = PageElement(By.XPATH, "(//XCUIElementTypeOther)[15]")  # TODO: check name=='APNSAlert'
 
     def go_to_shop(self):
         """Go to shop page
@@ -65,5 +64,5 @@ class IosInitialPageObject(BaseInitialPageObject):
         self.skip.click()
         # Close offers alert
         self.alert.wait_until_visible()
-        TouchAction(self.driver).tap(x=100, y=100).release().perform()
+        TouchAction(self.driver).press(x=100, y=100).release().perform()
         return BaseShopPageObject()
