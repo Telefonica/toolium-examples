@@ -49,16 +49,25 @@ def step_with_a_table(context):
 def step_with_a_table(context):
     i = time.time()
     print("            executing the \"step with another step executed dynamically\"...")
-    context.execute_steps(u'Given I wait 5 seconds')
-    print("            executed the \"step with another step executed dynamically\"... took %s seconds" % (time.time()-i))
+    context.execute_steps(u'Given wait 5 seconds')
+    print("            executed the \"step with another step executed dynamically\"... took %s seconds"
+          % (time.time() - i))
 
 
 @step(u'step with another step using table executed dynamically')
 def step_with_a_table(context):
     i = time.time()
     print("            executing the \"step with another step using table executed dynamically\"...")
-    context.execute_steps(u'''Given step with a table\n      | parameter | value   |\n      | step_fields_1  | value 1 |\n      | step_fields_2  | value 2 |\n      | step_fields_3  | value 3 |\n      | step_fields_4  | value 4 |''')
-    print("            executed the \"step with another step using table executed dynamically\"... took %s seconds" % (time.time()-i))
+    context.execute_steps(u'''
+        Given step with a table
+          | parameter     | value   |
+          | step_fields_1 | value 1 |
+          | step_fields_2 | value 2 |
+          | step_fields_3 | value 3 |
+          | step_fields_4 | value 4 |
+    ''')
+    print("            executed the \"step with another step using table executed dynamically\"... took %s seconds"
+          % (time.time() - i))
 
 
 @step(u'the welcome message is displayed')
