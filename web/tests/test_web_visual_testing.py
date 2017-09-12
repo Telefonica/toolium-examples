@@ -20,6 +20,7 @@ from nose.tools import assert_in
 
 from web.pageobjects.login import LoginPageObject
 from web.test_cases import SeleniumTestCase
+from selenium.webdriver.common.by import By
 
 
 class Login(SeleniumTestCase):
@@ -30,20 +31,23 @@ class Login(SeleniumTestCase):
 
         # Open login form
         login_page = LoginPageObject().open()
+        self.assert_full_screenshot('login_form_no_password')
 
         # Assert the full screen
         self.assert_full_screenshot('login_form')
         # Assert the full screen excluding a web element
-        self.assert_full_screenshot('login_form_no_password', exclude_elements=[login_page.password])
+        self.assert_full_screenshot('login_form_no_password', exclude_elements=[login_page.password, (By.ID, 'asdad')])
         # Assert only a web element
-        self.assert_screenshot(login_page.login_button, 'login_submit_button')
+        self.assert_screenshot(login_page.login_button, 'login_form')
+        # Assert only a web element
+        login_page.login_button.assert_screenshot('login_submit_button')
 
         # Login and check welcome message
         secure_area = login_page.login(user)
         assert_in(expected_login_message, secure_area.message.get_message())
 
         # Assert the full screen
-        self.assert_full_screenshot('login_secure_area', force=True)
+        self.assert_full_screenshot('login_secure_area', force=True, exclude_elements=[login_page.password])
 
         # Logout and check logout message
         login_page = secure_area.logout()
