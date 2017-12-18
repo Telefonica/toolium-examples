@@ -33,7 +33,7 @@ chrome driver must be downloaded and configured:
 
 - Download `chromedriver_*.zip <http://chromedriver.storage.googleapis.com/index.html>`_
 - Unzip file and save the executable in a local folder
-- Configure driver path in *[Driver]* section in `web[_behave|_lettuce]/conf/properties.cfg` file ::
+- Configure driver path in *[Driver]* section in `web[_pytest|_behave|_lettuce]/conf/properties.cfg` file ::
 
     [Driver]
     chrome_driver_path: C:\Drivers\chromedriver.exe
@@ -45,6 +45,15 @@ To run web tests with nose:
 .. code:: console
 
     $ nosetests web
+
+**/web_pytest**
+
+To run web tests with pytest:
+
+.. code:: console
+
+    $ cd web_pytest
+    $ py.test
 
 **/web_behave**
 
