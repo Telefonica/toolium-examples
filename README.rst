@@ -25,23 +25,20 @@ Running Tests
 Each folder contains a sample project to test web, Android or iOS applications using nose, behave or lettuce to execute
 them.
 
+Running web tests
+~~~~~~~~~~~~~~~~~
+
 By default, web tests are configured to run in chrome locally, so chrome must be installed in your machine and the
 chrome driver must be downloaded and configured:
 
 - Download `chromedriver_*.zip <http://chromedriver.storage.googleapis.com/index.html>`_
 - Unzip file and save the executable in a local folder
-- Configure driver path in *[Driver]* section in properties.cfg file ::
+- Configure driver path in *[Driver]* section in `web[_behave|_lettuce]/conf/properties.cfg` file ::
 
     [Driver]
     chrome_driver_path: C:\Drivers\chromedriver.exe
 
-
-And mobile tests are configured to run against a local Appium server, so
-`Appium <http://appium.io/slate/en/master/?ruby#setting-up-appium>`_ must be installed, configured and started before
-executing tests. iOS tests are configured to run on iOS Simulator and Android tests need an Android Emulator or a
-plugged Android device.
-
-**web**
+**/web**
 
 To run web tests with nose:
 
@@ -49,23 +46,7 @@ To run web tests with nose:
 
     $ nosetests web
 
-**android**
-
-To run Android tests with nose:
-
-.. code:: console
-
-    $ nosetests android
-
-**ios**
-
-To run iOS tests with nose:
-
-.. code:: console
-
-    $ nosetests ios
-
-**web_behave**
+**/web_behave**
 
 To run behave web tests:
 
@@ -73,20 +54,44 @@ To run behave web tests:
 
     $ behave web_behave
 
-The same web tests could be executed in an Android or iOS device using different configuration files per environment.
-To run behave web tests in an Android device:
+**/web_lettuce**
+
+To run lettuce web tests:
 
 .. code:: console
 
-    $ behave web_behave/features/login.feature -D Config_environment=android
+    $ lettuce web_lettuce
 
-To run behave web tests in an iOS device:
+Note: lettuce works only in Python 2
+
+Running mobile tests
+~~~~~~~~~~~~~~~~~~~
+
+By default, mobile tests are configured to run against a local Appium server, so
+`Appium <http://appium.io/slate/en/master/?ruby#setting-up-appium>`_ must be installed, configured and started before
+executing tests.
+
+**/android**
+
+Android tests need an Android Emulator or a plugged Android device.
+
+To run Android tests with nose:
 
 .. code:: console
 
-    $ behave web_behave/features/login.feature -D Config_environment=ios
+    $ nosetests android
 
-**android_behave**
+**/ios**
+
+iOS tests are configured to run on iOS Simulator.
+
+To run iOS tests with nose:
+
+.. code:: console
+
+    $ nosetests ios
+
+**/android_behave**
 
 To run behave Android tests:
 
@@ -94,7 +99,7 @@ To run behave Android tests:
 
     $ behave android_behave
 
-**ios_behave**
+**/ios_behave**
 
 To run behave iOS tests:
 
@@ -102,7 +107,7 @@ To run behave iOS tests:
 
     $ behave ios_behave
 
-**mobile_behave**
+**/mobile_behave**
 
 This folder contains a behave test that could be executed either in Android or iOS depending on *Config_environment*
 behave user property.
@@ -119,12 +124,29 @@ To run behave test in iOS:
 
     $ behave mobile_behave -D Config_environment=ios
 
-**web_lettuce**
+**/web_behave**
 
-To run lettuce web tests:
+The same `/web_behave` tests already run in a browser could also be executed in an Android or iOS
+device using different configuration files per environment.
+
+To run behave web tests in an Android device:
 
 .. code:: console
 
-    $ lettuce web_lettuce
+    $ behave web_behave/features/login.feature -D Config_environment=android
 
-Note: lettuce works only in Python 2
+To run behave web tests in an iOS device:
+
+.. code:: console
+
+    $ behave web_behave/features/login.feature -D Config_environment=ios
+
+Contributing
+------------
+
+If you want to collaborate in Toolium-examples development, feel free of `forking it <https://github.com/Telefonica/toolium-examples>`_
+and asking for a pull request.
+
+Finally, before accepting your contribution, we need you to sign our
+`Contributor License Agreement <https://raw.githubusercontent.com/telefonicaid/Licensing/master/ContributionPolicy.txt>`_
+and send it to ruben.gonzalezalonso@telefonica.com.
