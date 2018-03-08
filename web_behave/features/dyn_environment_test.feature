@@ -7,7 +7,7 @@ Feature: Tests with the dynamic environment
 
   Actions Before the Feature:
     Given wait 3 seconds
-    And waitrty 3 seconds
+    And wait 3 seconds
     And wait 3 seconds
     And step with a table
       | parameter     | value       |
