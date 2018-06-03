@@ -1,0 +1,12 @@
+SecureArea :
+
+  - Button :
+      Name            : logout_button
+      Locator-Type    : XPATH
+      Locator-Value   : //div[@id='content']//a[contains(@class,'button')]
+      Wait-For-Loaded : True
+  - Text :
+      Name            : flash_message
+      Locator-Type    : ID
+      Locator-Value   : flash
+      Wait-For-Loaded : False

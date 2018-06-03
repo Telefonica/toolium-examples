@@ -1,0 +1,22 @@
+Login :
+
+  - InputText :
+      Name            : username_field
+      Locator-Type    : ID
+      Locator-Value   : username
+      Wait-For-Loaded : True
+  - InputText :
+      Name            : password_field
+      Locator-Type    : ID
+      Locator-Value   : password
+      Wait-For-Loaded : True
+  - Button :
+      Name            : login_button
+      Locator-Type    : XPATH
+      Locator-Value   : //form[@id="login"]/button
+      Wait-For-Loaded : True
+  - Text :
+      Name            : flash_message
+      Locator-Type    : ID
+      Locator-Value   : flash
+      Wait-For-Loaded : False
