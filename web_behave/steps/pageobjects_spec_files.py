@@ -23,6 +23,7 @@ from behave import given, when, then
 def step_impl(context):
     context.driver.get('{}/login'.format(context.toolium_config.get('Test', 'url')))
     context.current_page = context.get_pageobject('Login')
+    context.current_page.wait_until_loaded()
 
 
 @when('SpecFilesExample: the user logs in with username "{username}" and password "{password}"')
@@ -31,12 +32,14 @@ def step_impl(context, username, password):
     context.current_page.password_field.text = password
     context.current_page.login_button.click()
     context.current_page = context.get_pageobject('SecureArea')
+    context.current_page.wait_until_loaded()
 
 
 @when('SpecFilesExample: the user logs out')
 def step_impl(context):
     context.current_page.logout_button.click()
     context.current_page = context.get_pageobject('Login')
+    context.current_page.wait_until_loaded()
 
 
 @then('SpecFilesExample: the message "{message}" is shown')
