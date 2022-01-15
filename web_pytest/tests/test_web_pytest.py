@@ -16,8 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from nose.tools import assert_in
-
 from web.pageobjects.login import LoginPageObject
 
 
@@ -28,8 +26,12 @@ def test_successful_login_logout():
 
     # Login and check welcome message
     secure_area = LoginPageObject().open().login(user)
-    assert_in(expected_login_message, secure_area.message.get_message())
+    assert expected_login_message in secure_area.message.get_message(), \
+        'Expected mmessage "%s" not found in message field: %s' % (expected_login_message,
+                                                                   secure_area.message.get_message())
 
     # Logout and check logout message
     login_page = secure_area.logout()
-    assert_in(expected_logout_message, login_page.message.get_message())
+    assert expected_logout_message in login_page.message.get_message(), \
+        'Expected mmessage "%s" not found in message field: %s' % (expected_logout_message,
+                                                                   login_page.message.get_message())
