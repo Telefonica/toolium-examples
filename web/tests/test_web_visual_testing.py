@@ -47,7 +47,7 @@ class Login(SeleniumTestCase):
         assert_in(expected_login_message, secure_area.message.get_message())
 
         # Assert the full screen
-        self.assert_full_screenshot('login_secure_area', force=True, exclude_elements=[login_page.password])
+        self.assert_full_screenshot('login_secure_area', force=True)
 
         # Logout and check logout message
         login_page = secure_area.logout()

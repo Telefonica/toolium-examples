@@ -18,6 +18,7 @@ limitations under the License.
 
 from unittest import TestCase
 
+from nose.plugins.attrib import attr
 from nose.tools import assert_in
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -40,6 +41,7 @@ class Login(TestCase):
         # Close driver and browser
         self.driver.quit()
 
+    @attr('skip')
     def test_successful_login_logout(self):
         user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
         expected_login_message = "You logged into a secure area!"

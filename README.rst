@@ -7,9 +7,6 @@ applications, in different scenarios.
 Getting Started
 ---------------
 
-The requirements to install Toolium are `Python 2.7 or 3.3+ <http://www.python.org>`_ and
-`pip <https://pypi.python.org/pypi/pip>`_. If you use Python 2.7.9+, you don't need to install pip separately.
-
 Clone `toolium-examples <https://github.com/Telefonica/toolium-examples>`_ repository and install requirements. It's
 highly recommendable to use a virtualenv.
 
@@ -22,7 +19,7 @@ highly recommendable to use a virtualenv.
 Running Tests
 -------------
 
-Each folder contains a sample project to test web, Android or iOS applications using nose, behave or lettuce to execute
+Each folder contains a sample project to test web, Android or iOS applications using nose, behave or pytest to execute
 them.
 
 Running web tests
@@ -33,18 +30,18 @@ chrome driver must be downloaded and configured:
 
 - Download `chromedriver_*.zip <http://chromedriver.storage.googleapis.com/index.html>`_
 - Unzip file and save the executable in a local folder
-- Configure driver path in *[Driver]* section in `web[_pytest|_behave|_lettuce]/conf/properties.cfg` file ::
+- Configure driver path in *[Driver]* section in `web[_pytest|_behave]/conf/properties.cfg` file ::
 
     [Driver]
     chrome_driver_path: C:\Drivers\chromedriver.exe
 
 **/web**
 
-To run web tests with nose:
+To run web tests with nose, excluding skipped tests:
 
 .. code:: console
 
-    $ nosetests web
+    $ nosetests web -a '!skip'
 
 **/web_pytest**
 
@@ -53,7 +50,7 @@ To run web tests with pytest:
 .. code:: console
 
     $ cd web_pytest
-    $ py.test
+    $ python -m pytest
 
 **/web_behave**
 
@@ -62,16 +59,6 @@ To run behave web tests:
 .. code:: console
 
     $ behave web_behave
-
-**/web_lettuce**
-
-To run lettuce web tests:
-
-.. code:: console
-
-    $ lettuce web_lettuce
-
-Note: lettuce works only in Python 2
 
 Running mobile tests
 ~~~~~~~~~~~~~~~~~~~
