@@ -24,4 +24,5 @@ class SeleniumTestCase(test_cases.SeleniumTestCase):
 
     def setUp(self):
         self.config_files.set_config_properties_filenames('properties.cfg', 'local-properties.cfg')
+        self.config_files.set_visual_baseline_directory('resources/baseline')
         super(SeleniumTestCase, self).setUp()

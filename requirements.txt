@@ -1,6 +1,6 @@
 toolium~=2.0
 behave==1.2.6  # behave tests
-pytest==4.6.6  # unittests
+pytest~=6.2    # unittests
 needle==0.5.0  # visual testing
 nose==1.3.7    # unittests
 ddt==1.0.0     # data-driven tests
