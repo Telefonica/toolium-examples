@@ -22,7 +22,7 @@ from toolium.driver_wrapper import DriverWrapper
 from web_behave.pageobjects.login import LoginPageObject
 
 
-@given('the home page is open in {browser}')
+@given('the login page is open in {browser}')
 def step_impl(context, browser):
     if browser == 'browser1':
         # Use default driver

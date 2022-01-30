@@ -16,23 +16,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from selenium.webdriver.common.by import By
-
-from toolium.pageobjects.page_object import PageObject
-from toolium.pageelements import *
-from web_pytest.pageobjects.message import MessagePageObject
+from android_nose2.pageobjects.menu import MenuPageObject
+from android_nose2.pageobjects.tabs import TabsPageObject
+from android_nose2.test_cases import AndroidTestCase
 
 
-class SecureAreaPageObject(PageObject):
-    message = MessagePageObject()
-    logout_button = Button(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]")
+class Tabs(AndroidTestCase):
+    def test_change_tab(self):
+        # Open tabs activity
+        MenuPageObject().open_option('Views').open_option('Tabs').open_option('1. Content By Id')
+        tabs_page = TabsPageObject()
 
-    def logout(self):
-        """ Log out of secure area
+        # Check that the first tab is open
+        assert 'tab1' == tabs_page.content1.text
 
-        :returns: login page object instance
-        """
-        from web_pytest.pageobjects.login import LoginPageObject
-
-        self.logout_button.click()
-        return LoginPageObject(self.driver_wrapper).wait_until_loaded()
+        # Open second tab and check content
+        tabs_page.tab2.click()
+        assert 'tab2' == tabs_page.content2.text

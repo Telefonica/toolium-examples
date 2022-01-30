@@ -16,23 +16,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from selenium.webdriver.common.by import By
-
-from toolium.pageobjects.page_object import PageObject
-from toolium.pageelements import *
-from web_pytest.pageobjects.message import MessagePageObject
+from ios_nose2.pageobjects.calc import CalcPageObject
+from ios_nose2.test_cases import IosTestCase
 
 
-class SecureAreaPageObject(PageObject):
-    message = MessagePageObject()
-    logout_button = Button(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]")
+class IosTestApp(IosTestCase):
+    def test_sum(self):
+        first_number = 2
+        second_number = 3
 
-    def logout(self):
-        """ Log out of secure area
+        # Sum numbers
+        calc = CalcPageObject()
+        calc.sum(first_number, second_number)
 
-        :returns: login page object instance
-        """
-        from web_pytest.pageobjects.login import LoginPageObject
-
-        self.logout_button.click()
-        return LoginPageObject(self.driver_wrapper).wait_until_loaded()
+        # Check expected result
+        assert first_number + second_number == calc.get_sum_result(), "Wrong sum"

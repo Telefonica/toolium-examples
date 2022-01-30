@@ -18,21 +18,21 @@ limitations under the License.
 
 from selenium.webdriver.common.by import By
 
-from toolium.pageobjects.page_object import PageObject
-from toolium.pageelements import *
-from web_pytest.pageobjects.message import MessagePageObject
+from ios_nose2.test_cases import IosHybridTestCase
 
 
-class SecureAreaPageObject(PageObject):
-    message = MessagePageObject()
-    logout_button = Button(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]")
+class IosHybrid(IosHybridTestCase):
+    def test_search_employees(self):
+        search_letter = 'j'
+        expected_employees = 5
 
-    def logout(self):
-        """ Log out of secure area
+        # Switch to webview context
+        self.utils.switch_to_first_webview_context()
 
-        :returns: login page object instance
-        """
-        from web_pytest.pageobjects.login import LoginPageObject
+        # Search employees that starts with selected letter
+        input_text = self.utils.wait_until_element_visible((By.TAG_NAME, 'input'))
+        input_text.send_keys(search_letter)
 
-        self.logout_button.click()
-        return LoginPageObject(self.driver_wrapper).wait_until_loaded()
+        # Count employees
+        employees = self.driver.find_elements(By.TAG_NAME, 'li')
+        assert expected_employees == len(employees), 'Wrong number of employees'

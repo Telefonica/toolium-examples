@@ -21,7 +21,7 @@ from behave import given, when, then
 from web_behave.pageobjects.login import LoginPageObject
 
 
-@given('the home page is open')
+@given('the login page is open')
 def step_impl(context):
     context.current_page = LoginPageObject()
     context.current_page.open()
@@ -38,6 +38,7 @@ def step_impl(context):
     context.current_page = context.current_page.logout()
 
 
-@then('the message "{message}" is shown')
-def step_impl(context, message):
-    assert message in context.current_page.message.get_message()
+@then('the message "{expected_message}" is shown')
+def step_impl(context, expected_message):
+    message = context.current_page.message.get_message()
+    assert expected_message in message, f'Expected message "{expected_message}" not found in message field: {message}'
