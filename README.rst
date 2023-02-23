@@ -64,7 +64,7 @@ Running mobile tests
 ~~~~~~~~~~~~~~~~~~~
 
 By default, mobile tests are configured to run against a local Appium server, so
-`Appium <http://appium.io/slate/en/master/?ruby#setting-up-appium>`_ must be installed, configured and started before
+`Appium <https://appium.github.io/appium/docs/en/2.0>`_ must be installed, configured and started before
 executing tests.
 
 **/android**

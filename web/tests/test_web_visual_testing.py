@@ -70,9 +70,9 @@ class Login(SeleniumTestCase):
         login_page.login_button.assert_screenshot('login_submit_button')
 
         # Assert the full screen with a non-related baseline, it will generate an error in visual testing report
-        self.assert_full_screenshot('login_form_no_password')
+        self.assert_full_screenshot('login_form_old_version')
         # Assert a web element with a different size baseline image, it will generate an error in visual testing report
-        self.assert_screenshot(login_page.login_button, 'login_form')
+        self.assert_screenshot(login_page.login_button, 'login_submit_button_old_version')
 
         # Login and check welcome message
         secure_area = login_page.login(user)
