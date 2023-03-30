@@ -56,3 +56,6 @@ class Login(TestCase):
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
         message = self.driver.find_element(By.ID, 'flash').text.splitlines()[0]
         assert expected_logout_message in message
+
+    # Add local attribute to allow skiping it in CI, it can only be executed locally
+    test_successful_login_logout.local = 1
