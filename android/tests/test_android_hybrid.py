@@ -16,7 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from nose.tools import assert_equal
 from selenium.webdriver.common.by import By
 
 from android.test_cases import AndroidHybridTestCase
@@ -36,4 +35,4 @@ class Hybrid(AndroidHybridTestCase):
 
         # Count employees
         employees = self.driver.find_elements(By.TAG_NAME, 'li')
-        assert_equal(expected_employees, len(employees), 'Wrong number of employees')
+        assert expected_employees == len(employees), 'Wrong number of employees'

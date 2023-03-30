@@ -1,5 +1,5 @@
 toolium~=3.0.0a2
 behave==1.2.6  # behave tests
 pytest==7.2    # pytests tests
-nose2==0.12.0  # nose tests
-ddt==1.6.0     # data-driven in nose tests
+nose2==0.12.0  # nose2 tests
+ddt==1.6.0     # data-driven in nose2 tests

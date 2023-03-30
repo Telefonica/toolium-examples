@@ -18,15 +18,10 @@ limitations under the License.
 
 from unittest import TestCase
 
-from nose.plugins.attrib import attr
-from nose.tools import assert_in
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
-# TODO: Configure CHROME_DRIVER_PATH with your chrome driver local path
-CHROME_DRIVER_PATH = "C:\\Drivers\\chromedriver.exe"
 
 
 class Login(TestCase):
@@ -34,14 +29,13 @@ class Login(TestCase):
 
     def setUp(self):
         # Create a new chrome driver before each test
-        self.driver = webdriver.Chrome(CHROME_DRIVER_PATH)
+        self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(5)
 
     def tearDown(self):
         # Close driver and browser
         self.driver.quit()
 
-    @attr('skip')
     def test_successful_login_logout(self):
         user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
         expected_login_message = "You logged into a secure area!"
@@ -55,10 +49,10 @@ class Login(TestCase):
         self.driver.find_element_by_id('password').send_keys(user['password'])
         self.driver.find_element_by_xpath("//form[@id='login']/button").click()
         message = self.driver.find_element_by_id('flash').text.splitlines()[0]
-        assert_in(expected_login_message, message)
+        assert expected_login_message in message
 
         # Logout and check logout message
         self.driver.find_element_by_xpath("//div[@id='content']//a[contains(@class,'button')]").click()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
         message = self.driver.find_element_by_id('flash').text.splitlines()[0]
-        assert_in(expected_logout_message, message)
+        assert expected_logout_message in message

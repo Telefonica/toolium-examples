@@ -19,7 +19,6 @@ limitations under the License.
 from unittest import TestCase
 
 from appium.webdriver.webdriver import WebDriver
-from nose.tools import assert_equal
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support import expected_conditions as EC
@@ -61,4 +60,4 @@ class IosTestApp(TestCase):
 
         # Check expected result
         result = int(self.driver.find_element_by_xpath("//UIAStaticText[1]").text)
-        assert_equal(first_number + second_number, result, "Wrong sum")
+        assert first_number + second_number == result, "Wrong sum"

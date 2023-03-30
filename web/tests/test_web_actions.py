@@ -16,7 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from nose.tools import assert_equal
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
@@ -34,7 +33,7 @@ class Actions(SeleniumTestCase):
 
         # Check the new element
         caption2 = self.driver.find_element_by_xpath("//div[@class='figure'][2]/div[@class='figcaption']/h5")
-        assert_equal(caption2.text, 'name: user2')
+        assert caption2.text == 'name: user2'
 
     def test_keyboard_open_tab(self):
         # Open url

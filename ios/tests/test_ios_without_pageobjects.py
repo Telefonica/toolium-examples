@@ -16,7 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from nose.tools import assert_equal
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -40,4 +39,4 @@ class IosTestApp(IosTestCase):
 
         # Check expected result
         result = int(self.driver.find_element_by_xpath("//XCUIElementTypeStaticText[1]").text)
-        assert_equal(first_number + second_number, result, "Wrong sum")
+        assert first_number + second_number == result, "Wrong sum"

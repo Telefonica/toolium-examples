@@ -19,7 +19,6 @@ limitations under the License.
 from unittest import TestCase
 
 from appium.webdriver.webdriver import WebDriver
-from nose.tools import assert_equal
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
@@ -54,9 +53,9 @@ class Tabs(TestCase):
 
         # Check that the first tab is open
         content1 = self.driver.find_element_by_id('io.appium.android.apis:id/view1')
-        assert_equal('tab1', content1.text)
+        assert 'tab1' == content1.text
 
         # Open second tab and check content
         self.driver.find_element_by_xpath('(//android.widget.TabWidget//android.widget.TextView)[2]').click()
         content2 = self.driver.find_element_by_id('io.appium.android.apis:id/view2')
-        assert_equal('tab2', content2.text)
+        assert 'tab2' == content2.text
