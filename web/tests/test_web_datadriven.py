@@ -17,7 +17,6 @@ limitations under the License.
 """
 
 from ddt import ddt, data, file_data
-from nose.tools import assert_in
 
 from web.pageobjects.login import LoginPageObject
 from web.test_cases import SeleniumTestCase
@@ -37,12 +36,13 @@ class Login(SeleniumTestCase):
         """
         login_page = LoginPageObject().open()
         login_page.login(user)
-        assert_in(user['expected_message'], login_page.message.get_message())
+        assert user['expected_message'] in login_page.message.get_message()
 
     @data(*users_dict)
     def test_wrong_login_dict(self, user):
         self.common_wrong_login(user)
 
     @file_data('datadriven_users.json')
-    def test_wrong_login_file(self, user):
+    def test_wrong_login_file(self, username, password, expected_message):
+        user = {'username': username, 'password': password, 'expected_message': expected_message}
         self.common_wrong_login(user)

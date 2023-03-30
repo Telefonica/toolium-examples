@@ -16,8 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from nose.tools import assert_equal
-
 from android.pageobjects.menu import MenuPageObject
 from android.pageobjects.tabs import TabsPageObject
 from android.test_cases import AndroidTestCase
@@ -30,8 +28,8 @@ class Tabs(AndroidTestCase):
         tabs_page = TabsPageObject()
 
         # Check that the first tab is open
-        assert_equal('tab1', tabs_page.content1.text)
+        assert 'tab1' == tabs_page.content1.text
 
         # Open second tab and check content
         tabs_page.tab2.click()
-        assert_equal('tab2', tabs_page.content2.text)
+        assert 'tab2' == tabs_page.content2.text

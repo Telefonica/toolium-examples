@@ -16,8 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from nose.tools import assert_equal, assert_is_not_none
-
 from web.pageobjects.tables import TablesPageObject
 from web.test_cases import SeleniumTestCase
 
@@ -39,9 +37,9 @@ class Tables(SeleniumTestCase):
                 break
 
         # Check user data
-        assert_is_not_none(found_row, 'User {} not found'.format(user['last_name']))
-        assert_equal(found_row.last_name.text, user['last_name'])
-        assert_equal(found_row.first_name.text, user['first_name'])
-        assert_equal(found_row.email.text, user['email'])
-        assert_equal(found_row.due.text, user['due'])
-        assert_equal(found_row.web.text, user['web'])
+        assert found_row is not None, 'User {} not found'.format(user['last_name'])
+        assert found_row.last_name.text == user['last_name']
+        assert found_row.first_name.text == user['first_name']
+        assert found_row.email.text == user['email']
+        assert found_row.due.text == user['due']
+        assert found_row.web.text == user['web']

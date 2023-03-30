@@ -16,8 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from nose.tools import assert_equal
-
 from android.test_cases import AndroidTestCase
 
 
@@ -34,9 +32,9 @@ class Tabs(AndroidTestCase):
 
         # Check that the first tab is open
         content1 = self.driver.find_element_by_id('io.appium.android.apis:id/view1')
-        assert_equal('tab1', content1.text)
+        assert 'tab1' == content1.text
 
         # Open second tab and check content
         self.driver.find_element_by_xpath('(//android.widget.TabWidget//android.widget.TextView)[2]').click()
         content2 = self.driver.find_element_by_id('io.appium.android.apis:id/view2')
-        assert_equal('tab2', content2.text)
+        assert 'tab2' == content2.text

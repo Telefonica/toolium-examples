@@ -16,8 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from nose.tools import assert_in
-
 from web.pageobjects.login import LoginPageObject
 from web.test_cases import SeleniumTestCase
 from selenium.webdriver.common.by import By
@@ -38,12 +36,12 @@ class Login(SeleniumTestCase):
 
         # Login and check welcome message
         secure_area = login_page.login(user)
-        assert_in(expected_login_message, secure_area.message.get_message())
+        assert expected_login_message in secure_area.message.get_message()
         self.assert_full_screenshot('login_secure_area')
 
         # Logout and check logout message
         login_page = secure_area.logout()
-        assert_in(expected_logout_message, login_page.message.get_message())
+        assert expected_logout_message in login_page.message.get_message()
         self.assert_full_screenshot('login_logout')
 
     def test_successful_login_logout_visualtesting_examples(self):
@@ -70,13 +68,13 @@ class Login(SeleniumTestCase):
         login_page.login_button.assert_screenshot('login_submit_button')
 
         # Assert the full screen with a non-related baseline, it will generate an error in visual testing report
-        self.assert_full_screenshot('login_form_no_password')
+        self.assert_full_screenshot('login_form_old_version')
         # Assert a web element with a different size baseline image, it will generate an error in visual testing report
-        self.assert_screenshot(login_page.login_button, 'login_form')
+        self.assert_screenshot(login_page.login_button, 'login_submit_button_old_version')
 
         # Login and check welcome message
         secure_area = login_page.login(user)
-        assert_in(expected_login_message, secure_area.message.get_message())
+        assert expected_login_message in secure_area.message.get_message()
 
         # Assert the full screen
         self.assert_full_screenshot('login_secure_area')
@@ -85,7 +83,7 @@ class Login(SeleniumTestCase):
 
         # Logout and check logout message
         login_page = secure_area.logout()
-        assert_in(expected_logout_message, login_page.message.get_message())
+        assert expected_logout_message in login_page.message.get_message()
 
         # Assert the full screen
         self.assert_full_screenshot('login_logout')

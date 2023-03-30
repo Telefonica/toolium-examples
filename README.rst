@@ -19,29 +19,22 @@ highly recommendable to use a virtualenv.
 Running Tests
 -------------
 
-Each folder contains a sample project to test web, Android or iOS applications using nose, behave or pytest to execute
+Each folder contains a sample project to test web, Android or iOS applications using nose2, behave or pytest to execute
 them.
 
 Running web tests
 ~~~~~~~~~~~~~~~~~
 
-By default, web tests are configured to run in chrome locally, so chrome must be installed in your machine and the
-chrome driver must be downloaded and configured:
-
-- Download `chromedriver_*.zip <http://chromedriver.storage.googleapis.com/index.html>`_
-- Unzip file and save the executable in a local folder
-- Configure driver path in *[Driver]* section in `web[_pytest|_behave]/conf/properties.cfg` file ::
-
-    [Driver]
-    chrome_driver_path: C:\Drivers\chromedriver.exe
+By default, web tests are configured to run in chrome locally, so chrome must be installed in your machine.
+Selenium 4 will download chrome driver automatically when tests are executed.
 
 **/web**
 
-To run web tests with nose, excluding skipped tests:
+To run web tests with nose2, excluding skipped tests:
 
 .. code:: console
 
-    $ nosetests web -a '!skip'
+    $ nose2 web
 
 **/web_pytest**
 
@@ -64,28 +57,28 @@ Running mobile tests
 ~~~~~~~~~~~~~~~~~~~
 
 By default, mobile tests are configured to run against a local Appium server, so
-`Appium <http://appium.io/slate/en/master/?ruby#setting-up-appium>`_ must be installed, configured and started before
+`Appium <https://appium.github.io/appium/docs/en/2.0>`_ must be installed, configured and started before
 executing tests.
 
 **/android**
 
 Android tests need an Android Emulator or a plugged Android device.
 
-To run Android tests with nose:
+To run Android tests with nose2:
 
 .. code:: console
 
-    $ nosetests android
+    $ nose2 android
 
 **/ios**
 
 iOS tests are configured to run on iOS Simulator.
 
-To run iOS tests with nose:
+To run iOS tests with nose2:
 
 .. code:: console
 
-    $ nosetests ios
+    $ nose2 ios
 
 **/android_behave**
 

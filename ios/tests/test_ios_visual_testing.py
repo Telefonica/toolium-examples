@@ -16,8 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from nose.tools import assert_equal
-
 from ios.pageobjects.calc import CalcPageObject
 from ios.test_cases import IosTestCase
 
@@ -32,5 +30,5 @@ class IosTestApp(IosTestCase):
         calc.sum(first_number, second_number)
 
         # Check expected result
-        assert_equal(first_number + second_number, calc.get_sum_result(), "Wrong sum")
+        assert first_number + second_number == calc.get_sum_result(), "Wrong sum"
         self.assert_full_screenshot('Sum', exclude_elements=[calc.status_bar])
