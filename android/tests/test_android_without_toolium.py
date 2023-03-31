@@ -20,6 +20,7 @@ from unittest import TestCase
 
 from appium.webdriver.webdriver import WebDriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.by import By
 
 
 class Tabs(TestCase):
@@ -52,10 +53,10 @@ class Tabs(TestCase):
         self.driver.find_element_by_android_uiautomator(option_locator.format('1. Content By Id')).click()
 
         # Check that the first tab is open
-        content1 = self.driver.find_element_by_id('io.appium.android.apis:id/view1')
+        content1 = self.driver.find_element(By.ID, 'io.appium.android.apis:id/view1')
         assert 'tab1' == content1.text
 
         # Open second tab and check content
-        self.driver.find_element_by_xpath('(//android.widget.TabWidget//android.widget.TextView)[2]').click()
-        content2 = self.driver.find_element_by_id('io.appium.android.apis:id/view2')
+        self.driver.find_element(By.XPATH, '(//android.widget.TabWidget//android.widget.TextView)[2]').click()
+        content2 = self.driver.find_element(By.ID, 'io.appium.android.apis:id/view2')
         assert 'tab2' == content2.text

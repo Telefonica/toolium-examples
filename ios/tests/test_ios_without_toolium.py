@@ -55,9 +55,9 @@ class IosTestApp(TestCase):
         first_element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//UIATextField[1]")))
         first_element.send_keys(first_number)
-        self.driver.find_element_by_xpath("//UIATextField[2]").send_keys(second_number)
+        self.driver.find_element(By.XPATH, "//UIATextField[2]").send_keys(second_number)
         self.driver.find_element_by_accessibility_id("ComputeSumButton").click()
 
         # Check expected result
-        result = int(self.driver.find_element_by_xpath("//UIAStaticText[1]").text)
+        result = int(self.driver.find_element(By.XPATH, "//UIAStaticText[1]").text)
         assert first_number + second_number == result, "Wrong sum"
