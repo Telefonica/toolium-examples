@@ -30,7 +30,7 @@ Selenium 4 will download chrome driver automatically when tests are executed.
 
 **/web**
 
-To run web tests with nose2, excluding skipped tests:
+To run web tests with nose2:
 
 .. code:: console
 
