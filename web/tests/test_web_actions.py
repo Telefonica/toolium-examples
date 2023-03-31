@@ -20,6 +20,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
 from web.test_cases import SeleniumTestCase
+from selenium.webdriver.common.by import By
 
 
 class Actions(SeleniumTestCase):
@@ -28,11 +29,11 @@ class Actions(SeleniumTestCase):
         self.driver.get('{}/hovers'.format(self.config.get('Test', 'url')))
 
         # Move mouse over second image
-        image2 = self.driver.find_element_by_xpath("//div[@class='figure'][2]/img")
+        image2 = self.driver.find_element(By.XPATH, "//div[@class='figure'][2]/img")
         ActionChains(self.driver).move_to_element(image2).perform()
 
         # Check the new element
-        caption2 = self.driver.find_element_by_xpath("//div[@class='figure'][2]/div[@class='figcaption']/h5")
+        caption2 = self.driver.find_element(By.XPATH, "//div[@class='figure'][2]/div[@class='figcaption']/h5")
         assert caption2.text == 'name: user2'
 
     def test_keyboard_open_tab(self):
@@ -46,4 +47,4 @@ class Actions(SeleniumTestCase):
         ActionChains(self.driver).key_down(Keys.CONTROL).send_keys(Keys.F4).key_up(Keys.CONTROL).perform()
 
         # Check that an element of the first tab is visible
-        self.driver.find_element_by_id('username')
+        self.driver.find_element(By.ID, 'username')

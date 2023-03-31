@@ -33,7 +33,7 @@ class Gestures(AndroidTestCase):
         drag_and_drop_page.drag_and_drop()
 
         # Check movement
-        result = self.driver.find_element_by_id('io.appium.android.apis:id/drag_result_text')
+        result = self.driver.find_element(By.ID, 'io.appium.android.apis:id/drag_result_text')
         assert 'Dropped!' == drag_and_drop_page.result.text
 
     def test_swipe_simple(self):

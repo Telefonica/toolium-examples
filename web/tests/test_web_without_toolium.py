@@ -45,14 +45,14 @@ class Login(TestCase):
         self.driver.get('http://the-internet.herokuapp.com/login')
 
         # Login and check welcome message
-        self.driver.find_element_by_id('username').send_keys(user['username'])
-        self.driver.find_element_by_id('password').send_keys(user['password'])
-        self.driver.find_element_by_xpath("//form[@id='login']/button").click()
-        message = self.driver.find_element_by_id('flash').text.splitlines()[0]
+        self.driver.find_element(By.ID, 'username').send_keys(user['username'])
+        self.driver.find_element(By.ID, 'password').send_keys(user['password'])
+        self.driver.find_element(By.XPATH, "//form[@id='login']/button").click()
+        message = self.driver.find_element(By.ID, 'flash').text.splitlines()[0]
         assert expected_login_message in message
 
         # Logout and check logout message
-        self.driver.find_element_by_xpath("//div[@id='content']//a[contains(@class,'button')]").click()
+        self.driver.find_element(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]").click()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
-        message = self.driver.find_element_by_id('flash').text.splitlines()[0]
+        message = self.driver.find_element(By.ID, 'flash').text.splitlines()[0]
         assert expected_logout_message in message
