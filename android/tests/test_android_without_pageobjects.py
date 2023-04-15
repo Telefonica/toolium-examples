@@ -17,7 +17,7 @@ limitations under the License.
 """
 
 from android.test_cases import AndroidTestCase
-from selenium.webdriver.common.by import By
+from appium.webdriver.common.appiumby import AppiumBy
 
 class Tabs(AndroidTestCase):
     """This is the same test as test_android.py but without using page objects"""
@@ -26,15 +26,15 @@ class Tabs(AndroidTestCase):
         # Open tabs activity
         option_locator = 'new UiScrollable(new UiSelector().scrollable(true).instance(0))' \
                          '.scrollIntoView(new UiSelector().text("{}").instance(0));'
-        self.driver.find_element_by_android_uiautomator(option_locator.format('Views')).click()
-        self.driver.find_element_by_android_uiautomator(option_locator.format('Tabs')).click()
-        self.driver.find_element_by_android_uiautomator(option_locator.format('1. Content By Id')).click()
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, option_locator.format('Views')).click()
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, option_locator.format('Tabs')).click()
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, option_locator.format('1. Content By Id')).click()
 
         # Check that the first tab is open
-        content1 = self.driver.find_element(By.ID, 'io.appium.android.apis:id/view1')
+        content1 = self.driver.find_element(AppiumBy.ID, 'io.appium.android.apis:id/view1')
         assert 'tab1' == content1.text
 
         # Open second tab and check content
-        self.driver.find_element(By.XPATH, '(//android.widget.TabWidget//android.widget.TextView)[2]').click()
-        content2 = self.driver.find_element(By.ID, 'io.appium.android.apis:id/view2')
+        self.driver.find_element(AppiumBy.XPATH, '(//android.widget.TabWidget//android.widget.TextView)[2]').click()
+        content2 = self.driver.find_element(AppiumBy.ID, 'io.appium.android.apis:id/view2')
         assert 'tab2' == content2.text

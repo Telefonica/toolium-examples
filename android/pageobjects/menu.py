@@ -16,7 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from appium.webdriver.common.mobileby import MobileBy
+from appium.webdriver.common.appiumby import AppiumBy
 
 from toolium.pageobjects.page_object import PageObject
 
@@ -31,5 +31,5 @@ class MenuPageObject(PageObject):
         :param option: str with menu option
         :returns: this page object instance
         """
-        self.driver.find_element(MobileBy.ANDROID_UIAUTOMATOR, self.option_locator.format(option)).click()
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, self.option_locator.format(option)).click()
         return self
