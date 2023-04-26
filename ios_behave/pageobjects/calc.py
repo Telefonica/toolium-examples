@@ -16,19 +16,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from selenium.webdriver.common.by import By
-from appium.webdriver.common.mobileby import MobileBy
+from appium.webdriver.common.appiumby import AppiumBy
 
 from toolium.pageobjects.page_object import PageObject
 from toolium.pageelements import *
 
 
 class CalcPageObject(PageObject):
-    first_op = InputText(By.XPATH, '//XCUIElementTypeTextField[1]')
-    second_op = InputText(By.XPATH, '//XCUIElementTypeTextField[2]')
-    compute = Button(MobileBy.ACCESSIBILITY_ID, 'ComputeSumButton')
-    result = Text(By.XPATH, '//XCUIElementTypeStaticText[1]')
-    status_bar = PageElement(By.XPATH, '//XCUIElementTypeStatusBar[1]')
+    first_op = InputText(AppiumBy.XPATH, '//XCUIElementTypeTextField[1]')
+    second_op = InputText(AppiumBy.XPATH, '//XCUIElementTypeTextField[2]')
+    compute = Button(AppiumBy.ACCESSIBILITY_ID, 'ComputeSumButton')
+    result = Text(AppiumBy.XPATH, '//XCUIElementTypeStaticText[1]')
+    status_bar = PageElement(AppiumBy.XPATH, '//XCUIElementTypeStatusBar[1]')
 
     def sum(self, first_number, second_number):
         """Add two numbers

@@ -18,9 +18,9 @@ limitations under the License.
 
 from unittest import TestCase
 
-from appium.webdriver.webdriver import WebDriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from appium import webdriver
+from appium.options.common.base import AppiumOptions
+from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -29,18 +29,22 @@ class IosTestApp(TestCase):
     """This is the same test as test_ios.py but without using Toolium"""
 
     def setUp(self):
-        server_url = 'http://127.0.0.1:4723/wd/hub'
+        server_url = 'http://127.0.0.1:4723'
         app = 'https://github.com/appium/javascript-workshop/blob/master/apps/TestApp7.1.app.zip?raw=true&fake=.zip'
 
-        capabilities = DesiredCapabilities.IPHONE
-        capabilities['automationName'] = 'XCUITest'
-        capabilities['platformName'] = 'iOS'
-        capabilities['deviceName'] = 'iPhone 7'
-        capabilities['platformVersion'] = '10.0'
-        capabilities['browserName'] = ''
-        capabilities['app'] = app
+        capabilities = {
+            'automationName': 'XCUITest',
+            'platformName': 'iOS',
+            'platformVersion': '10.0',
+            'browserName': '',
+            'deviceName': 'iPhone 7',
+            'app': app,
+        }
+        options = AppiumOptions()
+        options.load_capabilities(capabilities)
+
         # Create a new appium driver before each test
-        self.driver = WebDriver(command_executor=server_url, desired_capabilities=capabilities)
+        self.driver = webdriver.Remote(command_executor=server_url, options=options)
         self.driver.implicitly_wait(5)
 
     def tearDown(self):
@@ -53,11 +57,11 @@ class IosTestApp(TestCase):
 
         # Input numbers and click button
         first_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//UIATextField[1]")))
+            EC.presence_of_element_located((AppiumBy.XPATH, "//UIATextField[1]")))
         first_element.send_keys(first_number)
-        self.driver.find_element(By.XPATH, "//UIATextField[2]").send_keys(second_number)
-        self.driver.find_element_by_accessibility_id("ComputeSumButton").click()
+        self.driver.find_element(AppiumBy.XPATH, "//UIATextField[2]").send_keys(second_number)
+        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "ComputeSumButton").click()
 
         # Check expected result
-        result = int(self.driver.find_element(By.XPATH, "//UIAStaticText[1]").text)
+        result = int(self.driver.find_element(AppiumBy.XPATH, "//UIAStaticText[1]").text)
         assert first_number + second_number == result, "Wrong sum"

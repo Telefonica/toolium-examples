@@ -98,20 +98,20 @@ To run behave iOS tests:
 
 **/mobile_behave**
 
-This folder contains a behave test that could be executed either in Android or iOS depending on *Config_environment*
+This folder contains a behave test that could be executed either in Android or iOS depending on *TOOLIUM_CONFIG_ENVIRONMENT*
 behave user property.
 
 To run behave test in Android:
 
 .. code:: console
 
-    $ behave mobile_behave -D Config_environment=android
+    $ behave mobile_behave -D TOOLIUM_CONFIG_ENVIRONMENT=android
 
 To run behave test in iOS:
 
 .. code:: console
 
-    $ behave mobile_behave -D Config_environment=ios
+    $ behave mobile_behave -D TOOLIUM_CONFIG_ENVIRONMENT=ios
 
 **/web_behave**
 
@@ -122,13 +122,13 @@ To run behave web tests in an Android device:
 
 .. code:: console
 
-    $ behave web_behave/features/login.feature -D Config_environment=android
+    $ behave web_behave/features/login.feature -D TOOLIUM_CONFIG_ENVIRONMENT=android
 
 To run behave web tests in an iOS device:
 
 .. code:: console
 
-    $ behave web_behave/features/login.feature -D Config_environment=ios
+    $ behave web_behave/features/login.feature -D TOOLIUM_CONFIG_ENVIRONMENT=ios
 
 Contributing
 ------------

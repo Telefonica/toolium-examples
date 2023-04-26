@@ -16,7 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from selenium.webdriver.common.by import By
+from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -32,11 +32,11 @@ class IosTestApp(IosTestCase):
 
         # Input numbers and click button
         first_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//XCUIElementTypeTextField[1]")))
+            EC.presence_of_element_located((AppiumBy.XPATH, "//XCUIElementTypeTextField[1]")))
         first_element.send_keys(first_number)
-        self.driver.find_element(By.XPATH, "//XCUIElementTypeTextField[2]").send_keys(second_number)
-        self.driver.find_element_by_accessibility_id("ComputeSumButton").click()
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeTextField[2]").send_keys(second_number)
+        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "ComputeSumButton").click()
 
         # Check expected result
-        result = int(self.driver.find_element(By.XPATH, "//XCUIElementTypeStaticText[1]").text)
+        result = int(self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeStaticText[1]").text)
         assert first_number + second_number == result, "Wrong sum"

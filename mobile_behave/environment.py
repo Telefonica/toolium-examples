@@ -28,7 +28,7 @@ def before_all(context):
     :param context: behave context
     """
     # Set Android as default environment
-    context.config.userdata.setdefault('Config_environment', 'android')
+    context.config.userdata.setdefault('TOOLIUM_CONFIG_ENVIRONMENT', 'android')
     toolium_before_all(context)
 
 
