@@ -28,13 +28,13 @@ Running web tests
 By default, web tests are configured to run in chrome locally, so chrome must be installed in your machine.
 Selenium 4 will download chrome driver automatically when tests are executed.
 
-**/web**
+**/web_behave**
 
-To run web tests with nose2:
+To run behave web tests:
 
 .. code:: console
 
-    $ nose2 web
+    $ behave web_behave
 
 **/web_pytest**
 
@@ -45,13 +45,20 @@ To run web tests with pytest:
     $ cd web_pytest
     $ python -m pytest
 
-**/web_behave**
+**/web_nose2**
 
-To run behave web tests:
+To run web tests with nose2:
 
 .. code:: console
 
-    $ behave web_behave
+    $ nose2 web_nose2
+
+These web tests can also be executed with pytest:
+
+.. code:: console
+
+    $ cd web_nose2
+    $ python -m pytest
 
 Running mobile tests
 ~~~~~~~~~~~~~~~~~~~
@@ -60,27 +67,9 @@ By default, mobile tests are configured to run against a local Appium server, so
 `Appium <https://appium.github.io/appium/docs/en/2.0>`_ must be installed, configured and started before
 executing tests.
 
-**/android**
+**/android_behave**
 
 Android tests need an Android Emulator or a plugged Android device.
-
-To run Android tests with nose2:
-
-.. code:: console
-
-    $ nose2 android
-
-**/ios**
-
-iOS tests are configured to run on iOS Simulator.
-
-To run iOS tests with nose2:
-
-.. code:: console
-
-    $ nose2 ios
-
-**/android_behave**
 
 To run behave Android tests:
 
@@ -89,6 +78,8 @@ To run behave Android tests:
     $ behave android_behave
 
 **/ios_behave**
+
+iOS tests are configured to run on iOS Simulator.
 
 To run behave iOS tests:
 
@@ -129,6 +120,22 @@ To run behave web tests in an iOS device:
 .. code:: console
 
     $ behave web_behave/features/login.feature -D TOOLIUM_CONFIG_ENVIRONMENT=ios
+
+**/android_nose2**
+
+To run Android tests with nose2:
+
+.. code:: console
+
+    $ nose2 android_nose2
+
+**/ios_nose2**
+
+To run iOS tests with nose2:
+
+.. code:: console
+
+    $ nose2 ios_nose2
 
 Contributing
 ------------

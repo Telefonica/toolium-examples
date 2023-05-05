@@ -20,6 +20,7 @@ from toolium.behave.environment import (before_all as toolium_before_all, before
                                         before_scenario as toolium_before_scenario,
                                         after_scenario as toolium_after_scenario,
                                         after_feature as toolium_after_feature, after_all as toolium_after_all)
+from toolium.config_files import ConfigFiles
 
 
 def before_all(context):
@@ -27,6 +28,8 @@ def before_all(context):
 
     :param context: behave context
     """
+    context.config_files = ConfigFiles()
+    context.config_files.set_visual_baseline_directory('resources/baseline')
     toolium_before_all(context)
 
 

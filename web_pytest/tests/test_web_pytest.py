@@ -16,7 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from web.pageobjects.login import LoginPageObject
+from web_pytest.pageobjects.login import LoginPageObject
 
 
 def test_successful_login_logout():
