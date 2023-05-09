@@ -51,7 +51,7 @@ To run web tests with nose2:
 
 .. code:: console
 
-    $ nose2 web_nose2
+    $ python -m nose2 web_nose2
 
 These web tests can also be executed with pytest:
 
@@ -127,7 +127,7 @@ To run Android tests with nose2:
 
 .. code:: console
 
-    $ nose2 android_nose2
+    $ python -m nose2 android_nose2
 
 **/ios_nose2**
 
@@ -135,7 +135,7 @@ To run iOS tests with nose2:
 
 .. code:: console
 
-    $ nose2 ios_nose2
+    $ python -m nose2 ios_nose2
 
 Contributing
 ------------
