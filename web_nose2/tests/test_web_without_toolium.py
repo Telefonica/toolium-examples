@@ -25,7 +25,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 class Login(TestCase):
-    """This is the same test as test_web.py but without using Toolium"""
+    """  This is the same test as test_web.py but without using Toolium  """
 
     def setUp(self):
         # Create a new chrome driver before each test
@@ -56,6 +56,33 @@ class Login(TestCase):
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
         message = self.driver.find_element(By.ID, 'flash').text.splitlines()[0]
         assert expected_logout_message in message
-
+    
     # Add local attribute to allow skiping it in CI, it can only be executed locally
     test_successful_login_logout.local = 1
+
+
+class WindowHandle(TestCase):
+    """This is the same test as test_web.py but without using Toolium"""
+
+    def setUp(self):
+        # Create a new chrome driver before each test
+        self.driver = webdriver.Chrome()
+        self.driver.implicitly_wait(5)
+    
+    def test_open_multiple_windows(self):
+        # Open URL
+        self.driver.get("https://seleniumhq.github.io")
+
+        # Setup wait for later
+        wait = WebDriverWait(self.driver, 10)
+
+        # Store the ID of the original window
+        original_window = self.driver.current_window_handle
+
+        # Open different window
+        self.driver.switch_to.new_window('window')
+        wait.until(EC.number_of_windows_to_be(2))
+        self.driver.get('http://the-internet.herokuapp.com')
+
+         # Check we have 2 windows
+        assert len(self.driver.window_handles) == 2
