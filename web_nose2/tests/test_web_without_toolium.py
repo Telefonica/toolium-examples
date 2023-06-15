@@ -68,6 +68,10 @@ class WindowHandle(TestCase):
         # Create a new chrome driver before each test
         self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(5)
+
+    def tearDown(self):
+        # Close driver and browser
+        self.driver.quit()
     
     def test_open_multiple_windows(self):
         # Open URL
