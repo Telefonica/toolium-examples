@@ -29,11 +29,11 @@ class Tabs(TestCase):
         server_url = 'http://127.0.0.1:4723'
 
         capabilities = {
-            'automationName': 'UiAutomator2',
             'platformName': 'Android',
-            'deviceName': 'Android Emulator',
             'browserName': '',
-            'app': 'https://github.com/appium/javascript-workshop/blob/master/apps/ApiDemos.apk?raw=true',
+            'appium:automationName': 'UiAutomator2',
+            'appium:deviceName': 'Android Emulator',
+            'appium:app': 'https://github.com/appium/javascript-workshop/blob/master/apps/ApiDemos.apk?raw=true',
         }
         options = AppiumOptions()
         options.load_capabilities(capabilities)

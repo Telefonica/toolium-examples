@@ -33,12 +33,12 @@ class IosTestApp(TestCase):
         app = 'https://github.com/appium/javascript-workshop/blob/master/apps/TestApp7.1.app.zip?raw=true&fake=.zip'
 
         capabilities = {
-            'automationName': 'XCUITest',
             'platformName': 'iOS',
-            'platformVersion': '10.0',
             'browserName': '',
-            'deviceName': 'iPhone 7',
-            'app': app,
+            'appium:automationName': 'XCUITest',
+            'appium:platformVersion': '10.0',
+            'appium:deviceName': 'iPhone 7',
+            'appium:app': app,
         }
         options = AppiumOptions()
         options.load_capabilities(capabilities)
