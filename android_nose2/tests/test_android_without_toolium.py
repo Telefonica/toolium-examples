@@ -33,7 +33,7 @@ class Tabs(TestCase):
             'browserName': '',
             'appium:automationName': 'UiAutomator2',
             'appium:deviceName': 'Android Emulator',
-            'appium:app': 'https://github.com/appium/javascript-workshop/blob/master/apps/ApiDemos.apk?raw=true',
+            'appium:app': 'https://github.com/Telefonica/toolium-examples/blob/master/resources/ApiDemos-debug.apk?raw=true',
         }
         options = AppiumOptions()
         options.load_capabilities(capabilities)
