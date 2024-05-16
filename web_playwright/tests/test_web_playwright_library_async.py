@@ -1,6 +1,6 @@
 import asyncio
 
-from playwright.async_api import Playwright, async_playwright, expect
+from playwright.async_api import Playwright, async_playwright
 
 
 async def run(playwright: Playwright) -> None:
@@ -38,4 +38,5 @@ async def main() -> None:
         await run(playwright)
 
 
-asyncio.run(main())
+# Uncomment this line to run the script, commented to avoid running it unexpectedly
+# asyncio.run(main())
