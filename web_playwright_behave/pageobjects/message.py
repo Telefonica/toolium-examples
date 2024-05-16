@@ -18,11 +18,11 @@ limitations under the License.
 
 from selenium.webdriver.common.by import By
 
-from toolium.pageelements import Text
-from toolium.pageobjects.playwright_page_object import PlaywrightPageObject
+from toolium.pageelements.playwright import Text
+from toolium.pageobjects.page_object import PageObject
 
 
-class MessagePageObject(PlaywrightPageObject):
+class MessagePageObject(PageObject):
     def init_page_elements(self):
         self.message = Text(By.ID, 'flash')
 
@@ -31,7 +31,4 @@ class MessagePageObject(PlaywrightPageObject):
 
         :returns: str with message
         """
-        # TODO: update toolium page objects to use playwright
-        text = await self.page.locator('#flash').text_content()
-        return text.splitlines()[1]
-        # return self.message.wait_until_visible(2).text.splitlines()[0]
+        return (await self.message.get_text()).splitlines()[1]

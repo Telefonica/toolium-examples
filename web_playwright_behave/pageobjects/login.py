@@ -18,25 +18,25 @@ limitations under the License.
 
 from selenium.webdriver.common.by import By
 
-from toolium.pageelements import InputText, Button
-from toolium.pageobjects.playwright_page_object import PlaywrightPageObject
+from toolium.pageelements.playwright import InputText, Button
+from toolium.pageobjects.page_object import PageObject
 from web_playwright_behave.pageobjects.message import MessagePageObject
 from web_playwright_behave.pageobjects.secure_area import SecureAreaPageObject
 
 
-class LoginPageObject(PlaywrightPageObject):
+class LoginPageObject(PageObject):
     def init_page_elements(self):
         self.username = InputText(By.ID, 'username')
         self.password = InputText(By.ID, 'password')
         self.login_button = Button(By.XPATH, "//form[@id='login']/button")
-        self.message = MessagePageObject(self.page)
+        self.message = MessagePageObject()
 
     async def open(self):
         """ Open login url in browser
 
         :returns: this page object instance
         """
-        await self.page.goto(f"{self.config.get('Test', 'url')}/login")
+        await self.driver.goto(f"{self.config.get('Test', 'url')}/login")
 
     async def login(self, user):
         """ Fill login form and submit it
@@ -45,11 +45,7 @@ class LoginPageObject(PlaywrightPageObject):
         :returns: secure area page object instance
         """
         self.logger.debug("Login with user '%s'", user['username'])
-        # TODO: update toolium page objects to use playwright
-        await self.page.locator('#username').fill(user['username'])
-        await self.page.locator('#password').fill(user['password'])
-        await self.page.locator("xpath=//form[@id='login']/button").click()
-        # self.username.text = user['username']
-        # self.password.text = user['password']
-        # await self.login_button.click()
-        return SecureAreaPageObject(self.page)
+        await self.username.fill(user['username'])
+        await self.password.fill(user['password'])
+        await self.login_button.click()
+        return SecureAreaPageObject()

@@ -18,14 +18,14 @@ limitations under the License.
 
 from selenium.webdriver.common.by import By
 
-from toolium.pageelements import Button
-from toolium.pageobjects.playwright_page_object import PlaywrightPageObject
+from toolium.pageelements.playwright import Button
+from toolium.pageobjects.page_object import PageObject
 from web_playwright_behave.pageobjects.message import MessagePageObject
 
 
-class SecureAreaPageObject(PlaywrightPageObject):
+class SecureAreaPageObject(PageObject):
     def init_page_elements(self):
-        self.message = MessagePageObject(self.page)
+        self.message = MessagePageObject()
         self.logout_button = Button(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]")
 
     async def logout(self):
@@ -35,7 +35,5 @@ class SecureAreaPageObject(PlaywrightPageObject):
         """
         from web_playwright_behave.pageobjects.login import LoginPageObject  # pylint: disable=C0415
 
-        # TODO: update toolium page objects to use playwright
-        await self.page.locator("xpath=//div[@id='content']//a[contains(@class,'button')]").click()
-        # await self.logout_button.click()
-        return LoginPageObject(self.page)
+        await self.logout_button.click()
+        return LoginPageObject()
