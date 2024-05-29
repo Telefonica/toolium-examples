@@ -1,5 +1,5 @@
 # temporal requirement until toolium 3.2.0 is published
-git+ssh://git@github.com/Telefonica/toolium@feat/initial_behave_playwright
+git+ssh://git@github.com/Telefonica/toolium@feat/playwright
 # toolium~=3.2
 behave==1.2.6  # behave tests
 pytest==7.2    # pytests tests
