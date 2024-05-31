@@ -22,8 +22,8 @@ Running Tests
 Each folder contains a sample project to test web, Android or iOS applications using nose2, behave or pytest to execute
 them.
 
-Running web tests
-~~~~~~~~~~~~~~~~~
+Running web tests using Selenium
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 By default, web tests are configured to run in chrome locally, so chrome must be installed in your machine.
 Selenium 4 will download chrome driver automatically when tests are executed.
@@ -60,8 +60,25 @@ These web tests can also be executed with pytest:
     $ cd web_nose2
     $ python -m pytest
 
+Running web tests using Playwright
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**/web_playwright**
+
+To run playwright web tests:
+
+.. code:: console
+
+    $ cd web_playwright
+    # Run playwright test integrated with pytest
+    $ python -m pytest tests/test_web_playwright_pytest.py --headed --browser chromium
+    # Run playwright test using sync library mode
+    $ python -m pytest tests/test_web_playwright_library_sync.py --headed
+    # Run playwright test using async library mode
+    $ python tests/test_web_playwright_library_async.py
+
 Running mobile tests
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 By default, mobile tests are configured to run against a local Appium server, so
 `Appium <https://appium.github.io/appium/docs/en/2.0>`_ must be installed, configured and started before
