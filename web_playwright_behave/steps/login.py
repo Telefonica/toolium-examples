@@ -24,7 +24,7 @@ from web_playwright_behave.pageobjects.login import LoginPageObject
 @given('the login page is open')
 @async_run_until_complete
 async def open_page(context):
-    context.current_page = LoginPageObject(context.page)
+    context.current_page = LoginPageObject()
     await context.current_page.open()
 
 
