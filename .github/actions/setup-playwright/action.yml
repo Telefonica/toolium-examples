@@ -1,0 +1,25 @@
+name: Setup Playwright environement
+description: Install dependencies for performing playwrighttest actions
+inputs:
+  python-version:
+    description: Python version to test
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Python ${{ inputs.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        python --version
+        python -m pip install -r requirements.txt --upgrade
+
+    - name: Install Playwright
+      shell: bash
+      run: |
+        playwright install

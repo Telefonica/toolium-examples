@@ -4,7 +4,7 @@ from playwright.async_api import Playwright, async_playwright
 
 
 async def run(playwright: Playwright) -> None:
-    browser = await playwright.chromium.launch(headless=False)
+    browser = await playwright.chromium.launch(headless=True)
     context = await browser.new_context()
     page = await context.new_page()
 
@@ -39,4 +39,4 @@ async def main() -> None:
 
 
 # Uncomment this line to run the script, commented to avoid running it unexpectedly
-# asyncio.run(main())
+asyncio.run(main())

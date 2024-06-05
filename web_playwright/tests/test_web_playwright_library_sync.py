@@ -7,7 +7,7 @@ def test_successful_login_logout():
     expected_logout_message = "You logged out of the secure area!"
 
     with sync_playwright() as p:
-        browser = p.firefox.launch(headless=False)
+        browser = p.firefox.launch(headless=True)
         page = browser.new_page()
 
         # Open url

@@ -89,3 +89,6 @@ output
 
 # Local properties files
 local-*properties.cfg
+
+# Pytests reporst
+**/test-unit-result*.xml

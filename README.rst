@@ -70,6 +70,8 @@ To run playwright web tests:
 .. code:: console
 
     $ cd web_playwright
+    # Install playwright base browsers
+    $ playwright install
     # Run playwright test integrated with pytest
     $ python -m pytest tests/test_web_playwright_pytest.py --headed --browser chromium
     # Run playwright test using sync library mode

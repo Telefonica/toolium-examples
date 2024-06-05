@@ -1,0 +1,26 @@
+name: Playwright Tests
+description: 'Install and execute playwright tests'
+inputs:
+  python-version:
+    description: Python version to test
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Playwright test with pytest for python ${{ inputs.python-version }}
+      shell: bash
+      run: |
+        cd web_playwright
+        python -m pytest tests/test_web_playwright_pytest.py --junitxml="test-result-pytest-${{ inputs.python-version }}.xml"
+        python -m pytest tests/test_web_playwright_library_sync.py --junitxml="test-result-sync-${{ inputs.python-version }}.xml"
+        python tests/test_web_playwright_library_async.py --junitxml="test-result-async-${{ inputs.python-version }}.xml"
+    - name: Test Reporter for pyhton ${{ inputs.python-version }}
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: "Playwright tests with Python ${{ inputs.python-version }} version"
+        path: web_playwright/test-result-*-${{ inputs.python-version }}.xml
+        reporter: java-junit
+        fail-on-error: true
+        fail-on-empty: false

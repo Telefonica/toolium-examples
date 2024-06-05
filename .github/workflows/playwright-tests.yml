@@ -1,0 +1,33 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Playwright Build and run tests
+
+on:
+  push:
+    branches: 
+      - master
+      - QAWTO-194/feat/enable-playwright-tests-in-actions
+  pull_request:
+    branches: master
+
+jobs:
+  build-and-test:
+    name: Playwright Build and Test (Python ${{ matrix.python-version }})
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup playwright tests ${{ matrix.python-version }}
+      uses: ./.github/actions/setup-playwright
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Playwright test with pytest ${{ matrix.python-version }}
+      uses: ./.github/actions/playwright-tests
+      with:
+        python-version: ${{ matrix.python-version }}
