@@ -63,9 +63,17 @@ These web tests can also be executed with pytest:
 Running web tests using Playwright
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+**/web_playwright_behave**
+
+To run behave web tests:
+
+.. code:: console
+
+    $ behave web_playwright_behave
+
 **/web_playwright**
 
-To run playwright web tests:
+To run playwright example web tests without using toolium:
 
 .. code:: console
 
