@@ -31,11 +31,9 @@ class IosHybrid(IosTestCase):
 
         # Switch to webview context
         self.utils.switch_to_first_webview_context()
-        self.logger.debug(f"Context: {self.driver_wrapper.driver.contexts}")    
 
         # Get title in webview
         title_text = self.utils.wait_until_element_visible((By.XPATH, '//h1'))
-        print(title_text.text)
 
         # Assert title text
         assert "This is HTML" in title_text.text, 'Title text is not correct'

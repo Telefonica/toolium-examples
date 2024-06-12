@@ -16,19 +16,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from ios_nose2.pageobjects.ui_catalog import UICatalogHome
+from ios_nose2.pageobjects.ui_catalog import UICatalogHome,UIAlertsView
 from ios_nose2.test_cases import IosTestCase
 
 
 class IosTestApp(IosTestCase):
-    def a_test_sum(self):
-        first_number = 2
-        second_number = 3
+    def test_visual(self):
+       # Open app
+        home_page = UICatalogHome()
+        home_page.alerts_view.click()
 
-        # Sum numbers
-        # calc = CalcPageObject()
-        # calc.sum(first_number, second_number)
+        # Click on Simple alert
+        alert_page = UIAlertsView()
+        alert_page.simple.click()
 
-        # # Check expected result
-        # assert first_number + second_number == calc.get_sum_result(), "Wrong sum"
-        # self.assert_full_screenshot('Sum', exclude_elements=[calc.status_bar])
+        # Check that the alert is shown
+        assert alert_page.alert.is_visible(), 'Alert is not shown'
+        self.assert_full_screenshot('Alert', threshold=0.01)
