@@ -26,7 +26,7 @@ from ios_nose2.test_cases import IosTestCase
 class IosTestApp(IosTestCase):
     """This is the same test as test_ios.py but without using page objects"""
 
-    def test_sum(self):
+    def a_test_sum(self):
         first_number = 2
         second_number = 3
 

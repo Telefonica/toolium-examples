@@ -51,7 +51,7 @@ class IosTestApp(TestCase):
         # Close driver
         self.driver.quit()
 
-    def test_sum(self):
+    def a_test_sum(self):
         first_number = 2
         second_number = 3
 

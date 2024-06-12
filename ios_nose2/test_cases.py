@@ -26,12 +26,3 @@ class IosTestCase(test_cases.AppiumTestCase):
         self.config_files.set_config_properties_filenames('properties.cfg', 'ios-properties.cfg',
                                                           'local-ios-properties.cfg')
         super(IosTestCase, self).setUp()
-
-
-class IosHybridTestCase(test_cases.AppiumTestCase):
-    """Test Case base class for iOS tests (hybrid app)"""
-
-    def setUp(self):
-        self.config_files.set_config_properties_filenames('properties.cfg', 'ios-hybrid-properties.cfg',
-                                                          'local-ios-properties.cfg')
-        super(IosHybridTestCase, self).setUp()
