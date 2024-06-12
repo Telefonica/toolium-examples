@@ -18,19 +18,25 @@ limitations under the License.
 
 from behave import given, when, then
 
-from ios_behave.pageobjects.calc import CalcPageObject
+from ios_behave.pageobjects.uicatalog import UICatalogHome, UIAlertsView
 
 
-@given('the calculator is open')
+@given('the UICatalog page is opened')
 def step_impl(context):
-    context.current_page = CalcPageObject()
+    context.current_page = UICatalogHome()
 
 
-@when('the user adds {first_number} and {second_number}')
-def step_impl(context, first_number, second_number):
-    context.current_page.sum(first_number, second_number)
+@when('accesses to the Alerts view page') 
+def step_impl(context):
+    context.current_page.alerts_view.click()
+    context.current_page = UIAlertsView()
 
 
-@then('the result is {expected_result}')
-def step_impl(context, expected_result):
-    assert int(expected_result) == context.current_page.get_sum_result()
+@when('clicks on the simple alert option')
+def step_impl(context):
+    context.current_page.simple.click()
+
+
+@then('the alert is displayed')
+def step_impl(context):
+    assert context.current_page.alert.is_visible(), "Alert is not displayed"
