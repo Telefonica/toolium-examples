@@ -18,21 +18,22 @@ limitations under the License.
 
 from selenium.webdriver.common.by import By
 
-from ios_nose2.test_cases import IosHybridTestCase
+from ios_nose2.pageobjects.ui_catalog import UICatalogHome, UIWebViewView
+from ios_nose2.test_cases import IosTestCase
 
 
-class IosHybrid(IosHybridTestCase):
-    def test_search_employees(self):
-        search_letter = 'j'
-        expected_employees = 5
+class IosHybrid(IosTestCase):
+    def test_webview(self):
+         # Open app
+        home_page = UICatalogHome()
+        home_page.webview_view.click()
+        web_view_page = UIWebViewView()
 
         # Switch to webview context
         self.utils.switch_to_first_webview_context()
 
-        # Search employees that starts with selected letter
-        input_text = self.utils.wait_until_element_visible((By.TAG_NAME, 'input'))
-        input_text.send_keys(search_letter)
+        # Get title in webview
+        title_text = self.utils.wait_until_element_visible((By.XPATH, '//h1'))
 
-        # Count employees
-        employees = self.driver.find_elements(By.TAG_NAME, 'li')
-        assert expected_employees == len(employees), 'Wrong number of employees'
+        # Assert title text
+        assert "This is HTML" in title_text.text, 'Title text is not correct'
