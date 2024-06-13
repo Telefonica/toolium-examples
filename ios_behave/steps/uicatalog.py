@@ -26,7 +26,7 @@ def step_impl(context):
     context.current_page = UICatalogHome()
 
 
-@when('accesses to the Alerts view page') 
+@when('navigates to the Alerts view page')
 def step_impl(context):
     context.current_page.alerts_view.click()
     context.current_page = UIAlertsView()
