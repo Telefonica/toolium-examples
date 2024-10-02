@@ -52,7 +52,6 @@ class IosTestApp(TestCase):
         self.driver.quit()
 
     def test_alert_is_shown_no_toolium(self):
-        print('Test: Alert is shown without Toolium')
         # Open alert view
         alert_view = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((AppiumBy.IOS_PREDICATE, 'label == "Alert Views"')))
