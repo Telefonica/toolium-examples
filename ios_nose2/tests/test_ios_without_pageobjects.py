@@ -26,17 +26,16 @@ from ios_nose2.test_cases import IosTestCase
 class IosTestApp(IosTestCase):
     """This is the same test as test_ios.py but without using page objects"""
 
-    def test_sum(self):
-        first_number = 2
-        second_number = 3
+    def test_alert_is_shown_no_pageobject(self):
+        # Open alert view
+        alert_view = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.IOS_PREDICATE, 'label == "Alert Views"')))
+        alert_view.click()
 
-        # Input numbers and click button
-        first_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((AppiumBy.XPATH, "//XCUIElementTypeTextField[1]")))
-        first_element.send_keys(first_number)
-        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeTextField[2]").send_keys(second_number)
-        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "ComputeSumButton").click()
+        # Click on Simple alert
+        self.driver.find_element(AppiumBy.IOS_PREDICATE, 'label == "Simple"').click()
 
         # Check expected result
-        result = int(self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeStaticText[1]").text)
-        assert first_number + second_number == result, "Wrong sum"
+        alert = self.driver.find_element(AppiumBy.CLASS_NAME, 'XCUIElementTypeAlert')
+       
+        assert alert.is_displayed(), 'Alert is not shown'
