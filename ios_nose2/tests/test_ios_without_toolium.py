@@ -29,15 +29,15 @@ class IosTestApp(TestCase):
     """This is the same test as test_ios.py but without using Toolium"""
 
     def setUp(self):
-        server_url = 'http://127.0.0.1:4723'
-        app = 'https://github.com/appium/javascript-workshop/blob/master/apps/TestApp7.1.app.zip?raw=true&fake=.zip'
+        server_url = 'http://127.0.0.1:4723/wd/hub'
+        app = 'https://github.com/appium/ios-uicatalog/blob/master/UIKitCatalog/UIKitCatalog-iphonesimulator.zip?raw=true'
 
         capabilities = {
             'platformName': 'iOS',
             'browserName': '',
             'appium:automationName': 'XCUITest',
-            'appium:platformVersion': '10.0',
-            'appium:deviceName': 'iPhone 7',
+            'appium:platformVersion': '17.5',
+            'appium:deviceName': 'iPhone 15',
             'appium:app': app,
         }
         options = AppiumOptions()
@@ -51,17 +51,16 @@ class IosTestApp(TestCase):
         # Close driver
         self.driver.quit()
 
-    def test_sum(self):
-        first_number = 2
-        second_number = 3
+    def test_alert_is_shown_no_toolium(self):
+        # Open alert view
+        alert_view = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.IOS_PREDICATE, 'label == "Alert Views"')))
+        alert_view.click()
 
-        # Input numbers and click button
-        first_element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((AppiumBy.XPATH, "//UIATextField[1]")))
-        first_element.send_keys(first_number)
-        self.driver.find_element(AppiumBy.XPATH, "//UIATextField[2]").send_keys(second_number)
-        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "ComputeSumButton").click()
+        # Click on Simple alert
+        self.driver.find_element(AppiumBy.IOS_PREDICATE, 'label == "Simple"').click()
 
         # Check expected result
-        result = int(self.driver.find_element(AppiumBy.XPATH, "//UIAStaticText[1]").text)
-        assert first_number + second_number == result, "Wrong sum"
+        alert = self.driver.find_element(AppiumBy.CLASS_NAME, 'XCUIElementTypeAlert')
+       
+        assert alert.is_displayed(), 'Alert is not shown'

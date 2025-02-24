@@ -116,6 +116,7 @@ To run behave iOS tests:
 
 This folder contains a behave test that could be executed either in Android or iOS depending on *TOOLIUM_CONFIG_ENVIRONMENT*
 behave user property.
+This is shown just for illustrative purposes, as currently the app in the example does not work with new versions of Android or iOS.
 
 To run behave test in Android:
 
