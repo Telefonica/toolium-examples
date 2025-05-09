@@ -26,7 +26,7 @@ from web_playwright_behave.pageobjects.message import MessagePageObject
 class SecureAreaPageObject(PageObject):
     def init_page_elements(self):
         self.message = MessagePageObject()
-        self.logout_button = Button(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]")
+        self.logout_button = Button(By.XPATH, "//div[@id='content']//i[contains(@class,'icon-signout')]")
 
     async def logout(self):
         """ Log out of secure area

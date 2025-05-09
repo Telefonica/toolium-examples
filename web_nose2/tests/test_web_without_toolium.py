@@ -52,7 +52,7 @@ class Login(TestCase):
         assert expected_login_message in message
 
         # Logout and check logout message
-        self.driver.find_element(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]").click()
+        self.driver.find_element(By.XPATH, "//div[@id='content']//i[contains(@class,'icon-signout')]").click()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
         message = self.driver.find_element(By.ID, 'flash').text.splitlines()[0]
         assert expected_logout_message in message

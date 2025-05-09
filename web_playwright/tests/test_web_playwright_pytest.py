@@ -17,6 +17,6 @@ def test_successful_login_logout(page: Page):
     assert expected_login_message in message
 
     # Logout and check logout message
-    page.locator("xpath=//div[@id='content']//a[contains(@class,'button')]").click()
+    page.locator("xpath=//div[@id='content']//i[contains(@class,'icon-signout')]").click()
     message = page.locator('id=flash').inner_text().splitlines()[0]
     assert expected_logout_message in message

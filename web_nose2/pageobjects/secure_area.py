@@ -25,7 +25,7 @@ from web_nose2.pageobjects.message import MessagePageObject
 
 class SecureAreaPageObject(PageObject):
     message = MessagePageObject()
-    logout_button = Button(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]")
+    logout_button = Button(By.XPATH, "//div[@id='content']//i[contains(@class,'icon-signout')]")
 
     def logout(self):
         """ Log out of secure area

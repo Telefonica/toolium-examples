@@ -24,7 +24,7 @@ async def run(playwright: Playwright) -> None:
     assert expected_login_message in message
 
     # Logout and check logout message
-    await page.locator("xpath=//div[@id='content']//a[contains(@class,'button')]").click()
+    await page.locator("xpath=//div[@id='content']//i[contains(@class,'icon-signout')]").click()
     message = await page.locator('id=flash').inner_text()
     message = message.splitlines()[0]
     assert expected_logout_message in message
