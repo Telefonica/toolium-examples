@@ -82,6 +82,7 @@ output
 .eggs
 .tox
 .env
+.autoenv
 
 # Database
 *.sqlite3
