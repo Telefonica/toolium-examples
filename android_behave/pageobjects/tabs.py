@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -17,9 +16,8 @@ limitations under the License.
 """
 
 from selenium.webdriver.common.by import By
-
+from toolium.pageelements import Button, PageElement, Text
 from toolium.pageobjects.page_object import PageObject
-from toolium.pageelements import *
 
 
 class TabsPageObject(PageObject):

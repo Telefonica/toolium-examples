@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -17,13 +16,14 @@ limitations under the License.
 """
 
 from appium.webdriver.common.appiumby import AppiumBy
-
 from toolium.pageobjects.page_object import PageObject
 
 
 class MenuPageObject(PageObject):
-    option_locator = 'new UiScrollable(new UiSelector().scrollable(true).instance(0))' \
-                     '.scrollIntoView(new UiSelector().text("{}").instance(0));'
+    option_locator = (
+        'new UiScrollable(new UiSelector().scrollable(true).instance(0))'
+        '.scrollIntoView(new UiSelector().text("{}").instance(0));'
+    )
 
     def open_option(self, option):
         """Search a menu option and click on it

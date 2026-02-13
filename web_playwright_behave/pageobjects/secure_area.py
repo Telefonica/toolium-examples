@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2024 Telefónica Innovación Digital, S.L.
 This file is part of Toolium.
 
@@ -17,9 +16,9 @@ limitations under the License.
 """
 
 from selenium.webdriver.common.by import By
-
 from toolium.pageelements.playwright import Button
 from toolium.pageobjects.page_object import PageObject
+
 from web_playwright_behave.pageobjects.message import MessagePageObject
 
 
@@ -29,7 +28,7 @@ class SecureAreaPageObject(PageObject):
         self.logout_button = Button(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]")
 
     async def logout(self):
-        """ Log out of secure area
+        """Log out of secure area
 
         :returns: login page object instance
         """

@@ -1,0 +1,70 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Scenario (by name)",
+      "type": "python",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "module": "behave",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "envFile": "${workspaceFolder}/.vscode/.env",
+      "args": [
+        "${file}",
+        "-n",
+        "${selectedText}"
+      ],
+      "stopOnEntry": false,
+      "justMyCode": false
+    },
+    {
+      "name": "Pytest: archivo actual",
+      "type": "python",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/web_pytest",
+      "module": "pytest",
+      "args": [
+        "${file}"
+      ],
+      "justMyCode": false
+    },
+    {
+      "name": "Pytest BDD: archivo actual",
+      "type": "python",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/web_pytest_bdd",
+      "module": "pytest",
+      "args": [
+        "${file}"
+      ],
+      "justMyCode": false
+    },
+    {
+      "name": "Playwright: archivo actual",
+      "type": "python",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/web_pytest",
+      "module": "pytest",
+      "args": [
+        "${file}",
+        "--headed",
+        "--browser",
+        "firefox"
+      ],
+      "justMyCode": false
+    },
+    {
+      "name": "Pynose2: archivo actual",
+      "type": "python",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/web_nose2",
+      "module": "pytest",
+      "args": [
+        "${file}"
+      ],
+      "justMyCode": false
+    }
+  ]
+}

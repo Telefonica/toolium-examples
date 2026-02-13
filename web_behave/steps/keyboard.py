@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2023 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,26 +15,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from behave import when, then
-
+from behave import then, when
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 
 @when('the user opens a new tab')
-def step_impl(context):
+def user_opens_new_tab(context):
     # Open a new tab (Ctrl+t)
     ActionChains(context.driver).key_down(Keys.CONTROL).send_keys('t').key_up(Keys.CONTROL).perform()
 
 
 @when('the user closes the tab')
-def step_impl(context):
+def user_closes_tab(context):
     # Close tab (Ctrl+F4)
     ActionChains(context.driver).key_down(Keys.CONTROL).send_keys(Keys.F4).key_up(Keys.CONTROL).perform()
 
 
 @then('the username field is visible')
-def step_impl(context):
+def username_field_is_visible(context):
     # Check that an element of the first tab is visible
     context.driver.find_element(By.ID, 'username')

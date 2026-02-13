@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2023 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -17,30 +16,26 @@ limitations under the License.
 """
 
 from behave import then
-
 from selenium.webdriver.common.by import By
 
 
 @then('the full screenshot is equal to "{screenshot_name}" image')
-def step_impl(context, screenshot_name):
+def full_screenshot_is_equal_to_image(context, screenshot_name):
     context.assert_full_screenshot(screenshot_name)
 
 
 @then('the full screenshot is equal to "{screenshot_name}" image excluding elements')
-def step_impl(context, screenshot_name):
+def full_screenshot_is_equal_to_image_excluding_elements(context, screenshot_name):
     excluded_elements = []
     for row in context.table:
         if row['type'] == 'element':
-            excluded_elements.append(
-                getattr(context.current_page, row['locator']))
+            excluded_elements.append(getattr(context.current_page, row['locator']))
         else:
-            excluded_elements.append(
-                (getattr(By, row['type']), row['locator']))
+            excluded_elements.append((getattr(By, row['type']), row['locator']))
 
-    context.assert_full_screenshot(
-        screenshot_name, exclude_elements=excluded_elements)
+    context.assert_full_screenshot(screenshot_name, exclude_elements=excluded_elements)
 
 
 @then('the "{element}" element screenshot is equal to "{expected_message}" image')
-def step_impl(context, element, expected_message):
+def element_screenshot_is_equal_to_image(context, element, expected_message):
     getattr(context.current_page, element).assert_screenshot(expected_message)

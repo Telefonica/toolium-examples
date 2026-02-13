@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -21,7 +20,7 @@ from unittest import TestCase
 from appium import webdriver
 from appium.options.common.base import AppiumOptions
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 
@@ -30,7 +29,9 @@ class IosTestApp(TestCase):
 
     def setUp(self):
         server_url = 'http://127.0.0.1:4723/wd/hub'
-        app = 'https://github.com/appium/ios-uicatalog/blob/master/UIKitCatalog/UIKitCatalog-iphonesimulator.zip?raw=true'
+        app = (
+            'https://github.com/appium/ios-uicatalog/blob/master/UIKitCatalog/UIKitCatalog-iphonesimulator.zip?raw=true'
+        )
 
         capabilities = {
             'platformName': 'iOS',
@@ -54,7 +55,8 @@ class IosTestApp(TestCase):
     def test_alert_is_shown_no_toolium(self):
         # Open alert view
         alert_view = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((AppiumBy.IOS_PREDICATE, 'label == "Alert Views"')))
+            expected_conditions.presence_of_element_located((AppiumBy.IOS_PREDICATE, 'label == "Alert Views"'))
+        )
         alert_view.click()
 
         # Click on Simple alert
@@ -62,5 +64,5 @@ class IosTestApp(TestCase):
 
         # Check expected result
         alert = self.driver.find_element(AppiumBy.CLASS_NAME, 'XCUIElementTypeAlert')
-       
+
         assert alert.is_displayed(), 'Alert is not shown'

@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,14 +15,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from behave import given, when, then
-
+from behave import given, then, when
 from toolium.driver_wrapper import DriverWrapper
+
 from web_behave.pageobjects.login import LoginPageObject
 
 
 @given('the login page is open in {browser}')
-def step_impl(context, browser):
+def login_page_is_open(context, browser):
     if browser == 'browser1':
         # Use default driver
         context.current_page = {'browser1': LoginPageObject()}
@@ -37,11 +36,11 @@ def step_impl(context, browser):
 
 
 @when('the user logs in with username "{username}" and password "{password}" in {browser}')
-def step_impl(context, username, password, browser):
+def user_logs_in(context, username, password, browser):
     user = {'username': username, 'password': password}
     context.current_page[browser] = context.current_page[browser].login(user)
 
 
 @then('the message "{message}" is shown in {browser}')
-def step_impl(context, message, browser):
+def message_is_shown(context, message, browser):
     assert message in context.current_page[browser].message.get_message()

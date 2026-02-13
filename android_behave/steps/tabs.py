@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,28 +15,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from behave import given, when, then
+from behave import given, then, when
 
 from android_behave.pageobjects.menu import MenuPageObject
 from android_behave.pageobjects.tabs import TabsPageObject
 
 
 @given('the menu is open')
-def step_impl(context):
+def menu_is_open(context):
     context.current_page = MenuPageObject()
 
 
 @when('the user goes to the tabs-by-id screen')
-def step_impl(context):
+def go_to_tabs_by_id_screen(context):
     context.current_page.open_option('Views').open_option('Tabs').open_option('1. Content By Id')
     context.current_page = TabsPageObject()
 
 
 @when('the user opens the second tab')
-def step_impl(context):
+def open_second_tab(context):
     context.current_page.tab2.click()
 
 
 @then('the second tab contains "{message}"')
-def step_impl(context, message):
+def second_tab_contains_message(context, message):
     assert message in context.current_page.content2.text

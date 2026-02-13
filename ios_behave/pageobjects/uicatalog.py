@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2024 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -17,19 +16,16 @@ limitations under the License.
 """
 
 from appium.webdriver.common.appiumby import AppiumBy
-
+from toolium.pageelements import Button, PageElement, Text
 from toolium.pageobjects.page_object import PageObject
-from toolium.pageelements import *
 
 
 class UICatalogHome(PageObject):
-    page_title  = Text(AppiumBy.IOS_CLASS_CHAIN, '**/XCUIElementTypeStaticText[`label == "UIKitCatalog"`]', 
-                       wait=True)
+    page_title = Text(AppiumBy.IOS_CLASS_CHAIN, '**/XCUIElementTypeStaticText[`label == "UIKitCatalog"`]', wait=True)
     alerts_view = Button(AppiumBy.IOS_PREDICATE, 'label == "Alert Views"')
 
+
 class UIAlertsView(PageObject):
-    page_title = Text(AppiumBy.IOS_CLASS_CHAIN, '**/XCUIElementTypeStaticText[`label == "Alert Views"`]', 
-                      wait=True)
+    page_title = Text(AppiumBy.IOS_CLASS_CHAIN, '**/XCUIElementTypeStaticText[`label == "Alert Views"`]', wait=True)
     simple = Button(AppiumBy.IOS_PREDICATE, 'label == "Simple"')
     alert = PageElement(AppiumBy.CLASS_NAME, 'XCUIElementTypeAlert')
-

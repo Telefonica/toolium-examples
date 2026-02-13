@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2024 Telefónica Innovación Digital, S.L.
 This file is part of Toolium.
 
@@ -17,9 +16,9 @@ limitations under the License.
 """
 
 from selenium.webdriver.common.by import By
-
-from toolium.pageelements.playwright import InputText, Button
+from toolium.pageelements.playwright import Button, InputText
 from toolium.pageobjects.page_object import PageObject
+
 from web_playwright_behave.pageobjects.message import MessagePageObject
 from web_playwright_behave.pageobjects.secure_area import SecureAreaPageObject
 
@@ -32,14 +31,14 @@ class LoginPageObject(PageObject):
         self.message = MessagePageObject()
 
     async def open(self):
-        """ Open login url in browser
+        """Open login url in browser
 
         :returns: this page object instance
         """
-        await self.driver.goto(f"{self.config.get('Test', 'url')}/login")
+        await self.driver.goto(f'{self.config.get("Test", "url")}/login')
 
     async def login(self, user):
-        """ Fill login form and submit it
+        """Fill login form and submit it
 
         :param user: dict with username and password values
         :returns: secure area page object instance

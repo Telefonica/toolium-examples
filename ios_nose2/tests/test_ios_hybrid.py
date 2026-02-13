@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -24,10 +23,10 @@ from ios_nose2.test_cases import IosTestCase
 
 class IosHybrid(IosTestCase):
     def test_webview(self):
-         # Open app
+        # Open app
         home_page = UICatalogHome()
         home_page.webview_view.click()
-        web_view_page = UIWebViewView()
+        web_view_page = UIWebViewView()  # noqa: F841
 
         # Switch to webview context
         self.utils.switch_to_first_webview_context()
@@ -36,4 +35,4 @@ class IosHybrid(IosTestCase):
         title_text = self.utils.wait_until_element_visible((By.XPATH, '//h1'))
 
         # Assert title text
-        assert "This is HTML" in title_text.text, 'Title text is not correct'
+        assert 'This is HTML' in title_text.text, 'Title text is not correct'

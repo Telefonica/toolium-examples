@@ -1,5 +1,3 @@
-import asyncio
-
 from playwright.async_api import Playwright, async_playwright
 
 
@@ -9,8 +7,8 @@ async def run(playwright: Playwright) -> None:
     page = await context.new_page()
 
     user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
-    expected_login_message = "You logged into a secure area!"
-    expected_logout_message = "You logged out of the secure area!"
+    expected_login_message = 'You logged into a secure area!'
+    expected_logout_message = 'You logged out of the secure area!'
 
     # Open url
     await page.goto('http://the-internet.herokuapp.com/login')

@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -17,7 +16,7 @@ limitations under the License.
 """
 
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 from ios_nose2.test_cases import IosTestCase
@@ -29,7 +28,8 @@ class IosTestApp(IosTestCase):
     def test_alert_is_shown_no_pageobject(self):
         # Open alert view
         alert_view = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((AppiumBy.IOS_PREDICATE, 'label == "Alert Views"')))
+            expected_conditions.presence_of_element_located((AppiumBy.IOS_PREDICATE, 'label == "Alert Views"'))
+        )
         alert_view.click()
 
         # Click on Simple alert
@@ -37,5 +37,5 @@ class IosTestApp(IosTestCase):
 
         # Check expected result
         alert = self.driver.find_element(AppiumBy.CLASS_NAME, 'XCUIElementTypeAlert')
-       
+
         assert alert.is_displayed(), 'Alert is not shown'

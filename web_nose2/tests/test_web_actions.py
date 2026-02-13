@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -17,10 +16,10 @@ limitations under the License.
 """
 
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from web_nose2.test_cases import SeleniumTestCase
-from selenium.webdriver.common.by import By
 
 
 class Actions(SeleniumTestCase):

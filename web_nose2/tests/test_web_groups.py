@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2016 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -23,8 +22,13 @@ from web_nose2.test_cases import SeleniumTestCase
 class Tables(SeleniumTestCase):
     def test_search_user(self):
         # Expected user
-        user = {'last_name': 'Doe', 'first_name': 'Jason', 'email': 'jdoe@hotmail.com', 'due': '$100.00',
-                'web': 'http://www.jdoe.com'}
+        user = {
+            'last_name': 'Doe',
+            'first_name': 'Jason',
+            'email': 'jdoe@hotmail.com',
+            'due': '$100.00',
+            'web': 'http://www.jdoe.com',
+        }
 
         # Open url
         self.driver.get('{}/tables'.format(self.config.get('Test', 'url')))

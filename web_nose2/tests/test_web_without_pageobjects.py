@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -17,7 +16,7 @@ limitations under the License.
 """
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 from web_nose2.test_cases import SeleniumTestCase
@@ -28,8 +27,8 @@ class Login(SeleniumTestCase):
 
     def test_successful_login_logout(self):
         user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
-        expected_login_message = "You logged into a secure area!"
-        expected_logout_message = "You logged out of the secure area!"
+        expected_login_message = 'You logged into a secure area!'
+        expected_logout_message = 'You logged out of the secure area!'
 
         # Open url
         self.driver.get('{}/login'.format(self.config.get('Test', 'url')))
@@ -43,6 +42,6 @@ class Login(SeleniumTestCase):
 
         # Logout and check logout message
         self.driver.find_element(By.XPATH, "//div[@id='content']//a[contains(@class,'button')]").click()
-        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'username')))
+        WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located((By.ID, 'username')))
         message = self.driver.find_element(By.ID, 'flash').text.splitlines()[0]
         assert expected_logout_message in message

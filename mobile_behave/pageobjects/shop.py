@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2016 Telefónica Investigación y Desarrollo, S.A.U.
 
 The copyright to the software program(s) is property of Telefonica I+D.
@@ -10,8 +9,7 @@ been supplied.
 """
 
 from selenium.webdriver.common.by import By
-
-from toolium.pageelements import *
+from toolium.pageelements import Buttons, Text
 from toolium.pageobjects.mobile_page_object import MobilePageObject
 
 
@@ -30,5 +28,5 @@ class AndroidShopPageObject(BaseShopPageObject):
 
 
 class IosShopPageObject(BaseShopPageObject):
-    title = Text(By.XPATH, "//XCUIElementTypeStaticText[1]")
+    title = Text(By.XPATH, '//XCUIElementTypeStaticText[1]')
     collections = Buttons(By.XPATH, '//XCUIElementTypeTable/XCUIElementTypeCell')

@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -34,7 +33,7 @@ class Gestures(AndroidTestCase):
 
         # Check movement
         result = self.driver.find_element(By.ID, 'io.appium.android.apis:id/drag_result_text')
-        assert 'Dropped!' == drag_and_drop_page.result.text
+        assert 'Dropped!' == result.text
 
     def test_swipe_simple(self):
         self.driver.swipe(50, 400, 50, 200, 500)
@@ -45,7 +44,7 @@ class Gestures(AndroidTestCase):
 
     def test_swipe_check(self):
         views_element = None
-        for i in range(10):
+        for _ in range(10):
             elements = self.driver.find_elements(By.XPATH, "//*[@text='Views']")
             if len(elements) > 0:
                 views_element = elements[0]

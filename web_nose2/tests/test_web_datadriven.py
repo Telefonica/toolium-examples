@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from ddt import ddt, data, file_data
+from ddt import data, ddt, file_data
 
 from web_nose2.pageobjects.login import LoginPageObject
 from web_nose2.test_cases import SeleniumTestCase
@@ -30,7 +29,7 @@ users_dict = (
 @ddt
 class Login(SeleniumTestCase):
     def common_wrong_login(self, user):
-        """ Try to login and check error message
+        """Try to login and check error message
 
         :param user: dict with username, password and expected message
         """
