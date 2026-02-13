@@ -18,14 +18,6 @@
       "source.organizeImports": "explicit"
     },
   },
-  "python.envFile": "${workspaceFolder}/.vscode/.env",
-  "python-envs.pythonProjects": [
-    {
-      "path": "",
-      "envManager": "ms-python.python:venv",
-      "packageManager": "ms-python.python:pip"
-    }
-  ],
   "ruff.organizeImports": true,
   "cucumberautocomplete.steps": [
     "**/steps/**/*.py",

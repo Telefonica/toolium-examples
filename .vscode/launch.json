@@ -3,14 +3,14 @@
   "configurations": [
     {
       "name": "Scenario (by name)",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "module": "behave",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
       },
-      "envFile": "${workspaceFolder}/.vscode/.env",
+      "envFile": "${workspaceFolder}/.env",
       "args": [
         "${file}",
         "-n",
@@ -20,8 +20,8 @@
       "justMyCode": false
     },
     {
-      "name": "Pytest: archivo actual",
-      "type": "python",
+      "name": "Pytest: current file",
+      "type": "debugpy",
       "request": "launch",
       "cwd": "${workspaceFolder}/web_pytest",
       "module": "pytest",
@@ -31,8 +31,8 @@
       "justMyCode": false
     },
     {
-      "name": "Pytest BDD: archivo actual",
-      "type": "python",
+      "name": "Pytest BDD: current file",
+      "type": "debugpy",
       "request": "launch",
       "cwd": "${workspaceFolder}/web_pytest_bdd",
       "module": "pytest",
@@ -42,8 +42,8 @@
       "justMyCode": false
     },
     {
-      "name": "Playwright: archivo actual",
-      "type": "python",
+      "name": "Playwright: current file",
+      "type": "debugpy",
       "request": "launch",
       "cwd": "${workspaceFolder}/web_pytest",
       "module": "pytest",
@@ -56,8 +56,8 @@
       "justMyCode": false
     },
     {
-      "name": "Pynose2: archivo actual",
-      "type": "python",
+      "name": "Pynose2: current file",
+      "type": "debugpy",
       "request": "launch",
       "cwd": "${workspaceFolder}/web_nose2",
       "module": "pytest",
