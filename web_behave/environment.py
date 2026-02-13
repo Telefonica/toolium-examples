@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,10 +15,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from toolium.behave.environment import (before_all as toolium_before_all, before_feature as toolium_before_feature,
-                                        before_scenario as toolium_before_scenario,
-                                        after_scenario as toolium_after_scenario,
-                                        after_feature as toolium_after_feature, after_all as toolium_after_all)
+from toolium.behave.environment import (
+    after_all as toolium_after_all,
+    after_feature as toolium_after_feature,
+    after_scenario as toolium_after_scenario,
+    before_all as toolium_before_all,
+    before_feature as toolium_before_feature,
+    before_scenario as toolium_before_scenario,
+)
 from toolium.config_files import ConfigFiles
 
 

@@ -3,8 +3,8 @@ from playwright.sync_api import Page
 
 def test_successful_login_logout(page: Page):
     user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
-    expected_login_message = "You logged into a secure area!"
-    expected_logout_message = "You logged out of the secure area!"
+    expected_login_message = 'You logged into a secure area!'
+    expected_logout_message = 'You logged out of the secure area!'
 
     # Open url
     page.goto('http://the-internet.herokuapp.com/login')

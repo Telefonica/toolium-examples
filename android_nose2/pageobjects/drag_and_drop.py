@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,11 +15,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-from appium.webdriver.common.touch_action import TouchAction
-
+from toolium.pageelements import PageElement, Text
 from toolium.pageobjects.page_object import PageObject
-from toolium.pageelements import *
 
 
 class DragAndDropPageObject(PageObject):
@@ -30,4 +28,4 @@ class DragAndDropPageObject(PageObject):
     result = Text(By.ID, 'io.appium.android.apis:id/drag_result_text')
 
     def drag_and_drop(self):
-        TouchAction(self.driver).long_press(self.dot3.web_element).move_to(self.dot2.web_element).release().perform()
+        ActionChains(self.driver).drag_and_drop(self.dot3.web_element, self.dot2.web_element).perform()

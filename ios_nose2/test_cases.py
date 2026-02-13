@@ -1,5 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -23,6 +22,7 @@ class IosTestCase(test_cases.AppiumTestCase):
     """Test Case base class for iOS tests"""
 
     def setUp(self):
-        self.config_files.set_config_properties_filenames('properties.cfg', 'ios-properties.cfg',
-                                                          'local-ios-properties.cfg')
-        super(IosTestCase, self).setUp()
+        self.config_files.set_config_properties_filenames(
+            'properties.cfg', 'ios-properties.cfg', 'local-ios-properties.cfg'
+        )
+        super().setUp()

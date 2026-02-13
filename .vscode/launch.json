@@ -1,0 +1,70 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Scenario (by name)",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "module": "behave",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "envFile": "${workspaceFolder}/.env",
+      "args": [
+        "${file}",
+        "-n",
+        "${selectedText}"
+      ],
+      "stopOnEntry": false,
+      "justMyCode": false
+    },
+    {
+      "name": "Pytest: current file",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/web_pytest",
+      "module": "pytest",
+      "args": [
+        "${file}"
+      ],
+      "justMyCode": false
+    },
+    {
+      "name": "Pytest BDD: current file",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/web_pytest_bdd",
+      "module": "pytest",
+      "args": [
+        "${file}"
+      ],
+      "justMyCode": false
+    },
+    {
+      "name": "Playwright: current file",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/web_pytest",
+      "module": "pytest",
+      "args": [
+        "${file}",
+        "--headed",
+        "--browser",
+        "firefox"
+      ],
+      "justMyCode": false
+    },
+    {
+      "name": "Pynose2: current file",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/web_nose2",
+      "module": "pytest",
+      "args": [
+        "${file}"
+      ],
+      "justMyCode": false
+    }
+  ]
+}

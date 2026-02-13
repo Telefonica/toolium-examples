@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,27 +15,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from behave import given, when, then
+from behave import given, then, when
 
-from ios_behave.pageobjects.uicatalog import UICatalogHome, UIAlertsView
+from ios_behave.pageobjects.uicatalog import UIAlertsView, UICatalogHome
 
 
 @given('the UICatalog page is opened')
-def step_impl(context):
+def uicatalog_page_is_opened(context):
     context.current_page = UICatalogHome()
 
 
 @when('navigates to the Alerts view page')
-def step_impl(context):
+def open_alerts_view_page(context):
     context.current_page.alerts_view.click()
     context.current_page = UIAlertsView()
 
 
 @when('clicks on the simple alert option')
-def step_impl(context):
+def clicks_on_simple_alert_option(context):
     context.current_page.simple.click()
 
 
 @then('the alert is displayed')
-def step_impl(context):
-    assert context.current_page.alert.is_visible(), "Alert is not displayed"
+def alert_is_displayed(context):
+    assert context.current_page.alert.is_visible(), 'Alert is not displayed'

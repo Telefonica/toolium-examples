@@ -1,5 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -25,4 +24,4 @@ class SeleniumTestCase(test_cases.SeleniumTestCase):
     def setUp(self):
         self.config_files.set_config_properties_filenames('properties.cfg', 'local-properties.cfg')
         self.config_files.set_visual_baseline_directory('resources/baseline')
-        super(SeleniumTestCase, self).setUp()
+        super().setUp()

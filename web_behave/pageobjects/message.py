@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -17,9 +16,8 @@ limitations under the License.
 """
 
 from selenium.webdriver.common.by import By
-
+from toolium.pageelements import Text
 from toolium.pageobjects.page_object import PageObject
-from toolium.pageelements import *
 
 
 class MessagePageObject(PageObject):
@@ -27,7 +25,7 @@ class MessagePageObject(PageObject):
         self.message = Text(By.ID, 'flash')
 
     def get_message(self):
-        """ Get first line of actual message
+        """Get first line of actual message
 
         :returns: str with message
         """

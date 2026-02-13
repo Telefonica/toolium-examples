@@ -1,5 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -23,15 +22,17 @@ class AndroidTestCase(test_cases.AppiumTestCase):
     """Test Case base class for Android tests"""
 
     def setUp(self):
-        self.config_files.set_config_properties_filenames('properties.cfg', 'android-properties.cfg',
-                                                          'local-android-properties.cfg')
-        super(AndroidTestCase, self).setUp()
+        self.config_files.set_config_properties_filenames(
+            'properties.cfg', 'android-properties.cfg', 'local-android-properties.cfg'
+        )
+        super().setUp()
 
 
 class AndroidHybridTestCase(test_cases.AppiumTestCase):
     """Test Case base class for Android tests (hybrid app)"""
 
     def setUp(self):
-        self.config_files.set_config_properties_filenames('properties.cfg', 'android-hybrid-properties.cfg',
-                                                          'local-android-properties.cfg')
-        super(AndroidHybridTestCase, self).setUp()
+        self.config_files.set_config_properties_filenames(
+            'properties.cfg', 'android-hybrid-properties.cfg', 'local-android-properties.cfg'
+        )
+        super().setUp()

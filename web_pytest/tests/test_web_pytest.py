@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2018 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -21,17 +20,17 @@ from web_pytest.pageobjects.login import LoginPageObject
 
 def test_successful_login_logout():
     user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
-    expected_login_message = "You logged into a secure area!"
-    expected_logout_message = "You logged out of the secure area!"
+    expected_login_message = 'You logged into a secure area!'
+    expected_logout_message = 'You logged out of the secure area!'
 
     # Login and check welcome message
     secure_area = LoginPageObject().open().login(user)
-    assert expected_login_message in secure_area.message.get_message(), \
-        'Expected mmessage "%s" not found in message field: %s' % (expected_login_message,
-                                                                   secure_area.message.get_message())
+    assert expected_login_message in secure_area.message.get_message(), (
+        f'Expected mmessage "{expected_login_message}" not found in message field: {secure_area.message.get_message()}'
+    )
 
     # Logout and check logout message
     login_page = secure_area.logout()
-    assert expected_logout_message in login_page.message.get_message(), \
-        'Expected mmessage "%s" not found in message field: %s' % (expected_logout_message,
-                                                                   login_page.message.get_message())
+    assert expected_logout_message in login_page.message.get_message(), (
+        f'Expected mmessage "{expected_logout_message}" not found in message field: {login_page.message.get_message()}'
+    )

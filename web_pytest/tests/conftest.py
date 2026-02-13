@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2018 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,4 +15,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from toolium.pytest_fixtures import *
+from toolium.pytest_fixtures import *  # noqa: F403

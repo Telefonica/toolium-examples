@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2016 Telefónica Investigación y Desarrollo, S.A.U.
 
 The copyright to the software program(s) is property of Telefonica I+D.
@@ -12,10 +11,10 @@ been supplied.
 from appium.webdriver.common.touch_action import TouchAction
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+from toolium.pageelements import Button, PageElement
+from toolium.pageobjects.mobile_page_object import MobilePageObject
 
 from mobile_behave.pageobjects.shop import BaseShopPageObject
-from toolium.pageelements import *
-from toolium.pageobjects.mobile_page_object import MobilePageObject
 
 
 class BaseInitialPageObject(MobilePageObject):
@@ -52,7 +51,7 @@ class IosInitialPageObject(BaseInitialPageObject):
     country = Button(By.XPATH, '//XCUIElementTypeButton[1]')
     accept = Button(By.XPATH, '//XCUIElementTypeButton[2]')
     skip = Button(By.XPATH, '//XCUIElementTypeButton[4]')
-    alert = PageElement(By.XPATH, "(//XCUIElementTypeOther)[15]")  # TODO: check name=='APNSAlert'
+    alert = PageElement(By.XPATH, '(//XCUIElementTypeOther)[15]')  # TODO: check name=='APNSAlert'
 
     def go_to_shop(self):
         """Go to shop page

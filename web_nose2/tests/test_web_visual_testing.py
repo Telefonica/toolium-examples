@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,9 +15,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from selenium.webdriver.common.by import By
+
 from web_nose2.pageobjects.login import LoginPageObject
 from web_nose2.test_cases import SeleniumTestCase
-from selenium.webdriver.common.by import By
 
 
 class Login(SeleniumTestCase):
@@ -27,8 +27,8 @@ class Login(SeleniumTestCase):
         Verify login and logout validation, like test_web.py test, but including visual testing assertions
         """
         user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
-        expected_login_message = "You logged into a secure area!"
-        expected_logout_message = "You logged out of the secure area!"
+        expected_login_message = 'You logged into a secure area!'
+        expected_logout_message = 'You logged out of the secure area!'
 
         # Open login form
         login_page = LoginPageObject().open()
@@ -50,8 +50,8 @@ class Login(SeleniumTestCase):
         Verify login and logout validation, including examples of visual testing assertions
         """
         user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
-        expected_login_message = "You logged into a secure area!"
-        expected_logout_message = "You logged out of the secure area!"
+        expected_login_message = 'You logged into a secure area!'
+        expected_logout_message = 'You logged out of the secure area!'
 
         # Open login form
         login_page = LoginPageObject().open()

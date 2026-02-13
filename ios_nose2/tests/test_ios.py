@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from ios_nose2.pageobjects.ui_catalog import UICatalogHome, UIAlertsView
+from ios_nose2.pageobjects.ui_catalog import UIAlertsView, UICatalogHome
 from ios_nose2.test_cases import IosTestCase
 
 
@@ -32,4 +31,3 @@ class IosTestApp(IosTestCase):
 
         # Check that the alert is shown
         assert alert_page.alert.is_visible(), 'Alert is not shown'
-

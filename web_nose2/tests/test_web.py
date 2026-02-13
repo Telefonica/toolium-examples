@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -23,8 +22,8 @@ from web_nose2.test_cases import SeleniumTestCase
 class Login(SeleniumTestCase):
     def test_successful_login_logout(self):
         user = {'username': 'tomsmith', 'password': 'SuperSecretPassword!'}
-        expected_login_message = "You logged into a secure area!"
-        expected_logout_message = "You logged out of the secure area!"
+        expected_login_message = 'You logged into a secure area!'
+        expected_logout_message = 'You logged out of the secure area!'
 
         # Login and check welcome message
         secure_area = LoginPageObject().open().login(user)

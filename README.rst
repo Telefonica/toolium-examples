@@ -169,6 +169,14 @@ Contributing
 If you want to collaborate in Toolium-examples development, feel free of `forking it <https://github.com/Telefonica/toolium-examples>`_
 and asking for a pull request.
 
+Before submitting your changes, make sure the code follows the project's style by running Ruff:
+
+.. code:: console
+
+    $ pip install ruff
+    $ ruff check --fix .    # Fix linting issues
+    $ ruff format .         # Format code
+
 Finally, before accepting your contribution, we need you to sign our
 `Contributor License Agreement <https://raw.githubusercontent.com/telefonicaid/Licensing/master/ContributionPolicy.txt>`_
 and send it to ruben.gonzalezalonso@telefonica.com.

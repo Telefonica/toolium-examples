@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2023 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,24 +15,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from behave import given, when, then
-
+from behave import given, then, when
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 
 
 @given('the hovers page is open')
-def step_impl(context):
+def hovers_page_is_open(context):
     context.driver.get('{}/hovers'.format(context.toolium_config.get('Test', 'url')))
 
 
 @when('the user moves mouse over the second image')
-def step_impl(context):
+def mouse_over_the_second_image(context):
     image2 = context.driver.find_element(By.XPATH, "//div[@class='figure'][2]/img")
     ActionChains(context.driver).move_to_element(image2).perform()
 
 
 @then('the second image text shows "{expected_message}"')
-def step_impl(context, expected_message):
+def second_image_text_shows(context, expected_message):
     caption2 = context.driver.find_element(By.XPATH, "//div[@class='figure'][2]/div[@class='figcaption']/h5")
     assert caption2.text == expected_message

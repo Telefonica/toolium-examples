@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2015 Telefónica Investigación y Desarrollo, S.A.U.
 This file is part of Toolium.
 
@@ -16,16 +15,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from android_nose2.test_cases import AndroidTestCase
 from appium.webdriver.common.appiumby import AppiumBy
+
+from android_nose2.test_cases import AndroidTestCase
+
 
 class Tabs(AndroidTestCase):
     """This is the same test as test_android.py but without using page objects"""
 
     def test_change_tab(self):
         # Open tabs activity
-        option_locator = 'new UiScrollable(new UiSelector().scrollable(true).instance(0))' \
-                         '.scrollIntoView(new UiSelector().text("{}").instance(0));'
+        option_locator = (
+            'new UiScrollable(new UiSelector().scrollable(true).instance(0))'
+            '.scrollIntoView(new UiSelector().text("{}").instance(0));'
+        )
         self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, option_locator.format('Views')).click()
         self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, option_locator.format('Tabs')).click()
         self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, option_locator.format('1. Content By Id')).click()

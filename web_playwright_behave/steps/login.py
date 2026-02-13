@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-u"""
+"""
 Copyright 2024 Telefónica Innovación Digital, S.L.
 This file is part of Toolium.
 
@@ -16,8 +15,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-from behave import given, when, then  # pylint: disable=E0611
+from behave import given, then, when  # pylint: disable=E0611
 from behave.api.async_step import async_run_until_complete
+
 from web_playwright_behave.pageobjects.login import LoginPageObject
 
 
