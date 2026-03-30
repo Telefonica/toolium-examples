@@ -87,3 +87,6 @@ class Login(SeleniumTestCase):
 
         # Assert the full screen
         self.assert_full_screenshot('login_logout')
+
+    # Add local attribute to allow skiping it in CI, it can only be executed locally
+    test_successful_login_logout_visualtesting_examples.local = 1
