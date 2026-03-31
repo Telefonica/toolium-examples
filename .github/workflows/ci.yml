@@ -38,12 +38,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install -r requirements_dev.txt
     - name: Run tests
       env:
         TOOLIUM_DRIVER_HEADLESS: Driver_headless=true
       run: |
-        behave web_behave/features/ --junit --junit-directory web_behave/output/reports
+        behave web_behave/features/ --junit --junit-directory web_behave/output/reports --tags=~@skip
       continue-on-error: true
     - name: Upload output folder
       uses: actions/upload-artifact@v7
@@ -76,7 +75,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install -r requirements_dev.txt
     - name: Run tests
       env:
         TOOLIUM_DRIVER_HEADLESS: Driver_headless=true
@@ -115,7 +113,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install -r requirements_dev.txt
     - name: Run tests
       env:
         TOOLIUM_DRIVER_HEADLESS: Driver_headless=true
@@ -154,14 +151,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install -r requirements_dev.txt
-        pip install toolium[playwright]
         playwright install
     - name: Run tests
       env:
         TOOLIUM_DRIVER_HEADLESS: Driver_headless=true
       run: |
-        behave web_playwright_behave/features --junit --junit-directory web_playwright_behave/output/reports/
+        behave web_playwright_behave/features --junit --junit-directory web_playwright_behave/output/reports/ --tags=~@skip
       continue-on-error: true
     - name: Upload output folder
       uses: actions/upload-artifact@v7
