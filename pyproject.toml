@@ -6,15 +6,16 @@ authors = [
 ]
 description = "Set of examples to learn how to use toolium"
 readme = "README.rst"
-license = {text = "Apache 2.0"}
-requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
 
 [tool.ruff]
 line-length = 120
-target-version = "py310"
+target-version = "py311"
 
 [tool.ruff.lint]
 # Rules to enforce

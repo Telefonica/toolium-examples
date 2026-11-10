@@ -7,12 +7,12 @@ Feature: Tests with the dynamic environment
 
   Actions Before the Feature:
     Given wait 3 seconds
-    And wait 3 seconds
-    And wait 3 seconds
-    And step with a table
-      | parameter     | value       |
-      | sub_fields_1  | sub_value 1 |
-      | sub_fields_2  | sub_value 2 |
+      And wait 3 seconds
+      And wait 3 seconds
+      And step with a table
+          | parameter     | value       |
+          | sub_fields_1  | sub_value 1 |
+          | sub_fields_2  | sub_value 2 |
 
   Actions Before each Scenario:
     Given the user navigates to the "www.google.es" url
