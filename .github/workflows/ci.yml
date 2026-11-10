@@ -4,14 +4,28 @@ on:
   pull_request:
 
 jobs:
+  python-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.set-versions.outputs.versions }}
+      oldest: ${{ steps.set-versions.outputs.oldest }}
+    steps:
+    - name: Set supported python versions
+      id: set-versions
+      run: |
+        versions='["3.11", "3.12", "3.13", "3.14"]'
+        echo "versions=$versions" >> "$GITHUB_OUTPUT"
+        echo "oldest=$(echo "$versions" | jq -r '.[0]')" >> "$GITHUB_OUTPUT"
+
   lint:
     runs-on: ubuntu-latest
+    needs: python-versions
     steps:
     - uses: actions/checkout@v6
-    - name: Set up python 3.11
+    - name: Set up python ${{ needs.python-versions.outputs.oldest }}
       uses: actions/setup-python@v6
       with:
-        python-version: '3.11'
+        python-version: ${{ needs.python-versions.outputs.oldest }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -23,9 +37,10 @@ jobs:
 
   behave-tests:
     runs-on: ubuntu-latest
+    needs: python-versions
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
+        python-version: ${{ fromJSON(needs.python-versions.outputs.versions) }}
       fail-fast: false
     steps:
     - uses: actions/checkout@v6
@@ -60,9 +75,10 @@ jobs:
 
   pytest-tests:
     runs-on: ubuntu-latest
+    needs: python-versions
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
+        python-version: ${{ fromJSON(needs.python-versions.outputs.versions) }}
       fail-fast: false
     steps:
     - uses: actions/checkout@v6
@@ -98,9 +114,10 @@ jobs:
 
   nose2-tests:
     runs-on: ubuntu-latest
+    needs: python-versions
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
+        python-version: ${{ fromJSON(needs.python-versions.outputs.versions) }}
       fail-fast: false
     steps:
     - uses: actions/checkout@v6
@@ -136,9 +153,10 @@ jobs:
 
   playwright-tests:
     runs-on: ubuntu-latest
+    needs: python-versions
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
+        python-version: ${{ fromJSON(needs.python-versions.outputs.versions) }}
       fail-fast: false
     steps:
     - uses: actions/checkout@v6
@@ -174,7 +192,7 @@ jobs:
 
   combine-output-artifacts:
     runs-on: ubuntu-latest
-    needs: [behave-tests, pytest-tests, nose2-tests, playwright-tests]
+    needs: [python-versions, behave-tests, pytest-tests, nose2-tests, playwright-tests]
     if: always()
     steps:
     - name: Download all artifacts
@@ -189,7 +207,7 @@ jobs:
         # Organize by framework and Python version
         for framework in behave pytest nose2 playwright; do
           mkdir -p "tests-output/$framework"
-          for version in 3.10 3.11 3.12 3.13; do
+          for version in ${{ join(fromJSON(needs.python-versions.outputs.versions), ' ') }}; do
             if [ -d "all-artifacts/${framework}-tests-output-${version}" ]; then
               echo "Moving $framework Python $version output..."
               mv "all-artifacts/${framework}-tests-output-${version}" "tests-output/$framework/python-${version}"
